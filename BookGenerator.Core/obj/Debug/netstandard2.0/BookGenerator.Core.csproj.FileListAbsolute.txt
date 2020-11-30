@@ -1,0 +1,6 @@
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.csprojAssemblyReference.cache
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.Engine.Strings.resources
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.csproj.GenerateResource.cache
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.AssemblyInfoInputs.cache
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.AssemblyInfo.cs
+C:\Users\filmee24\Documents\Projekte\ChefkochToEpub\BookGenerator.Core\obj\Debug\netstandard2.0\BookGenerator.Core.csproj.CoreCompileInputs.cache

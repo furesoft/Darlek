@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RecipeBookGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "-i"
+    }
+  }
+}

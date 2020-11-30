@@ -1,0 +1,88 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETStandard,Version=v2.1": {
+      "BookGenerator.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.1",
+        "compile": {
+          "bin/placeholder/BookGenerator.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookGenerator.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BookGenerator.Core/1.0.0": {
+      "type": "project",
+      "path": "../BookGenerator.Core/BookGenerator.Core.csproj",
+      "msbuildProject": "../BookGenerator.Core/BookGenerator.Core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETStandard,Version=v2.1": [
+      "BookGenerator.Core >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\filmee24\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
+      "projectName": "BookGenerator.Library",
+      "projectPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
+      "packagesPath": "C:\\Users\\filmee24\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\filmee24\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netstandard2.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "projectReferences": {
+            "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj": {
+              "projectPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netstandard2.1": {
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "NETStandard.Library": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
