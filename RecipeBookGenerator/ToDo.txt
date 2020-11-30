@@ -20,9 +20,21 @@
 		[X] WebRequest Api
 		[ ] Rest Api
 [ ] implement schemy crawler & evaluator
-[-] add attribute based library for schemy
-	SchemeCliLoader.Load(Assembly);
 
+[-] use ctor from struct
+[-] write scheme library
+ - string functions
+ - number functions
+ - bit functions
+ - list functions
+ - converter functions
+	(from->to)
+
+[ ] add object system to schemy
+	make-struct <name> <args>
+	<name>?
+	get-<prop> <name>
+	set-<prop>! <name> <value>
 
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler

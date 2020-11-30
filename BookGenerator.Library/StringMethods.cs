@@ -20,16 +20,11 @@ namespace BookGenerator.Library
     [RuntimeType]
     public struct Point
     {
+        [RuntimeCtorMethod("point")]
         public Point(int x, int y)
         {
             X = x;
             Y = y;
-        }
-
-        [RuntimeCtorMethod("point")]
-        public static Point Make(int x, int y)
-        {
-            return new Point(x, y);
         }
 
         public int X { get; set; }

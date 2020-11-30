@@ -2,7 +2,7 @@
 
 namespace BookGenerator.Core.RuntimeLibrary
 {
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Constructor)]
     public class RuntimeCtorMethodAttribute : Attribute
     {
         public RuntimeCtorMethodAttribute(string name)

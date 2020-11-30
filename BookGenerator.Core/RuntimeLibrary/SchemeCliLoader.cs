@@ -8,7 +8,7 @@ namespace BookGenerator.Core.RuntimeLibrary
 {
     public static class SchemeCliLoader
     {
-        private static Dictionary<string, MethodInfo> _methods = new Dictionary<string, MethodInfo>();
+        private static Dictionary<string, MethodBase> _methods = new Dictionary<string, MethodBase>();
         private static Dictionary<string, (object, MethodInfo)> _predicates = new Dictionary<string, (object, MethodInfo)>();
 
         public static void Load(Assembly ass)
@@ -25,21 +25,24 @@ namespace BookGenerator.Core.RuntimeLibrary
                         {
                             _methods.Add(matt.Name, mi);
                         }
+                    }
+                }
 
-                        var mctoratt = mi.GetCustomAttribute<RuntimeCtorMethodAttribute>();
-                        if (mctoratt != null)
+                foreach (var ctor in t.GetConstructors())
+                {
+                    var mctoratt = ctor.GetCustomAttribute<RuntimeCtorMethodAttribute>();
+                    if (mctoratt != null)
+                    {
+                        _methods.Add("make-" + mctoratt.Name, ctor);
+
+                        var predicate = new Func<object, bool>(_ =>
                         {
-                            _methods.Add("make-" + mctoratt.Name, mi);
+                            return t.IsAssignableFrom(_.GetType());
+                        });
 
-                            var predicate = new Func<object, bool>(_ =>
-                            {
-                                return t.IsAssignableFrom(_.GetType());
-                            });
+                        var target = predicate.Target;
 
-                            var target = predicate.Target;
-
-                            _predicates.Add(mctoratt.Name + "?", (target, predicate.Method));
-                        }
+                        _predicates.Add(mctoratt.Name + "?", (target, predicate.Method));
                     }
                 }
             }
@@ -64,7 +67,7 @@ namespace BookGenerator.Core.RuntimeLibrary
             }
         }
 
-        private static object CallMethodInfo(List<object> args, MethodInfo m, object target = null)
+        private static object CallMethodInfo(List<object> args, MethodBase m, object target = null)
         {
             var buffer = new List<object>();
 
