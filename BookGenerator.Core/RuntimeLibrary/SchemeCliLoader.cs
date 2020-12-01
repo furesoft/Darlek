@@ -26,6 +26,18 @@ namespace BookGenerator.Core.RuntimeLibrary
                             return Activator.CreateInstance(t, _.ToArray());
                         }, name));
 
+                        foreach (var prop in t.GetProperties())
+                        {
+                            interpreter.DefineGlobal(Symbol.FromString("get-" + prop.Name.ToLower()), new NativeProcedure(_ =>
+                            {
+                                return CallMethodInfo(_, prop.GetGetMethod(), _.FirstOrDefault());
+                            }, "get-" + prop.Name.ToLower()));
+                            interpreter.DefineGlobal(Symbol.FromString("set-" + prop.Name.ToLower() + "!"), new NativeProcedure(_ =>
+                            {
+                                return prop.GetSetMethod().Invoke(_.FirstOrDefault(), new object[] { _.Last() });
+                            }, "set-" + prop.Name.ToLower() + "!"));
+                        }
+
                         interpreter.DefineGlobal(Symbol.FromString(predName), new NativeProcedure(_ =>
                         {
                             return t.IsAssignableFrom(_.FirstOrDefault().GetType());
