@@ -18,9 +18,9 @@ namespace BookGenerator.Library
     }
 
     [RuntimeType]
+    [RuntimeCtorMethod("point")]
     public struct Point
     {
-        [RuntimeCtorMethod("point")]
         public Point(int x, int y)
         {
             X = x;

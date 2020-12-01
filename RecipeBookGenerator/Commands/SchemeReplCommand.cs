@@ -18,9 +18,8 @@ namespace BookGenerator.Commands
         public int Invoke(CommandlineArguments args)
         {
             var interpreter = new Interpreter();
-            SchemeCliLoader.Load(typeof(StringMethods).Assembly);
 
-            SchemeCliLoader.Apply(interpreter);
+            SchemeCliLoader.Apply(typeof(StringMethods).Assembly, interpreter);
 
             while (true)
             {

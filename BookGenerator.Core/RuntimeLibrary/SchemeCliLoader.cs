@@ -1,69 +1,49 @@
 ﻿using Schemy;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 using System.Reflection;
 
 namespace BookGenerator.Core.RuntimeLibrary
 {
     public static class SchemeCliLoader
     {
-        private static Dictionary<string, MethodBase> _methods = new Dictionary<string, MethodBase>();
-        private static Dictionary<string, (object, MethodInfo)> _predicates = new Dictionary<string, (object, MethodInfo)>();
-
-        public static void Load(Assembly ass)
+        public static void Apply(Assembly ass, Interpreter interpreter)
         {
             foreach (var t in ass.GetTypes())
             {
                 var att = t.GetCustomAttribute<RuntimeTypeAttribute>();
                 if (att != null)
                 {
+                    var mctoratt = t.GetCustomAttribute<RuntimeCtorMethodAttribute>();
+                    if (mctoratt != null)
+                    {
+                        var name = "make-" + mctoratt.Name;
+                        var predName = mctoratt.Name + "?";
+
+                        interpreter.DefineGlobal(Symbol.FromString(name), new NativeProcedure(_ =>
+                        {
+                            return Activator.CreateInstance(t, _.ToArray());
+                        }, name));
+
+                        interpreter.DefineGlobal(Symbol.FromString(predName), new NativeProcedure(_ =>
+                        {
+                            return t.IsAssignableFrom(_.FirstOrDefault().GetType());
+                        }, name));
+                    }
+
                     foreach (var mi in t.GetMethods())
                     {
                         var matt = mi.GetCustomAttribute<RuntimeMethodAttribute>();
                         if (matt != null)
                         {
-                            _methods.Add(matt.Name, mi);
+                            interpreter.DefineGlobal(Symbol.FromString(matt.Name), new NativeProcedure(_ =>
+                            {
+                                return CallMethodInfo(_, mi);
+                            }, matt.Name));
                         }
                     }
                 }
-
-                foreach (var ctor in t.GetConstructors())
-                {
-                    var mctoratt = ctor.GetCustomAttribute<RuntimeCtorMethodAttribute>();
-                    if (mctoratt != null)
-                    {
-                        _methods.Add("make-" + mctoratt.Name, ctor);
-
-                        var predicate = new Func<object, bool>(_ =>
-                        {
-                            return t.IsAssignableFrom(_.GetType());
-                        });
-
-                        var target = predicate.Target;
-
-                        _predicates.Add(mctoratt.Name + "?", (target, predicate.Method));
-                    }
-                }
-            }
-        }
-
-        public static void Apply(Interpreter interpreter)
-        {
-            foreach (var m in _methods)
-            {
-                interpreter.DefineGlobal(Symbol.FromString(m.Key), new NativeProcedure(_ =>
-                {
-                    return CallMethodInfo(_, m.Value);
-                }, m.Value.Name));
-            }
-
-            foreach (var m in _predicates)
-            {
-                interpreter.DefineGlobal(Symbol.FromString(m.Key), new NativeProcedure(_ =>
-                {
-                    return CallMethodInfo(_, m.Value.Item2, m.Value.Item1);
-                }, m.Value.Item2.Name));
             }
         }
 
