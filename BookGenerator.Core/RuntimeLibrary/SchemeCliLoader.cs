@@ -31,6 +31,7 @@ namespace BookGenerator.Core.RuntimeLibrary
                     //define setter
                     interpreter.DefineGlobal(Symbol.FromString("set-" + prop.AsString + "!"), new NativeProcedure(_ =>
                     {
+                        //Does not work. Need to rethink
                         ((RuntimeStruct)_.First())[i] = _.Last();
 
                         return true;
@@ -39,6 +40,19 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 //define predicate
                 //define ctor
+
+                interpreter.DefineGlobal(Symbol.FromString("make-" + s.Typename.AsString),
+                    new NativeProcedure(_ =>
+                    {
+                        var tmp = new RuntimeStruct { Typename = s.Typename };
+
+                        for (int i = 0; i < _.Count - 1; i++)
+                        {
+                            tmp[i] = _[i];
+                        }
+
+                        return tmp;
+                    }));
 
                 return s;
             }));

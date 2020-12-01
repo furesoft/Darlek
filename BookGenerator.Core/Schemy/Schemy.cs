@@ -374,7 +374,7 @@ namespace Schemy
                         var variable = (Symbol)exprList[1];
                         expr = exprList[2];
                         env[variable] = EvaluateExpression(expr, env);
-                        return None.Instance; // TODO: what's the return type of define?
+                        return None.Instance;
                     }
                     else if (Symbol.SET.Equals(exprList[0]))
                     {

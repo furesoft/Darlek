@@ -6,7 +6,6 @@ using System.Net;
 using System.Text;
 using BookGenerator.Core.Crawler;
 using BookGenerator.Core.Engine.Core;
-using BookGenerator.Properties;
 using LiteDB;
 
 namespace BookGenerator.Core
@@ -210,7 +209,7 @@ namespace BookGenerator.Core
                     return ms.ToArray();
                 }
 
-                return Resources.cover;
+                return null;
             }
         }
 

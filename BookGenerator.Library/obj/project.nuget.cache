@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "/Pwlbf2sni740d10acNAEmIful3YS2/DZi6e1vynp79QJ4wBcXD+3BOGsIXOTBD41gmj8p3TQmpac1xKhC1aDg==",
+  "dgSpecHash": "+mIZAMmiJAIMJ4hHsj3uZJJQ4DdrsyGVX/MvLzQt4oL54NY4Q3wOj77DZq6HjQNbbK9VST3Gi6JCVKrL6Q6j8g==",
   "success": true,
   "projectFilePath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\filmee24\\.nuget\\packages\\anglesharp\\0.14.0\\anglesharp.0.14.0.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\litedb\\5.0.9\\litedb.5.0.9.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\scriban\\2.1.4\\scriban.2.1.4.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\system.text.encoding.codepages\\4.5.0\\system.text.encoding.codepages.4.5.0.nupkg.sha512",
+    "C:\\Users\\filmee24\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.1\\system.threading.tasks.extensions.4.5.1.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -37,6 +37,20 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "dependencies": {
+            "AngleSharp": {
+              "target": "Package",
+              "version": "[0.14.0, )"
+            },
+            "LiteDB": {
+              "target": "Package",
+              "version": "[5.0.9, )"
+            },
+            "Scriban": {
+              "target": "Package",
+              "version": "[2.1.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
