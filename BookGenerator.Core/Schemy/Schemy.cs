@@ -493,10 +493,6 @@ namespace Schemy
             {
                 return intVal;
             }
-            else if (double.TryParse(token, out floatVal))
-            {
-                return floatVal;
-            }
             else if (token == "nil")
             {
                 return null;
