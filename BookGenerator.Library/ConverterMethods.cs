@@ -22,9 +22,15 @@ namespace BookGenerator.Library
         }
 
         [RuntimeMethod("list->base64")]
-        public static string ToBase64(IEnumerable<byte> src)
+        public static string ToBase64(List<object> src)
         {
-            return Convert.ToBase64String(src.ToArray());
+            return Convert.ToBase64String(src.Cast<byte>().ToArray());
+        }
+
+        [RuntimeMethod("num->byte")]
+        public static byte ToByte(int num)
+        {
+            return Convert.ToByte(num);
         }
 
         [RuntimeMethod("base64->list")]

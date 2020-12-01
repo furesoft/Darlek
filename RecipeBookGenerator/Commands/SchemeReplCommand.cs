@@ -1,5 +1,6 @@
 ﻿using BookGenerator.Core.CLI;
 using BookGenerator.Core.RuntimeLibrary;
+using BookGenerator.Core.SchemeLibrary;
 using BookGenerator.Library;
 using Schemy;
 using System;
@@ -20,6 +21,7 @@ namespace BookGenerator.Commands
             var interpreter = new Interpreter();
 
             SchemeCliLoader.Apply(typeof(StringMethods).Assembly, interpreter);
+            SchemeCliLoader.Apply(typeof(RepositoryMethods).Assembly, interpreter);
 
             while (true)
             {
