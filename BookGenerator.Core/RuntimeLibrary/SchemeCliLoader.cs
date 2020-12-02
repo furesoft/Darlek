@@ -8,6 +8,8 @@ namespace BookGenerator.Core.RuntimeLibrary
 {
     public static class SchemeCliLoader
     {
+        public static Dictionary<Symbol, Schemy.Environment> Modules = new Dictionary<Symbol, Schemy.Environment>();
+
         public static void Apply(Assembly ass, Interpreter interpreter)
         {
             //(make-struct 'name (list 'prop1 'prop2))

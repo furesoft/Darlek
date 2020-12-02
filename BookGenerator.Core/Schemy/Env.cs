@@ -12,6 +12,11 @@ namespace Schemy
     {
         public readonly IDictionary<Symbol, object> store;
 
+        public void Define(Symbol sym, object val)
+        {
+            this[sym] = val;
+        }
+
         /// <summary>
         /// The enclosing environment. For top level env, this is null.
         /// </summary>
