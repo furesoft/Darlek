@@ -99,18 +99,25 @@ namespace BookGenerator.Core.RuntimeLibrary
                         var matt = mi.GetCustomAttribute<RuntimeMethodAttribute>();
                         if (matt != null)
                         {
+                            var procedure = new NativeProcedure(_ =>
+                            {
+                                return CallMethodInfo(_, mi);
+                            });
+
                             if (att.Module != null)
                             {
-                                if (Modules.ContainsKey(att.Module))
+                                if (!Modules.ContainsKey(att.Module))
                                 {
+                                    var env = new Schemy.Environment(new Dictionary<Symbol, object>(), interpreter.Environment);
+
+                                    Modules.Add(att.Module, env);
                                 }
+
+                                Modules[att.Module].Define(Symbol.FromString(matt.Name), procedure);
                             }
                             else
                             {
-                                interpreter.DefineGlobal(Symbol.FromString(matt.Name), new NativeProcedure(_ =>
-                                {
-                                    return CallMethodInfo(_, mi);
-                                }, matt.Name));
+                                interpreter.DefineGlobal(Symbol.FromString(matt.Name), procedure);
                             }
                         }
                     }
