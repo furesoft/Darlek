@@ -59,6 +59,20 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 return s;
             }));
+            interpreter.DefineGlobal(Symbol.FromString("open"), NativeProcedure.Create<Symbol, Procedure, object>((ns, callback) =>
+            {
+                if (Modules.ContainsKey(ns))
+                {
+                    OpenModule(ns, interpreter.Environment);
+                    callback.Call(new List<object>());
+                }
+                else
+                {
+                    throw new KeyNotFoundException($"Module '{ns.AsString}' not found");
+                }
+
+                return None.Instance;
+            }));
 
             foreach (var t in ass.GetTypes())
             {
@@ -122,6 +136,14 @@ namespace BookGenerator.Core.RuntimeLibrary
                         }
                     }
                 }
+            }
+        }
+
+        private static void OpenModule(Symbol ns, Schemy.Environment env)
+        {
+            foreach (var obj in Modules[ns].store)
+            {
+                env.Define(obj.Key, obj.Value);
             }
         }
 
