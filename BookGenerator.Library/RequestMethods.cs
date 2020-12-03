@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace BookGenerator.Library
 {
-    [RuntimeType]
+    [RuntimeType("network")]
     public static class RequestMethods
     {
         [RuntimeMethod("make-request")]

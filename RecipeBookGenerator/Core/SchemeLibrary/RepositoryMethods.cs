@@ -2,7 +2,7 @@
 
 namespace BookGenerator.Core.SchemeLibrary
 {
-    [RuntimeType]
+    [RuntimeType("runtime")]
     public static class RepositoryMethods
     {
         [RuntimeMethod("repository-get-metadata")]

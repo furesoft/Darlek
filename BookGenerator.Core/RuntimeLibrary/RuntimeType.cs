@@ -11,5 +11,9 @@ namespace BookGenerator.Core.RuntimeLibrary
         {
             Module = Symbol.FromString(module);
         }
+
+        public RuntimeTypeAttribute()
+        {
+        }
     }
 }

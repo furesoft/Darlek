@@ -1,4 +1,5 @@
-﻿using Schemy;
+﻿using BookGenerator.Core.Epub;
+using Schemy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,10 +99,19 @@ namespace BookGenerator.Core.RuntimeLibrary
                         var matt = mi.GetCustomAttribute<RuntimeMethodAttribute>();
                         if (matt != null)
                         {
-                            interpreter.DefineGlobal(Symbol.FromString(matt.Name), new NativeProcedure(_ =>
+                            if (att.Module != null)
                             {
-                                return CallMethodInfo(_, mi);
-                            }, matt.Name));
+                                if (Modules.ContainsKey(att.Module))
+                                {
+                                }
+                            }
+                            else
+                            {
+                                interpreter.DefineGlobal(Symbol.FromString(matt.Name), new NativeProcedure(_ =>
+                                {
+                                    return CallMethodInfo(_, mi);
+                                }, matt.Name));
+                            }
                         }
                     }
                 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BookGenerator.Library
 {
-    [RuntimeType]
+    [RuntimeType("conversion")]
     public static class ConverterMethods
     {
         [RuntimeMethod("object->string")]

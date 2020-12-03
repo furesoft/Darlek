@@ -84,7 +84,7 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
-      "BookGenerator.Core/1.0.0": {
+      "Darlek.Core/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
         "dependencies": {
@@ -93,10 +93,10 @@
           "Scriban": "2.1.4"
         },
         "compile": {
-          "bin/placeholder/BookGenerator.Core.dll": {}
+          "bin/placeholder/Darlek.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/BookGenerator.Core.dll": {}
+          "bin/placeholder/Darlek.Core.dll": {}
         }
       }
     }
@@ -349,7 +349,7 @@
         "version.txt"
       ]
     },
-    "BookGenerator.Core/1.0.0": {
+    "Darlek.Core/1.0.0": {
       "type": "project",
       "path": "../BookGenerator.Core/BookGenerator.Core.csproj",
       "msbuildProject": "../BookGenerator.Core/BookGenerator.Core.csproj"
@@ -357,7 +357,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
-      "BookGenerator.Core >= 1.0.0"
+      "Darlek.Core >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -367,7 +367,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
-      "projectName": "BookGenerator.Library",
+      "projectName": "Darlek.Library",
       "projectPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
       "packagesPath": "C:\\Users\\filmee24\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\obj\\",

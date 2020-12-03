@@ -4,7 +4,7 @@ using Schemy;
 
 namespace BookGenerator.Library
 {
-    [RuntimeType]
+    [RuntimeType("bitvector")]
     public static class BitVectorMethods
     {
         [RuntimeMethod("bitvector-set")]

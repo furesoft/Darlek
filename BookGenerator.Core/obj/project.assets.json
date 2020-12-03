@@ -349,7 +349,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj",
-      "projectName": "BookGenerator.Core",
+      "projectName": "Darlek.Core",
       "projectPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj",
       "packagesPath": "C:\\Users\\filmee24\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\obj\\",

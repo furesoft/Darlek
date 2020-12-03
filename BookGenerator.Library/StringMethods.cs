@@ -2,7 +2,7 @@
 
 namespace BookGenerator.Library
 {
-    [RuntimeType]
+    [RuntimeType("strings")]
     public static class StringMethods
     {
         [RuntimeMethod("substr")]
