@@ -1,8 +1,11 @@
 ﻿using BookGenerator.Core.RuntimeLibrary;
 using Furesoft.Core;
+using Schemy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 
 namespace BookGenerator.Library
 {

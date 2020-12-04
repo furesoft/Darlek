@@ -1,4 +1,5 @@
 ﻿using BookGenerator.Core.Epub;
+using LiteDB;
 using Schemy;
 using System;
 using System.Collections.Generic;
@@ -13,66 +14,7 @@ namespace BookGenerator.Core.RuntimeLibrary
 
         public static void Apply(Assembly ass, Interpreter interpreter)
         {
-            //(make-struct 'name (list 'prop1 'prop2))
-            interpreter.DefineGlobal(Symbol.FromString("make-struct"), new NativeProcedure(_ =>
-            {
-                var s = new RuntimeStruct { Typename = (Symbol)_.First() };
-
-                var props = (List<object>)_.Last();
-
-                for (int i = 0; i < props.Count - 1; i++)
-                {
-                    s.Add(null);
-                    var prop = (Symbol)props[i];
-
-                    //define getter
-                    interpreter.DefineGlobal(Symbol.FromString("get-" + prop.AsString), new NativeProcedure(_ =>
-                    {
-                        return ((RuntimeStruct)_.First())[i];
-                    }));
-
-                    //define setter
-                    interpreter.DefineGlobal(Symbol.FromString("set-" + prop.AsString + "!"), new NativeProcedure(_ =>
-                    {
-                        //Does not work. Need to rethink
-                        ((RuntimeStruct)_.First())[i] = _.Last();
-
-                        return true;
-                    }));
-                }
-
-                //define predicate
-                //define ctor
-
-                interpreter.DefineGlobal(Symbol.FromString("make-" + s.Typename.AsString),
-                    new NativeProcedure(_ =>
-                    {
-                        var tmp = new RuntimeStruct { Typename = s.Typename };
-
-                        for (int i = 0; i < _.Count - 1; i++)
-                        {
-                            tmp[i] = _[i];
-                        }
-
-                        return tmp;
-                    }));
-
-                return s;
-            }));
-            interpreter.DefineGlobal(Symbol.FromString("open"), NativeProcedure.Create<Symbol, Procedure, object>((ns, callback) =>
-            {
-                if (Modules.ContainsKey(ns))
-                {
-                    OpenModule(ns, interpreter.Environment);
-                    callback.Call(new List<object>());
-                }
-                else
-                {
-                    throw new KeyNotFoundException($"Module '{ns.AsString}' not found");
-                }
-
-                return None.Instance;
-            }));
+            InitGlobals(interpreter);
 
             foreach (var t in ass.GetTypes())
             {
@@ -137,6 +79,69 @@ namespace BookGenerator.Core.RuntimeLibrary
                     }
                 }
             }
+        }
+
+        private static void InitGlobals(Interpreter interpreter)
+        {
+            //(make-struct 'name (list 'prop1 'prop2))
+            interpreter.DefineGlobal(Symbol.FromString("make-struct"), new NativeProcedure(_ =>
+            {
+                var s = new RuntimeStruct { Typename = (Symbol)_.First() };
+
+                var props = (List<object>)_.Last();
+
+                for (int i = 0; i < props.Count - 1; i++)
+                {
+                    s.Add(null);
+                    var prop = (Symbol)props[i];
+
+                    //define getter
+                    interpreter.DefineGlobal(Symbol.FromString("get-" + prop.AsString), new NativeProcedure(_ =>
+                    {
+                        return ((RuntimeStruct)_.First())[i];
+                    }));
+
+                    //define setter
+                    interpreter.DefineGlobal(Symbol.FromString("set-" + prop.AsString + "!"), new NativeProcedure(_ =>
+                    {
+                        //Does not work. Need to rethink
+                        ((RuntimeStruct)_.First())[i] = _.Last();
+
+                        return true;
+                    }));
+                }
+
+                //define predicate
+                //define ctor
+
+                interpreter.DefineGlobal(Symbol.FromString("make-" + s.Typename.AsString),
+                    new NativeProcedure(_ =>
+                    {
+                        var tmp = new RuntimeStruct { Typename = s.Typename };
+
+                        for (int i = 0; i < _.Count - 1; i++)
+                        {
+                            tmp[i] = _[i];
+                        }
+
+                        return tmp;
+                    }));
+
+                return s;
+            }));
+            interpreter.DefineGlobal(Symbol.FromString("open"), NativeProcedure.Create<Symbol, object>((ns) =>
+            {
+                if (Modules.ContainsKey(ns))
+                {
+                    OpenModule(ns, interpreter.Environment);
+                }
+                else
+                {
+                    throw new KeyNotFoundException($"Module '{ns.AsString}' not found");
+                }
+
+                return None.Instance;
+            }));
         }
 
         private static void OpenModule(Symbol ns, Schemy.Environment env)
