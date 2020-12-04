@@ -17,8 +17,17 @@ namespace BookGenerator.Commands
         {
             var crawler = Crawlerfactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
             //ToDo: Check url of validity
+            string url = null;
+            if (args.HasOption("url"))
+            {
+                url = args.GetValue<string>("url");
+            }
+            else
+            {
+                url = args.GetLastValue();
+            }
 
-            var r = crawler.Crawl(new Uri(args.GetValue<string>("url"), UriKind.RelativeOrAbsolute)).Result;
+            var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
             Repository.Add(r);
 
             if (r.ContainsKey("imageUri"))

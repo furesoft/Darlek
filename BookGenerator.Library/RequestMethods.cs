@@ -3,6 +3,7 @@ using BookGenerator.Core.RuntimeLibrary;
 using Furesoft.Core;
 using Schemy;
 using System.Collections.Generic;
+using System.Net;
 
 namespace BookGenerator.Library
 {
@@ -13,6 +14,14 @@ namespace BookGenerator.Library
         public static object Make()
         {
             return new XmlHttpRequest();
+        }
+
+        [RuntimeMethod("get-raw-from-url")]
+        public static byte[] GetRawFromUri(string url)
+        {
+            var wc = new WebClient();
+
+            return wc.DownloadData(url);
         }
 
         [RuntimeMethod("request-open")]

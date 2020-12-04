@@ -9,7 +9,7 @@ namespace BookGenerator.Commands
     {
         public string Name => "extract";
 
-        public string HelpText => "extract --<crawler|template>";
+        public string HelpText => "extract --<crawler|template|commands> --language <js|ss>";
 
         public string Description => "Extract the default template or sample js crawler";
 
@@ -17,17 +17,25 @@ namespace BookGenerator.Commands
         {
             var arg = args.GetKey(0);
 
-            if (args.GetOption("c", "crawler"))
+            if (args.GetOption("c", "crawler") && args.GetValue<string>("language") == "js")
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "crawler.js"), Resources.SampleCrawler);
+            }
+            else if (args.GetOption("c", "crawler") && args.GetValue<string>("language") == "ss")
+            {
+                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "crawler.ss"), Resources.SampleCrawler1);
             }
             if (args.GetOption("t", "template"))
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "Template.html"), Resources.Template);
             }
-            if (args.GetOption("c", "commands"))
+            if (args.GetOption("c", "commands") && args.GetValue<string>("language") == "js")
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "commands.js"), Resources.Commands);
+            }
+            else if (args.GetOption("c", "commands") && args.GetValue<string>("language") == "ss")
+            {
+                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "commands.ss"), Resources.Commands1);
             }
 
             return 0;

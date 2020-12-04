@@ -79,6 +79,14 @@ namespace BookGenerator.Core.CLI
             }
         }
 
+        public string GetLastValue()
+        {
+            var p = new string[Parameters.Count];
+            Parameters.Values.CopyTo(p, 0);
+
+            return p[Parameters.Count - 1];
+        }
+
         // Retrieve a parameter value if it exists
         public string this[string param]
         {

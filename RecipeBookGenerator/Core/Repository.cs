@@ -30,7 +30,7 @@ namespace BookGenerator.Core
             {
                 foreach (var finfo in db.FileStorage.FindAll().Where(_ => _.Filename.StartsWith("commands")))
                 {
-                    var eval = EvaluatorSelector.GetEvaluator<Context>(finfo.Filename);
+                    var eval = EvaluatorSelector.GetEvaluator<object>(finfo.Filename);
                     if (eval != null)
                     {
                         var ms = new MemoryStream();
