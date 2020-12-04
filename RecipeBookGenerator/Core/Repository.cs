@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using BookGenerator.Core.Crawler;
-using BookGenerator.Core.Engine.Core;
 using LiteDB;
 
 namespace BookGenerator.Core

@@ -7,14 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Core\Crawler\SampleCrawler.js" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Include="Core\Crawler\SampleCrawler.js" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Update="Properties\Resources.Designer.cs">
 			<DesignTime>True</DesignTime>
 			<AutoGen>True</AutoGen>

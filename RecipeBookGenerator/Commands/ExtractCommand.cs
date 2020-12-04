@@ -17,11 +17,7 @@ namespace BookGenerator.Commands
         {
             var arg = args.GetKey(0);
 
-            if (args.GetOption("c", "crawler") && args.GetValue<string>("language") == "js")
-            {
-                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "crawler.js"), Resources.SampleCrawler);
-            }
-            else if (args.GetOption("c", "crawler") && args.GetValue<string>("language") == "ss")
+            if (args.GetOption("c", "crawler") && args.GetValue<string>("language") == "ss")
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "crawler.ss"), Resources.SampleCrawler1);
             }
@@ -29,11 +25,8 @@ namespace BookGenerator.Commands
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "Template.html"), Resources.Template);
             }
-            if (args.GetOption("c", "commands") && args.GetValue<string>("language") == "js")
-            {
-                File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "commands.js"), Resources.Commands);
-            }
-            else if (args.GetOption("c", "commands") && args.GetValue<string>("language") == "ss")
+
+            if (args.GetOption("c", "commands") && args.GetValue<string>("language") == "ss")
             {
                 File.WriteAllText(Path.Combine(Environment.CurrentDirectory, "commands.ss"), Resources.Commands1);
             }

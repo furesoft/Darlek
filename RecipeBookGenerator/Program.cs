@@ -16,7 +16,6 @@ namespace BookGenerator
         private static void App_BeforeRun()
         {
             Repository.CollectCustomCommands();
-            new JsEvaluator().AddCustomCommands(Resources.Commands);
             new SchemeEvaluator().AddCustomCommands(Resources.Commands1);
         }
     }

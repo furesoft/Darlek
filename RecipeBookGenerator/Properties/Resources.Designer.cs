@@ -61,31 +61,20 @@ namespace BookGenerator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die function search(args) {
-        ///    console.log(&quot;hello &quot; + args);
+        ///   Sucht eine lokalisierte Zeichenfolge, die (open &apos;cli-vector)
         ///
-        ///    return 0;
-        ///}
+        ///(define myCommand (lambda (args)
+        ///	(display (get-value args &quot;query&quot;))
         ///
-        ///registerCommand(&quot;search&quot;, &quot;Search for a query&quot;, &quot;search -q &lt;query&gt;&quot;, search); ähnelt.
-        /// </summary>
-        internal static string Commands {
-            get {
-                return ResourceManager.GetString("Commands", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die (define myCommand (lambda (args)
-        ///	(display (get-option args &quot;query&quot;))
+        ///	0
         ///))
         ///
-        ///(register-command (
-        ///	&quot;todo&quot;
+        ///(register-command 
+        ///	&quot;my-command&quot;
         ///	&quot;Do Something&quot;
         ///	&quot;todo --query &quot;
         ///	myCommand
-        ///)) ähnelt.
+        ///) ähnelt.
         /// </summary>
         internal static string Commands1 {
             get {
@@ -109,26 +98,6 @@ namespace BookGenerator.Properties {
         internal static string Library {
             get {
                 return ResourceManager.GetString("Library", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die function crawl() {
-        ///    var model = model || {};
-        ///
-        ///    model.header = &quot;hello&quot;;
-        ///    model.body = &quot;world&quot;;
-        ///
-        ///    model.name = $(&quot;a[class=&apos;ds-copy-link bi-recipe-title&apos;]&quot;).innerHtml;
-        ///
-        ///    model.content = Repository.GetMetadata(&quot;title&quot;);
-        ///
-        ///    return model;
-        ///}; ähnelt.
-        /// </summary>
-        internal static string SampleCrawler {
-            get {
-                return ResourceManager.GetString("SampleCrawler", resourceCulture);
             }
         }
         

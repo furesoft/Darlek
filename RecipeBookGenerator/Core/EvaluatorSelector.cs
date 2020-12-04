@@ -1,7 +1,4 @@
-﻿using LiteDB;
-using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace BookGenerator.Core.Crawler
 {
@@ -9,9 +6,9 @@ namespace BookGenerator.Core.Crawler
     {
         public static IEvaluator<T> GetEvaluator<T>(string filename)
         {
-            if (Path.GetExtension(filename) == ".js")
+            if (Path.GetExtension(filename) == ".ss")
             {
-                return (IEvaluator<T>)new JsEvaluator();
+                return (IEvaluator<T>)new SchemeEvaluator();
             }
 
             return null;

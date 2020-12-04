@@ -15,10 +15,9 @@ namespace BookGenerator.Commands
             }
             var extension = Path.GetExtension(name);
             var content = Repository.GetFile($"{name}");
-            if (extension == ".js") new JSCrawler(content);
             if (extension == ".ss") new SchemeCrawler(content);
             // need use crawler command
-            return new JSCrawler(Repository.GetFile($"{name}.js"));
+            return new SchemeCrawler(content);
         }
 
         public static bool IsDefault(string name)

@@ -24,11 +24,11 @@ namespace BookGenerator.Commands
                 else if (args.GetValue<string>("crawler") == "sample")
                 {
                     Repository.SetMetadata("crawler", args.GetValue<string>("crawler"));
-                    Repository.AddContentFile(Resources.SampleCrawler, args.GetValue<string>("crawler") + ".js");
+                    Repository.AddContentFile(Resources.SampleCrawler1, args.GetValue<string>("crawler") + ".ss");
                 }
                 else
                 {
-                    //if not default use js file
+                    //if not default use ss file
                     Repository.SetMetadata("crawler", args.GetValue<string>("crawler"));
                     Repository.AddFile(File.ReadAllText(args.GetValue<string>("crawler")), args.GetValue<string>("crawler"), args.GetValue<string>("crawler"));
                 }
