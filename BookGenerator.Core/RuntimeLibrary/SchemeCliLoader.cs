@@ -27,10 +27,24 @@ namespace BookGenerator.Core.RuntimeLibrary
                         var name = "make-" + mctoratt.Name;
                         var predName = mctoratt.Name + "?";
 
-                        interpreter.DefineGlobal(Symbol.FromString(name), new NativeProcedure(_ =>
+                        var environment = interpreter.Environment;
+
+                        if (att.Module != null)
+                        {
+                            if (!Modules.ContainsKey(att.Module))
+                            {
+                                Modules.Add(att.Module, new Schemy.Environment(new Dictionary<Symbol, object>(), null));
+                            }
+
+                            environment = Modules[att.Module];
+                        }
+
+                        var make = (Symbol.FromString(name), new NativeProcedure(_ =>
                         {
                             return Activator.CreateInstance(t, _.ToArray());
-                        }, name));
+                        }));
+
+                        environment.Define(make.Item1, make.Item2);
 
                         foreach (var prop in t.GetProperties())
                         {
@@ -44,7 +58,7 @@ namespace BookGenerator.Core.RuntimeLibrary
                             }, "set-" + prop.Name.ToLower() + "!"));
                         }
 
-                        interpreter.DefineGlobal(Symbol.FromString(predName), new NativeProcedure(_ =>
+                        environment.Define(Symbol.FromString(predName), new NativeProcedure(_ =>
                         {
                             return t.IsAssignableFrom(_.FirstOrDefault().GetType());
                         }, name));

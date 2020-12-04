@@ -14,6 +14,12 @@ namespace BookGenerator.Library
             return cmdvec.GetOption(shortTerm, longTerm);
         }
 
+        [RuntimeMethod("option?")]
+        public static object HasOption(CommandlineArguments cmdvec, string key)
+        {
+            return cmdvec.HasOption(key);
+        }
+
         [RuntimeMethod("get-value")]
         public static object GetValue(CommandlineArguments cmdvec, string param)
         {

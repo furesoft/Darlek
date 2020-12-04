@@ -9,6 +9,6 @@
 (register-command 
 	"my-command"
 	"Do Something"
-	"todo --query "
+	"my-command --query "
 	myCommand
 )

@@ -7,7 +7,7 @@ namespace Furesoft.Core
     /// A Class To Easily Use Int as BitField
     /// </summary>
     [RuntimeCtorMethod("bitvector")]
-    [RuntimeType]
+    [RuntimeType("bitvector")]
     public struct BitSet
     {
         private int flags;
