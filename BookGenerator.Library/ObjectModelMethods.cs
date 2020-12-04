@@ -7,7 +7,6 @@ using System.Text;
 
 namespace BookGenerator.Library
 {
-
     [RuntimeType("ObjectModel")]
     public static class ObjectModelMethods
     {
@@ -15,6 +14,12 @@ namespace BookGenerator.Library
         public static object MakeObject()
         {
             return new BsonDocument();
+        }
+
+        [RuntimeMethod("get-property")]
+        public static object GetProperty(BsonDocument doc, Symbol name)
+        {
+            return doc[name.AsString];
         }
 
         [RuntimeMethod("set-property")]
