@@ -121,6 +121,9 @@
   <data name="Commands" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Commands.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="Commands1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Commands.ss;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="cover" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cover.jpg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -129,6 +132,9 @@
   </data>
   <data name="SampleCrawler" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Core\Crawler\SampleCrawler.js;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SampleCrawler1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Core\Crawler\SampleCrawler.ss;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Template" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Template.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>

@@ -21,16 +21,10 @@
 		[ ] Rest Api
 [ ] implement schemy crawler & evaluator
 
-[ ] write module system
-	map cli methods to specific modules/environments
-	Example:
-	(open 'strings
-		(
-			(substr "hello" 1)
-		)
-	)
+[ ] write argument vector methods
+	get-option
+	get-value
 
-[-] use ctor from struct
 [-] write scheme library
  - string functions
  - number functions

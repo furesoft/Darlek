@@ -129,15 +129,18 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 return s;
             }));
-            interpreter.DefineGlobal(Symbol.FromString("open"), NativeProcedure.Create<Symbol, object>((ns) =>
+            interpreter.DefineGlobal(Symbol.FromString("open"), new NativeProcedure((args) =>
             {
-                if (Modules.ContainsKey(ns))
+                foreach (var ns in args.Cast<Symbol>())
                 {
-                    OpenModule(ns, interpreter.Environment);
-                }
-                else
-                {
-                    throw new KeyNotFoundException($"Module '{ns.AsString}' not found");
+                    if (Modules.ContainsKey(ns))
+                    {
+                        OpenModule(ns, interpreter.Environment);
+                    }
+                    else
+                    {
+                        throw new KeyNotFoundException($"Module '{ns.AsString}' not found");
+                    }
                 }
 
                 return None.Instance;

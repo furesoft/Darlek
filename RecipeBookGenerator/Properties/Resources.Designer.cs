@@ -76,6 +76,24 @@ namespace BookGenerator.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (define myCommand (lambda (args)
+        ///	(display (get-option args &quot;query&quot;))
+        ///))
+        ///
+        ///(register-command (
+        ///	&quot;todo&quot;
+        ///	&quot;Do Something&quot;
+        ///	&quot;todo --query &quot;
+        ///	myCommand
+        ///)) ähnelt.
+        /// </summary>
+        internal static string Commands1 {
+            get {
+                return ResourceManager.GetString("Commands1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
         internal static byte[] cover {
@@ -101,7 +119,9 @@ namespace BookGenerator.Properties {
         ///    model.header = &quot;hello&quot;;
         ///    model.body = &quot;world&quot;;
         ///
-        ///    model.title = $(&quot;a[class=&apos;ds-copy-link bi-recipe-title&apos;]&quot;);
+        ///    model.name = $(&quot;a[class=&apos;ds-copy-link bi-recipe-title&apos;]&quot;).innerHtml;
+        ///
+        ///    model.content = Repository.GetMetadata(&quot;title&quot;);
         ///
         ///    return model;
         ///}; ähnelt.
@@ -109,6 +129,24 @@ namespace BookGenerator.Properties {
         internal static string SampleCrawler {
             get {
                 return ResourceManager.GetString("SampleCrawler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die (open &apos;ObjectModel)
+        ///
+        ///(define mycrawler (lambda (url) (
+        ///	(define result (make-object))
+        ///	(set-property result &apos;title &quot;hello scheme&quot;)
+        ///
+        ///	result
+        ///))
+        ///
+        ///(register-crawler mycrawler) ähnelt.
+        /// </summary>
+        internal static string SampleCrawler1 {
+            get {
+                return ResourceManager.GetString("SampleCrawler1", resourceCulture);
             }
         }
         

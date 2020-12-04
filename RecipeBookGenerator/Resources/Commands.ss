@@ -2,9 +2,9 @@
 	(display (get-option args "query"))
 ))
 
-(register-command (
-	"todo"
+(register-command 
+	"my-command"
 	"Do Something"
 	"todo --query "
 	myCommand
-))
+)

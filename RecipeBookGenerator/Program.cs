@@ -17,6 +17,7 @@ namespace BookGenerator
         {
             Repository.CollectCustomCommands();
             new JsEvaluator().AddCustomCommands(Resources.Commands);
+            new SchemeEvaluator().AddCustomCommands(Resources.Commands1);
         }
     }
 }
