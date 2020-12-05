@@ -7,13 +7,13 @@ namespace BookGenerator.Commands
     {
         public string Name => "cover";
 
-        public string HelpText => "cover --uri <coveruri>";
+        public string HelpText => "cover <coveruri>";
 
         public string Description => "Override default cover";
 
         public int Invoke(CommandlineArguments args)
         {
-            Repository.AddFile(args.GetValue<string>("uri"), "cover", "cover.jpg");
+            Repository.AddFile(args.GetLastValue(), "cover", "cover.jpg");
             return 0;
         }
     }

@@ -3,7 +3,7 @@ using System.IO;
 using BookGenerator.Core;
 using BookGenerator.Core.Crawler;
 
-namespace BookGenerator.Commands
+namespace BookGenerator
 {
     public static class Crawlerfactory
     {

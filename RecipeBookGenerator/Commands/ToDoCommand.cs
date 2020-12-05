@@ -13,9 +13,9 @@ namespace BookGenerator.Commands
 
         public int Invoke(CommandlineArguments args)
         {
-            Console.WriteLine("1. Add some metadata with: rbg set --title <title> --author <author>");
-            Console.WriteLine("2. Add some recipes with: rbg add --name <name> --id <id>");
-            Console.WriteLine("3. Generate Epub with: rbg publish -o <filename>");
+            Console.WriteLine("1. Add some metadata with: darlek set --title <title> --author <author>");
+            Console.WriteLine("2. Add some recipes with: darlek add <url>");
+            Console.WriteLine("3. Generate Epub with: darlek publish");
 
             return 0;
         }

@@ -11,7 +11,7 @@ namespace BookGenerator.Core
 {
     public static class Repository
     {
-        public static string CacheFile = Path.Combine(Environment.CurrentDirectory, ".rbg");
+        public static string CacheFile = Path.Combine(Environment.CurrentDirectory, ".darlek");
 
         public static void Clear()
         {
