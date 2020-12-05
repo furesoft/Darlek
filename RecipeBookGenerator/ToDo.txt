@@ -11,29 +11,12 @@
 [ ] install crawler and templates from nuget feed
 [ ] update crawler and templates from nuget feed
 
-[ ] custom crawler with js (Nil.Js)
-	[X] implement js crawler
-	[X] implement custom crawler setting
-	[ ] implement js api
-		[X] Repository
-		[X] HTML-API
-		[X] WebRequest Api
-		[ ] Rest Api
-[ ] implement schemy crawler & evaluator
 
-[ ] write argument vector methods
-	get-option
-	get-value
+
 
 [-] write scheme library
- - string functions
- - number functions
- - bit functions
- - list functions
- - converter functions
-	(from->to)
 
-[ ] add object system to schemy
+[-] add object system to schemy
 	make-struct <name> <args>
 	<name>?
 	get-<prop> <name>
@@ -42,10 +25,8 @@
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
 	- SongbookCrawler
-[ ] implement Sample JS Crawler
+[ ] implement Sample Scheme Crawler
 	wikipedia
 	google
 	rss
 	swagger
-
-[ ] implement sample scheme crawler
