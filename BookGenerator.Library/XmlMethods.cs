@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace BookGenerator.Library
 {
-    [RuntimeType("xml")]
+    [RuntimeType("data.xml")]
     public static class XmlMethods
     {
         [RuntimeMethod("parse-xml")]
