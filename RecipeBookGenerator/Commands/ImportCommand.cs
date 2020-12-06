@@ -18,7 +18,16 @@ namespace BookGenerator.Commands
         {
             ImportProvider.Collect(typeof(IImportProvider).Assembly);
 
-            var filename = args.GetLastValue();
+            string filename = null;
+            if (args.HasOption("path"))
+            {
+                filename = args.GetValue<string>("path");
+            }
+            else
+            {
+                filename = args.GetLastValue();
+            }
+
             var provider = ImportProvider.GetProvider(filename);
 
             var content = File.ReadAllBytes(filename);

@@ -54,7 +54,11 @@ namespace BookGenerator.Commands
                 }
             }
 
-            epub.SetCover(Repository.GetCover(), ImageFormat.Jpeg);
+            if (Repository.GetCover() != null)
+            {
+                epub.SetCover(Repository.GetCover(), ImageFormat.Jpeg);
+            }
+
             epub.Write(filename);
 
             return 0;

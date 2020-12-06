@@ -72,7 +72,7 @@ namespace BookGenerator.Properties {
         ///(register-command 
         ///	&quot;my-command&quot;
         ///	&quot;Do Something&quot;
-        ///	&quot;todo --query &quot;
+        ///	&quot;my-command --query &quot;
         ///	myCommand
         ///) ähnelt.
         /// </summary>
@@ -89,15 +89,6 @@ namespace BookGenerator.Properties {
             get {
                 object obj = ResourceManager.GetObject("cover", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
-        /// </summary>
-        internal static string Library {
-            get {
-                return ResourceManager.GetString("Library", resourceCulture);
             }
         }
         

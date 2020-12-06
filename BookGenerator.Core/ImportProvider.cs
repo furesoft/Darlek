@@ -17,8 +17,6 @@ namespace BookGenerator.Core
             {
                 _providers.Add(extension, provider);
             }
-
-            throw new System.Exception($"Provider for Type '{extension.AsString}' already registered");
         }
 
         public static IImportProvider GetProvider(string filename)
@@ -37,7 +35,7 @@ namespace BookGenerator.Core
         {
             foreach (var t in ass.GetTypes())
             {
-                if (typeof(IImportProvider).IsAssignableFrom(t))
+                if (typeof(IImportProvider).IsAssignableFrom(t) && !t.IsInterface)
                 {
                     var att = t.GetCustomAttribute<DoNotTrackAttribute>();
 
