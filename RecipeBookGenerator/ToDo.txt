@@ -1,4 +1,4 @@
-﻿
+﻿[-] make sql parser for litedb
 
 [ ] Fix default cover
 
