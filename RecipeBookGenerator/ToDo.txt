@@ -1,17 +1,15 @@
-﻿[-] make sql parser for litedb
-
+﻿
 [ ] Fix default cover
 
 [ ] generate custom image in crawler or commands.js
-
-
-[ ] import command to import json and xml documents
 
 [ ] update system for executable
 [ ] install crawler and templates from nuget feed
 [ ] update crawler and templates from nuget feed
 
+[ ] custom import provider with scheme: SchemeImportProvider
 
+[ ] migrate from litedb to develdb
 
 
 [-] write scheme library
