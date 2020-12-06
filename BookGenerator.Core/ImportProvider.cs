@@ -11,11 +11,11 @@ namespace BookGenerator.Core
     {
         private static Dictionary<Symbol, IImportProvider> _providers = new Dictionary<Symbol, IImportProvider>();
 
-        public static void Register(Symbol extension, IImportProvider provider)
+        public static void Register(IImportProvider provider)
         {
-            if (!_providers.ContainsKey(extension))
+            if (!_providers.ContainsKey(provider.Extension))
             {
-                _providers.Add(extension, provider);
+                _providers.Add(provider.Extension, provider);
             }
         }
 
@@ -43,7 +43,7 @@ namespace BookGenerator.Core
                     {
                         var instance = (IImportProvider)Activator.CreateInstance(t);
 
-                        Register(instance.Extension, instance);
+                        Register(instance);
                     }
                 }
             }

@@ -2,6 +2,7 @@
 using BookGenerator.Core.API;
 using BookGenerator.Core.CLI;
 using BookGenerator.Core.Crawler;
+using BookGenerator.Core.ImportProviders;
 using BookGenerator.Core.RuntimeLibrary;
 using BookGenerator.Core.SchemeLibrary;
 using BookGenerator.Library;
@@ -34,6 +35,16 @@ namespace BookGenerator.Core
 
                 var cmd = new SchemeCommand(args[0].ToString(), args[1].ToString(), args[2].ToString(), invoker);
                 App.Current.AddCommand(cmd);
+
+                return None.Instance;
+            }));
+
+            ctx.DefineGlobal(Symbol.FromString("register-importer"), new NativeProcedure((args) =>
+            {
+                var invoker = (Procedure)args[1];
+
+                var importer = new SchemeImporter((Symbol)args[0], invoker);
+                ImportProvider.Register(importer);
 
                 return None.Instance;
             }));
