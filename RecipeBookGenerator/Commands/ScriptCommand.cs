@@ -27,6 +27,11 @@ namespace BookGenerator.Commands
                 return None.Instance;
             }));
 
+            if (!File.Exists(args.GetValue<string>("file")))
+            {
+                throw new System.Exception("File not found");
+            }
+
             var content = File.ReadAllText(args.GetValue<string>("file"));
 
             interpreter.Evaluate(new StringReader(content));
