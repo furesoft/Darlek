@@ -23,6 +23,15 @@ namespace BookGenerator.Core
             }
         }
 
+        public static BsonDocument GetAllMetadata()
+        {
+            using var db = new LiteDatabase(CacheFile);
+
+            var storage = db.FileStorage.FindById("metadata");
+
+            return storage.Metadata;
+        }
+
         public static void CollectCustomCommands()
         {
             using (var db = new LiteDatabase(CacheFile))
