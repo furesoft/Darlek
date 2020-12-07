@@ -13,9 +13,6 @@
 	get-<prop> <name>
 	set-<prop>! <name> <value>
 
-[ ] Add Scripting ability to make darlek automatable 
-
-
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
 	- SongbookCrawler
