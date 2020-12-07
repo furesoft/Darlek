@@ -19,6 +19,11 @@ namespace BookGenerator.Core
             }
         }
 
+        public static IEnumerable<Symbol> GetAllProviders()
+        {
+            return _providers.Keys;
+        }
+
         public static IImportProvider GetProvider(string filename)
         {
             var extension = Symbol.FromString(Path.GetExtension(filename));

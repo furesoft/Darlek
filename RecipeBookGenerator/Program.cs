@@ -17,6 +17,8 @@ namespace BookGenerator
         {
             Repository.CollectCustomCommands();
             new SchemeEvaluator().AddCustomCommands(Resources.Commands1);
+
+            ImportProvider.Collect(typeof(IImportProvider).Assembly);
         }
     }
 }

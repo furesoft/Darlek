@@ -16,8 +16,6 @@ namespace BookGenerator.Commands
 
         public int Invoke(CommandlineArguments args)
         {
-            ImportProvider.Collect(typeof(IImportProvider).Assembly);
-
             string filename = null;
             if (args.HasOption("path"))
             {
