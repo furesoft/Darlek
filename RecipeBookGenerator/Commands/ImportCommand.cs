@@ -1,6 +1,5 @@
 ﻿using BookGenerator.Core;
 using BookGenerator.Core.CLI;
-using Schemy;
 using System;
 using System.IO;
 
