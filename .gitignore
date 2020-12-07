@@ -352,3 +352,5 @@ MigrationBackup/
 obj/Debug/netcoreapp3.1/RecipeBookGenerator.assets.cache
 
 obj/Debug/netcoreapp3.1/RecipeBookGenerator.csprojAssemblyReference.cache
+
+BookGenerator.Library/obj/Debug/netstandard2.1/

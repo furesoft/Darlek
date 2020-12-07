@@ -31,4 +31,10 @@
 	  <ProjectReference Include="..\BookGenerator.Core\BookGenerator.Core.csproj" />
 	  <ProjectReference Include="..\BookGenerator.Library\BookGenerator.Library.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="script.ss">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

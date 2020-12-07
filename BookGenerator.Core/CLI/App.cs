@@ -74,9 +74,9 @@ namespace BookGenerator.Core.CLI
             }
         }
 
-        public int EvaluateLine(string cmd)
+        public int EvaluateLine(string cmd, bool isInteractive = false)
         {
-            return ProcessCommand(cmd.Split(' ', StringSplitOptions.RemoveEmptyEntries)); ;
+            return ProcessCommand(cmd.Split(' ', StringSplitOptions.RemoveEmptyEntries), isInteractive);
         }
 
         private int ProcessCommand(string[] args, bool isInteractive = false)
