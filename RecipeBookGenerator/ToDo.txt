@@ -7,14 +7,6 @@
 [ ] install crawler and templates from nuget feed
 [ ] update crawler and templates from nuget feed
 
-[ ] migrate from litedb to develdb
-
-
-[-] write scheme library
- [ ] binary functions
-	- read8 16 32 64
-	..
-
 [-] add object system to schemy
 	make-struct <name> <args>
 	<name>?
