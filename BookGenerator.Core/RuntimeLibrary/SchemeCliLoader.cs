@@ -97,7 +97,7 @@ namespace BookGenerator.Core.RuntimeLibrary
 
         private static void InitGlobals(Interpreter interpreter)
         {
-            //(make-struct 'name (list 'prop1 'prop2))
+            //(make-struct 'name '('prop1 'prop2))
             interpreter.DefineGlobal(Symbol.FromString("make-struct"), new NativeProcedure(_ =>
             {
                 var s = new RuntimeStruct { Typename = (Symbol)_.First() };
@@ -106,40 +106,44 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 for (int i = 0; i < props.Count - 1; i++)
                 {
-                    s.Add(null);
-                    var prop = (Symbol)props[i];
+                    var prop = (Symbol)((List<object>)props[i])[1];
+                    s.Add(prop, null);
 
                     //define getter
                     interpreter.DefineGlobal(Symbol.FromString("get-" + prop.AsString), new NativeProcedure(_ =>
                     {
-                        return ((RuntimeStruct)_.First())[i];
+                        return ((RuntimeStruct)_.First())[prop];
                     }));
 
                     //define setter
                     interpreter.DefineGlobal(Symbol.FromString("set-" + prop.AsString + "!"), new NativeProcedure(_ =>
                     {
-                        //Does not work. Need to rethink
-                        ((RuntimeStruct)_.First())[i] = _.Last();
+                        ((RuntimeStruct)_.First())[prop] = _.Last();
 
                         return true;
                     }));
                 }
 
                 //define predicate
+                interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "?"),
+                   new NativeProcedure(_ =>
+                   {
+                       return _[0] is RuntimeStruct value && value.Typename == s.Typename;
+                   }));
+
                 //define ctor
-
                 interpreter.DefineGlobal(Symbol.FromString("make-" + s.Typename.AsString),
-                    new NativeProcedure(_ =>
+                new NativeProcedure(_ =>
+                {
+                    var tmp = new RuntimeStruct { Typename = s.Typename };
+
+                    for (int i = 0; i < props.Count; i++)
                     {
-                        var tmp = new RuntimeStruct { Typename = s.Typename };
+                        tmp.Add((Symbol)((List<object>)props[i])[1], _[i]);
+                    }
 
-                        for (int i = 0; i < _.Count - 1; i++)
-                        {
-                            tmp[i] = _[i];
-                        }
-
-                        return tmp;
-                    }));
+                    return tmp;
+                }));
 
                 return s;
             }));
