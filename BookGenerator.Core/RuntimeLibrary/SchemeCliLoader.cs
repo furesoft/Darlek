@@ -104,19 +104,19 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 var props = (List<object>)_.Last();
 
-                for (int i = 0; i < props.Count - 1; i++)
+                foreach (List<object> item in props)
                 {
-                    var prop = (Symbol)((List<object>)props[i])[1];
+                    var prop = (Symbol)item[1];
                     s.Add(prop, null);
 
                     //define getter
-                    interpreter.DefineGlobal(Symbol.FromString("get-" + prop.AsString), new NativeProcedure(_ =>
+                    interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "-get-" + prop.AsString), new NativeProcedure(_ =>
                     {
                         return ((RuntimeStruct)_.First())[prop];
                     }));
 
                     //define setter
-                    interpreter.DefineGlobal(Symbol.FromString("set-" + prop.AsString + "!"), new NativeProcedure(_ =>
+                    interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "-set-" + prop.AsString + "!"), new NativeProcedure(_ =>
                     {
                         ((RuntimeStruct)_.First())[prop] = _.Last();
 
