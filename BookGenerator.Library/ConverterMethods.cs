@@ -16,6 +16,12 @@ namespace BookGenerator.Library
             return Encoding.Default.GetString(input);
         }
 
+        [RuntimeMethod("struct->value-list")]
+        public static List<object> ToValueList(RuntimeStruct stru)
+        {
+            return stru.Values.ToList();
+        }
+
         [RuntimeMethod("string->num")]
         public static int ToNum(string input)
         {

@@ -1,6 +1,6 @@
 ﻿(open 'ObjectModel)
 
-(define mycrawler (lambda (url) (
+(define mycrawler (lambda (args) (
 	(define result (make-object))
 	(set-property result 'title "hello scheme")
 

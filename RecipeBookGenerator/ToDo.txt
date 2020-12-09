@@ -7,11 +7,12 @@
 [ ] install crawler and templates from nuget feed
 [ ] update crawler and templates from nuget feed
 
-[-] add object system to schemy
-	make-struct <name> <args>
-	<name>?
-	get-<prop> <name>
-	set-<prop>! <name> <value>
+[ ] make available in scheme to make custom modules
+(module 'core (
+	(define kl 12)
+
+	(export 'kl)
+))
 
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
