@@ -38,20 +38,20 @@ namespace Schemy
             }
 
             // populate an empty environment for the initializer to potentially work with
-            this.environment = Environment.CreateEmpty();
-            this.macroTable = new Dictionary<Symbol, Procedure>();
+            environment = Environment.CreateEmpty();
+            macroTable = new Dictionary<Symbol, Procedure>();
 
-            environmentInitializers = environmentInitializers ?? new List<CreateSymbolTableDelegate>();
+            environmentInitializers ??= new List<CreateSymbolTableDelegate>();
             environmentInitializers = new CreateSymbolTableDelegate[] { Builtins.CreateBuiltins }.Concat(environmentInitializers);
 
             foreach (CreateSymbolTableDelegate initializer in environmentInitializers)
             {
-                this.environment = new Environment(initializer(this), this.environment);
+                environment = new Environment(initializer(this), environment);
             }
 
             foreach (var iniReader in GetInitializeFiles())
             {
-                this.Evaluate(iniReader);
+                Evaluate(iniReader);
             }
         }
 
@@ -72,9 +72,9 @@ namespace Schemy
             }
         }
 
-        public IFileSystemAccessor FileSystemAccessor { get { return this.fsAccessor; } }
+        public IFileSystemAccessor FileSystemAccessor { get { return fsAccessor; } }
 
-        public Environment Environment { get { return this.environment; } }
+        public Environment Environment { get { return environment; } }
 
         /// <summary>
         /// Evaluate script from a input reader
@@ -157,7 +157,7 @@ namespace Schemy
         /// <param name="val">the associated value</param>
         public void DefineGlobal(Symbol sym, object val)
         {
-            this.environment[sym] = val;
+            environment[sym] = val;
         }
 
         /// <summary>
@@ -168,7 +168,6 @@ namespace Schemy
             Func<object, object> readAhead = null;
             readAhead = token =>
             {
-                Symbol quote;
                 if (object.Equals(token, Symbol.EOF))
                 {
                     throw new SyntaxError("unexpected EOF");
@@ -182,7 +181,7 @@ namespace Schemy
                         while (true)
                         {
                             token = port.NextToken();
-                            if (token is string && (string)token == ")")
+                            if (token is string x && x == ")")
                             {
                                 return L;
                             }
@@ -196,7 +195,7 @@ namespace Schemy
                     {
                         throw new SyntaxError("unexpected )");
                     }
-                    else if (Symbol.QuotesMap.TryGetValue(tokenStr, out quote))
+                    else if (Symbol.QuotesMap.TryGetValue(tokenStr, out Symbol quote))
                     {
                         object quoted = Read(port);
                         return new List<object> { quote, quoted };
@@ -475,7 +474,6 @@ namespace Schemy
 
         private static object ParseAtom(string token)
         {
-            int intVal;
             double floatVal;
             if (token == "#t")
             {
@@ -487,9 +485,9 @@ namespace Schemy
             }
             else if (token[0] == '"')
             {
-                return token.Substring(1, token.Length - 2);
+                return token[1..^1];
             }
-            else if (int.TryParse(token, out intVal))
+            else if (int.TryParse(token, out int intVal))
             {
                 return intVal;
             }
@@ -524,9 +522,9 @@ namespace Schemy
                 this.result = result;
             }
 
-            public Exception Error { get { return this.error; } }
+            public Exception Error { get { return error; } }
 
-            public object Result { get { return this.result; } }
+            public object Result { get { return result; } }
         }
 
         public class InPort
@@ -539,7 +537,7 @@ namespace Schemy
             public InPort(TextReader file)
             {
                 this.file = file;
-                this.line = string.Empty;
+                line = string.Empty;
             }
 
             /// <summary>
@@ -549,31 +547,31 @@ namespace Schemy
             {
                 while (true)
                 {
-                    if (this.line == string.Empty)
+                    if (line?.Length == 0)
                     {
-                        this.line = this.file.ReadLine();
+                        line = file.ReadLine();
                     }
 
-                    if (this.line == string.Empty)
+                    if (line?.Length == 0)
                     {
                         continue;
                     }
-                    else if (this.line == null)
+                    else if (line == null)
                     {
                         return Symbol.EOF;
                     }
                     else
                     {
-                        var res = Regex.Match(this.line, tokenizer);
+                        var res = Regex.Match(line, tokenizer);
                         var token = res.Groups[1].Value;
-                        this.line = res.Groups[2].Value;
+                        line = res.Groups[2].Value;
 
                         if (string.IsNullOrEmpty(token))
                         {
                             // 1st group is empty. All string falls into 2nd group. This usually means
                             // an error in the syntax, e.g., incomplete string "foo
-                            var tmp = this.line;
-                            this.line = string.Empty; // to continue reading next line
+                            var tmp = line;
+                            line = string.Empty; // to continue reading next line
 
                             if (tmp.Trim() != string.Empty)
                             {

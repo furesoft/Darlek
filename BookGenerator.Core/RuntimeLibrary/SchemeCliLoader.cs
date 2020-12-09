@@ -39,29 +39,17 @@ namespace BookGenerator.Core.RuntimeLibrary
                             environment = Modules[att.Module];
                         }
 
-                        var make = (Symbol.FromString(name), new NativeProcedure(_ =>
-                        {
-                            return Activator.CreateInstance(t, _.ToArray());
-                        }));
+                        var make = (Symbol.FromString(name), new NativeProcedure(_ => Activator.CreateInstance(t, _.ToArray())));
 
                         environment.Define(make.Item1, make.Item2);
 
                         foreach (var prop in t.GetProperties())
                         {
-                            interpreter.DefineGlobal(Symbol.FromString("get-" + prop.Name.ToLower()), new NativeProcedure(_ =>
-                            {
-                                return CallMethodInfo(_, prop.GetGetMethod(), _.FirstOrDefault());
-                            }, "get-" + prop.Name.ToLower()));
-                            interpreter.DefineGlobal(Symbol.FromString("set-" + prop.Name.ToLower() + "!"), new NativeProcedure(_ =>
-                            {
-                                return prop.GetSetMethod().Invoke(_.FirstOrDefault(), new object[] { _.Last() });
-                            }, "set-" + prop.Name.ToLower() + "!"));
+                            interpreter.DefineGlobal(Symbol.FromString("get-" + prop.Name.ToLower()), new NativeProcedure(_ => CallMethodInfo(_, prop.GetGetMethod(), _.FirstOrDefault()), "get-" + prop.Name.ToLower()));
+                            interpreter.DefineGlobal(Symbol.FromString("set-" + prop.Name.ToLower() + "!"), new NativeProcedure(_ => prop.GetSetMethod().Invoke(_.FirstOrDefault(), new object[] { _.Last() }), "set-" + prop.Name.ToLower() + "!"));
                         }
 
-                        environment.Define(Symbol.FromString(predName), new NativeProcedure(_ =>
-                        {
-                            return t.IsAssignableFrom(_.FirstOrDefault().GetType());
-                        }, name));
+                        environment.Define(Symbol.FromString(predName), new NativeProcedure(_ => t.IsAssignableFrom(_.FirstOrDefault().GetType()), name));
                     }
 
                     foreach (var mi in t.GetMethods())
@@ -69,10 +57,7 @@ namespace BookGenerator.Core.RuntimeLibrary
                         var matt = mi.GetCustomAttribute<RuntimeMethodAttribute>();
                         if (matt != null)
                         {
-                            var procedure = new NativeProcedure(_ =>
-                            {
-                                return CallMethodInfo(_, mi);
-                            });
+                            var procedure = new NativeProcedure(_ => CallMethodInfo(_, mi));
 
                             if (att.Module != null)
                             {
@@ -110,10 +95,7 @@ namespace BookGenerator.Core.RuntimeLibrary
                     s.Add(prop, null);
 
                     //define getter
-                    interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "-get-" + prop.AsString), new NativeProcedure(_ =>
-                    {
-                        return ((RuntimeStruct)_.First())[prop];
-                    }));
+                    interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "-get-" + prop.AsString), new NativeProcedure(_ => ((RuntimeStruct)_.First())[prop]));
 
                     //define setter
                     interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "-set-" + prop.AsString + "!"), new NativeProcedure(_ =>
@@ -126,10 +108,7 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 //define predicate
                 interpreter.DefineGlobal(Symbol.FromString(s.Typename.AsString + "?"),
-                   new NativeProcedure(_ =>
-                   {
-                       return _[0] is RuntimeStruct value && value.Typename == s.Typename;
-                   }));
+                   new NativeProcedure(_ => _[0] is RuntimeStruct value && value.Typename == s.Typename));
 
                 //define ctor
                 interpreter.DefineGlobal(Symbol.FromString("make-" + s.Typename.AsString),
