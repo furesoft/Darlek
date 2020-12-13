@@ -142,6 +142,13 @@ namespace BookGenerator.Core.RuntimeLibrary
 
                 return None.Instance;
             }));
+
+            interpreter.DefineGlobal(Symbol.FromString("display"), new NativeProcedure(_ =>
+            {
+                Console.WriteLine(_.First().ToString());
+
+                return None.Instance;
+            }));
         }
 
         private static void OpenModule(Symbol ns, Schemy.Environment env)
