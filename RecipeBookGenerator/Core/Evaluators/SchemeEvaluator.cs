@@ -1,14 +1,11 @@
 ﻿using BookGenerator.Commands;
-using BookGenerator.Core.API;
 using BookGenerator.Core.CLI;
 using BookGenerator.Core.Crawler;
 using BookGenerator.Core.ImportProviders;
 using BookGenerator.Core.RuntimeLibrary;
 using BookGenerator.Core.SchemeLibrary;
 using BookGenerator.Library;
-using BookGenerator.Properties;
 using Schemy;
-using System;
 using System.IO;
 
 namespace BookGenerator.Core
