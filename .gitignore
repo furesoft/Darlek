@@ -349,8 +349,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-obj/Debug/netcoreapp3.1/RecipeBookGenerator.assets.cache
-
-obj/Debug/netcoreapp3.1/RecipeBookGenerator.csprojAssemblyReference.cache
-
-BookGenerator.Library/obj/Debug/netstandard2.1/
+*.vsix
+StreamPlan.txt
