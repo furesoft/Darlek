@@ -1,0 +1,22 @@
+﻿
+[ ] Fix default cover
+
+[ ] generate custom image in crawler or commands.ss
+
+[ ] update system for executable
+[ ] install crawler and templates from nuget feed
+[ ] update crawler and templates from nuget feed
+
+[ ] write|find scheme macros
+
+[ ] make available in scheme to make custom modules
+(module 'core (
+	(define kl 12)
+
+	(export 'kl)
+))
+
+[ ] Encapsulate Crawling for different sites
+	- ChefkochCrawler
+
+[ ] implement Ui  with Specre.Console
