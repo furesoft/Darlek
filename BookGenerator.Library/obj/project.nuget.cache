@@ -1,16 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "VeBTN0BedtcZnaYNl9ipkuGauc1cSLvit1uvRYVcqAuSJObXpgJB+w6fWInqaoiSwq2Aoa1MbrSboHUZh9ezlA==",
+  "dgSpecHash": "1mWrbBiBw3vlMw1MpchvYy1DUJn7xcFYwDLn4m5+875TbfjZ+rIGWRngtX1oB4AOXnLiyfaRalnv+hD8iFyMaA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Library\\BookGenerator.Library.csproj",
+  "projectFilePath": "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Library\\BookGenerator.Library.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\filmee24\\.nuget\\packages\\anglesharp\\0.14.0\\anglesharp.0.14.0.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\litedb\\5.0.9\\litedb.5.0.9.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\scriban\\2.1.4\\scriban.2.1.4.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\system.text.encoding.codepages\\4.5.0\\system.text.encoding.codepages.4.5.0.nupkg.sha512",
-    "C:\\Users\\filmee24\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.1\\system.threading.tasks.extensions.4.5.1.nupkg.sha512"
+    "C:\\Users\\chris\\.nuget\\packages\\anglesharp\\0.17.1\\anglesharp.0.17.1.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\litedb\\5.0.12\\litedb.5.0.12.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\scriban\\5.5.0\\scriban.5.5.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.0\\system.threading.tasks.extensions.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

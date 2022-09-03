@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj": {}
+    "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Core\\BookGenerator.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj": {
+    "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Core\\BookGenerator.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj",
+        "projectUniqueName": "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Core\\BookGenerator.Core.csproj",
         "projectName": "Darlek.Core",
-        "projectPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\BookGenerator.Core.csproj",
-        "packagesPath": "C:\\Users\\filmee24\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\filmee24\\Documents\\Projekte\\ChefkochToEpub\\BookGenerator.Core\\obj\\",
+        "projectPath": "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Core\\BookGenerator.Core.csproj",
+        "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\filmee24\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,11 +26,13 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Users\\filmee24\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/avalonia-ci/api/v2": {}
         },
         "frameworks": {
           "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
         },
@@ -38,18 +44,19 @@
       },
       "frameworks": {
         "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
           "dependencies": {
             "AngleSharp": {
               "target": "Package",
-              "version": "[0.14.0, )"
+              "version": "[0.17.1, )"
             },
             "LiteDB": {
               "target": "Package",
-              "version": "[5.0.9, )"
+              "version": "[5.0.12, )"
             },
             "Scriban": {
               "target": "Package",
-              "version": "[2.1.4, )"
+              "version": "[5.5.0, )"
             }
           },
           "imports": [
@@ -67,7 +74,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100-preview.4.22252.9\\RuntimeIdentifierGraph.json"
         }
       }
     }
