@@ -20,11 +20,4 @@
 					(define expr1 (car (cdr first)))
 					`(if ,test1 ,expr1 (cond ,@rest))))))
 
-(define-macro while (lambda (c action)
-
-'(if c action)
-
-
-))
-
 

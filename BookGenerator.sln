@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30517.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookGenerator", "RecipeBookGenerator\BookGenerator.csproj", "{DB52F83B-F81A-45B9-A907-49E6D4BBDCB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookGenerator.Library", "BookGenerator.Library\BookGenerator.Library.csproj", "{EAD72057-C24C-4736-B311-8ACF8DB83240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookGenerator.Library", "BookGenerator.Library\BookGenerator.Library.csproj", "{EAD72057-C24C-4736-B311-8ACF8DB83240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookGenerator.Core", "BookGenerator.Core\BookGenerator.Core.csproj", "{9219727D-F566-494D-AB31-E6BD77630DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookGenerator.Core", "BookGenerator.Core\BookGenerator.Core.csproj", "{9219727D-F566-494D-AB31-E6BD77630DB7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{FC08A2EE-F59D-41AA-9E94-2DD47134353D}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
