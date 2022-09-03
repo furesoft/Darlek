@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
-using BookGenerator.Core;
+﻿using BookGenerator.Core;
 using BookGenerator.Core.CLI;
 using LiteDB;
+using Spectre.Console;
 
 namespace BookGenerator.Commands
 {
@@ -17,14 +16,18 @@ namespace BookGenerator.Commands
         public int Invoke(CommandlineArguments args)
         {
             var all = Repository.GetAll<BsonDocument>();
-            var table = new ConsoleTable(Console.CursorTop, ConsoleTable.Align.Left, new string[] { "Name", "Author", "ID" });
-            var entries = new ArrayList();
+
+            var table = new Table();
+            table.AddColumn(new TableColumn("Name").LeftAligned());
+            table.AddColumn(new TableColumn("Author").Centered());
+            table.AddColumn(new TableColumn("ID").RightAligned());
+
             foreach (var item in all)
             {
-                entries.Add(new string[] { item["Name"], item["Author"], item["_id"].AsObjectId.ToString() });
+                table.AddRow(new string[] { item["Name"], item["Author"], item["_id"].AsObjectId.ToString() });
             }
 
-            table.RePrint(entries);
+            AnsiConsole.Write(table);
 
             return 0;
         }

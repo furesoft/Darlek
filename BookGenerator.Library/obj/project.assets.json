@@ -63,6 +63,22 @@
           "build/_._": {}
         }
       },
+      "Spectre.Console/0.44.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Spectre.Console.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "System.Buffers/4.5.1": {
         "type": "package",
         "compile": {
@@ -165,7 +181,8 @@
         "dependencies": {
           "AngleSharp": "0.17.1",
           "LiteDB": "5.0.12",
-          "Scriban": "5.5.0"
+          "Scriban": "5.5.0",
+          "Spectre.Console": "0.44.0"
         },
         "compile": {
           "bin/placeholder/Darlek.Core.dll": {}
@@ -468,6 +485,24 @@
         "src/Scriban/TemplateContext.Helpers.cs",
         "src/Scriban/TemplateContext.Variables.cs",
         "src/Scriban/TemplateContext.cs"
+      ]
+    },
+    "Spectre.Console/0.44.0": {
+      "sha512": "QMpKtn5QV1j2nklqDwuRE/XwbDn5jxww+Mt5J6Jn3EeQIzaLcuLyUhCLh/mS8giN6uXbqOV1ep5HlUGxrV1ujQ==",
+      "type": "package",
+      "path": "spectre.console/0.44.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net5.0/Spectre.Console.dll",
+        "lib/net5.0/Spectre.Console.xml",
+        "lib/net6.0/Spectre.Console.dll",
+        "lib/net6.0/Spectre.Console.xml",
+        "lib/netstandard2.0/Spectre.Console.dll",
+        "lib/netstandard2.0/Spectre.Console.xml",
+        "small-logo.png",
+        "spectre.console.0.44.0.nupkg.sha512",
+        "spectre.console.nuspec"
       ]
     },
     "System.Buffers/4.5.1": {

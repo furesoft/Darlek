@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1mWrbBiBw3vlMw1MpchvYy1DUJn7xcFYwDLn4m5+875TbfjZ+rIGWRngtX1oB4AOXnLiyfaRalnv+hD8iFyMaA==",
+  "dgSpecHash": "jeFrjvZDkkimFExskBOZUUSyMnFpLsRp4DDx9iKSP58Z+8ydkczQBpiWm9Cs0SFOT0w2ihKsnD0k40IpQGgIUg==",
   "success": true,
   "projectFilePath": "C:\\Users\\chris\\Source\\Repos\\furesoft\\Darlek\\BookGenerator.Library\\BookGenerator.Library.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\chris\\.nuget\\packages\\litedb\\5.0.12\\litedb.5.0.12.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\scriban\\5.5.0\\scriban.5.5.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\spectre.console\\0.44.0\\spectre.console.0.44.0.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",

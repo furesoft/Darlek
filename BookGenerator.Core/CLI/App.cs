@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using Spectre.Console;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,16 +11,15 @@ namespace BookGenerator.Core.CLI
     /// </summary>
     public class App
     {
+        public static App Current = new App();
         private Dictionary<string, ICliCommand> _commands = new Dictionary<string, ICliCommand>();
 
-        public static App Current = new App();
+        public event Action BeforeRun;
 
         public void AddCommand(ICliCommand cmd)
         {
             _commands.Add(cmd.Name, cmd);
         }
-
-        public event Action BeforeRun;
 
         /// <summary>
         /// Start The Application
@@ -79,6 +78,20 @@ namespace BookGenerator.Core.CLI
             return ProcessCommand(cmd.Split(' ', StringSplitOptions.RemoveEmptyEntries), isInteractive);
         }
 
+        public void PrintAllCommands()
+        {
+            var table = new Table();
+            table.AddColumn(new TableColumn("Command").LeftAligned());
+            table.AddColumn(new TableColumn("Description").RightAligned());
+
+            foreach (var cmd in _commands)
+            {
+                table.AddRow(cmd.Key, cmd.Value.Description, cmd.Value.HelpText);
+            }
+
+            AnsiConsole.Write(table);
+        }
+
         private int ProcessCommand(string[] args, bool isInteractive = false)
         {
             if (args.Length == 0)
@@ -113,19 +126,6 @@ namespace BookGenerator.Core.CLI
             }
 
             return -1;
-        }
-
-        public void PrintAllCommands()
-        {
-            var table = new ConsoleTable(Console.CursorTop, ConsoleTable.Align.Left, new string[] { "Command", "Description" });
-            var rows = new ArrayList();
-
-            foreach (var cmd in _commands)
-            {
-                rows.Add(new string[] { cmd.Key, cmd.Value.Description, cmd.Value.HelpText });
-            }
-
-            table.RePrint(rows);
         }
     }
 }

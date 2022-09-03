@@ -57,6 +57,10 @@
             "Scriban": {
               "target": "Package",
               "version": "[5.5.0, )"
+            },
+            "Spectre.Console": {
+              "target": "Package",
+              "version": "[0.44.0, )"
             }
           },
           "imports": [
