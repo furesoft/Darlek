@@ -1,6 +1,7 @@
 name: Make Release from Tag
 
 on:
+  workflow_dispatch:
   push:
     tags:
     - "v[0-9]+.[0-9]+.[0-9]+"
@@ -33,7 +34,7 @@ jobs:
     - name: Install .NET Core
       uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: 6.0.x
         include-prerelease: true
 
     - name: Build
@@ -41,9 +42,9 @@ jobs:
       run: |
         # Define some variables for things we need
         tag=$(git describe --tags --abbrev=0)
-        release_name="Backc-$tag-${{ matrix.target }}"
+        release_name="Darlek-${{ matrix.target }}"
         # Build everything
-        dotnet publish Source/Backlang-Compiler.sln --runtime "${{ matrix.target }}" -p:PublishSingleFile=true -c Release -o "$release_name"
+        dotnet publish Darlek.sln --runtime "${{ matrix.target }}" -p:PublishSingleFile=true -c Release -o "$release_name"
 
     - name: Publish
       uses: softprops/action-gh-release@v1
