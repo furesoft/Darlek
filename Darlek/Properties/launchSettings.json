@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "Darlek": {
+      "commandName": "Project",
+      "commandLineArgs": "-i"
+    }
+  }
+}
