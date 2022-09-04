@@ -53,3 +53,4 @@ jobs:
         files: "Dist/$release_name/Darlek*"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        release_name: "Darlek-${{ matrix.target }}"
