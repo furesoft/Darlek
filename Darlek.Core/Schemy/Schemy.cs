@@ -496,15 +496,6 @@ public class Interpreter
         {
             yield return reader;
         }
-
-        var initFile = Path.Combine(Path.GetDirectoryName(typeof(Interpreter).Assembly.Location), ".init.ss");
-        if (File.Exists(initFile))
-        {
-            using (var reader = new StreamReader(initFile))
-            {
-                yield return reader;
-            }
-        }
     }
 
     public struct EvaluationResult
