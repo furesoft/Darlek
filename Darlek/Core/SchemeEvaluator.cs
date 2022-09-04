@@ -35,12 +35,6 @@ public class SchemeEvaluator
         }));
 
         ctx.DefineGlobal(Symbol.FromString("current-menu"), menu);
-        ctx.DefineGlobal(Symbol.FromString("show-menu"), new NativeProcedure((args) => {
-            var m = (Menu)args[0];
-            m.Show();
-
-            return None.Instance;
-        }));
 
         ctx.DefineGlobal(Symbol.FromString("register-importer"), new NativeProcedure((args) => {
             var invoker = (Procedure)args[1];
