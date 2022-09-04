@@ -5,6 +5,7 @@ using Scriban.Runtime;
 using Spectre.Console;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace Darlek.Commands.Manage;
 
@@ -52,10 +53,14 @@ public class PublishCommand : IMenuCommand
         {
             epub.SetCover(Repository.GetCover(), ImageFormat.Jpeg);
         }
+
         AnsiConsole.Status().AutoRefresh(true).Start("Saving To File", (_) => {
             epub.Write(filename);
         });
 
-        parentMenu.WaitAndShow();
+        Console.WriteLine("Success");
+        Thread.Sleep(1000);
+
+        parentMenu.Show();
     }
 }

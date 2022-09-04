@@ -11,12 +11,15 @@ public static class Program
         ImportProvider.Collect(typeof(IImportProvider).Assembly);
 
         var mainMenu = new Menu(null);
+        mainMenu.Items.Add("New", new NewCommand());
         mainMenu.Items.Add("Open", new OpenCommand());
-        mainMenu.Items.Add("Create", new CreateCommand());
-        mainMenu.Items.Add("Scheme REPL", new SchemeReplCommand());
-        mainMenu.Items.Add("Scheme Commands", new SchemeCommands());
-        mainMenu.Items.Add("Show Importers", new ShowImportersCommand());
-        mainMenu.Items.Add("Show Crawlers", new ShowCrawlersCommand());
+        mainMenu.Items.Add("Dev Tools", new DelegateCommand(_ => {
+            var m = new Menu(_);
+
+            m.Items.Add("Scheme REPL", new SchemeReplCommand());
+            m.Items.Add("Scheme Commands", new SchemeCommands());
+            m.Show();
+        }));
 
         ManageMenu.Init(mainMenu);
 

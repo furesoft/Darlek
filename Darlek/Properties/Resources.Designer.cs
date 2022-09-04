@@ -61,19 +61,17 @@ namespace Darlek.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die (open &apos;cli-vector &apos;ObjectModel &apos;conversion)
+        ///   Sucht eine lokalisierte Zeichenfolge, die (open &apos;ObjectModel &apos;conversion)
         ///
-        ///(define myCommand (lambda (args)
-        ///	(display (get-value args &quot;query&quot;))
-        ///
-        ///	0
+        ///(define myCommand (lambda (menu)
+        ///	(display &quot;Hello From Scheme :)&quot;)
+        ///	(wait-menu menu)
         ///))
         ///
         ///(register-command 
         ///	&quot;my-command&quot;
-        ///	&quot;Do Something&quot;
-        ///	&quot;my-command --query &quot;
         ///	myCommand
+        ///	manage-menu
         ///)
         ///
         ///(define myImport 

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Darlek.Commands;
 
-public class CreateCommand : IMenuCommand
+public class NewCommand : IMenuCommand
 {
     public void Invoke(Menu parentMenu)
     {
