@@ -240,7 +240,7 @@ public static class Repository
         return collection.FindAll().ToArray();
     }
 
-    internal static void RemoveByName(string name)
+    public static void RemoveByName(string name)
     {
         var collectionName = GetCollectionName();
         using var db = new LiteDatabase(CacheFile);
@@ -248,6 +248,15 @@ public static class Repository
         var collection = db.GetCollection(collectionName);
         var id = collection.FindOne(Query.EQ("name", name)).AsObjectId;
         collection.Delete(id);
+    }
+
+    public static void Update(BsonDocument document)
+    {
+        var collectionName = GetCollectionName();
+        using var db = new LiteDatabase(CacheFile);
+
+        var collection = db.GetCollection(collectionName);
+        collection.Update(document);
     }
 
     private static string GetCollectionName()
