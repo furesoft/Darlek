@@ -1,4 +1,4 @@
-using Darlek.Core.UI;
+using Darlek.Core;
 using System;
 
 namespace Darlek.Commands;

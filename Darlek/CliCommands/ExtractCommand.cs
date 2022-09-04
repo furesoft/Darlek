@@ -1,10 +1,6 @@
-﻿using Darlek.Core.CLI;
-using Darlek.Properties;
-using System;
-using System.IO;
+﻿namespace Darlek.CliCommands;
 
-namespace Darlek.Commands;
-
+/*
 public class ExtractCommand : ICliCommand
 {
     public string Name => "extract";
@@ -34,3 +30,4 @@ public class ExtractCommand : ICliCommand
         return 0;
     }
 }
+*/

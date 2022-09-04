@@ -1,5 +1,4 @@
 ﻿using Darlek.Core;
-using Darlek.Core.UI;
 using Spectre.Console;
 using System.IO;
 
@@ -16,5 +15,7 @@ public class CreateCommand : IMenuCommand
         Repository.SetMetadata("title", title);
         Repository.SetMetadata("author", author);
         Repository.SetMetadata("filename", "exported");
+
+        ManageMenu.Show();
     }
 }

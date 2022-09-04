@@ -15,20 +15,10 @@ public class SchemeCrawler : ICrawler
 
     public string Source { get; }
 
-    public async Task<BsonDocument> Crawl(string id)
-    {
-#if DEBUG
-        return await Crawl(new Uri($"{System.Environment.CurrentDirectory}\\debug.html"));
-#else
-
-        return await Crawl(new Uri($"https://www.chefkoch.de/rezepte/drucken/{id}.html"));
-#endif
-    }
-
     public async Task<BsonDocument> Crawl(Uri url)
     {
         var eval = new SchemeEvaluator();
-        var ctx = eval.Init();
+        var ctx = SchemeEvaluator.Init();
 
         ctx.DefineGlobal(Symbol.FromString("set-crawler"), NativeProcedure.Create<Procedure, Procedure>(_ => {
             return _;

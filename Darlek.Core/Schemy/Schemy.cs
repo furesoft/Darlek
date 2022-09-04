@@ -1,14 +1,14 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace Darlek.Core.Schemy;
-
 using Darlek.Core.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+
+namespace Darlek.Core.Schemy;
 
 public class Interpreter
 {
@@ -454,7 +454,6 @@ public class Interpreter
 
     private static object ParseAtom(string token)
     {
-        double floatVal;
         if (token == "#t")
         {
             return true;
@@ -528,7 +527,7 @@ public class Interpreter
     {
         private const string tokenizer = @"^\s*(,@|[('`,)]|""(?:[\\].|[^\\""])*""|;.*|[^\s('""`,;)]*)(.*)";
 
-        private TextReader file;
+        private readonly TextReader file;
         private string line;
 
         public InPort(TextReader file)

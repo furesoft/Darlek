@@ -1,12 +1,14 @@
-﻿(open 'cli-vector 'ObjectModel 'conversion)
+﻿(open 'ObjectModel 'conversion)
 
-(define myCommand (lambda (args)
+(define myCommand (lambda (menu)
 	(display "Hello From Scheme :)")
+	(wait-menu menu)
 ))
 
 (register-command 
 	"my-command"
 	myCommand
+	manage-menu
 )
 
 (define myImport 

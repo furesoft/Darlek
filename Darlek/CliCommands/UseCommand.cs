@@ -1,10 +1,6 @@
-﻿using Darlek.Core;
-using Darlek.Core.CLI;
-using Darlek.Properties;
-using System.IO;
+﻿namespace Darlek.CliCommands;
 
-namespace Darlek.Commands;
-
+/*
 public class UseCommand : ICliCommand
 {
     public string Name => "use";
@@ -41,3 +37,4 @@ public class UseCommand : ICliCommand
         return 0;
     }
 }
+*/

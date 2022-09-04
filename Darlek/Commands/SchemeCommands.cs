@@ -1,26 +1,16 @@
-﻿using Darlek.Core.CLI;
+﻿using Darlek.Core;
 using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.SchemeLibrary;
 using Darlek.Core.Schemy;
-using Darlek.Library;
 using Spectre.Console;
+using System;
 
 namespace Darlek.Commands;
 
-public class SchemeCommands : ICliCommand
+public class SchemeCommands : IMenuCommand
 {
-    public string Name => "scheme-commands";
-
-    public string HelpText => "scheme-commands";
-
-    public string Description => "List all possible commands";
-
-    public int Invoke(CommandlineArguments args)
+    public void Invoke(Menu parentMenu)
     {
         var interpreter = new Interpreter();
-
-        SchemeCliLoader.Apply(typeof(StringMethods).Assembly, interpreter);
-        SchemeCliLoader.Apply(typeof(RepositoryMethods).Assembly, interpreter);
 
         var table = new Table();
         table.AddColumn(new TableColumn("Function").LeftAligned());
@@ -41,6 +31,8 @@ public class SchemeCommands : ICliCommand
 
         AnsiConsole.Write(table);
 
-        return 0;
+        Console.ReadKey();
+
+        parentMenu.Show();
     }
 }

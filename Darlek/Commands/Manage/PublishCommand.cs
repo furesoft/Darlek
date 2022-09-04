@@ -1,13 +1,12 @@
 ﻿using Darlek.Core;
 using Darlek.Core.Epub;
-using Darlek.Core.UI;
 using LiteDB;
 using Scriban.Runtime;
 using Spectre.Console;
 using System;
 using System.Linq;
 
-namespace Darlek.Commands;
+namespace Darlek.Commands.Manage;
 
 public class PublishCommand : IMenuCommand
 {
@@ -28,10 +27,9 @@ public class PublishCommand : IMenuCommand
 
         for (var i = 0; i < recipes.Length; i++)
         {
-            bookInfo.Add("page", i + 1);
-
             var sobj = Renderer.BuildScriptObject(recipes[i]);
             sobj.Add("book", bookInfo);
+            sobj.Add("page", i + 1);
 
             var image = Repository.GetFile(recipes[i]["_id"].AsObjectId);
             if (image != null)
@@ -57,5 +55,7 @@ public class PublishCommand : IMenuCommand
         AnsiConsole.Status().AutoRefresh(true).Start("Saving To File", (_) => {
             epub.Write(filename);
         });
+
+        parentMenu.WaitAndShow();
     }
 }

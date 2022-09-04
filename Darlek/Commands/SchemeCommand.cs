@@ -1,5 +1,5 @@
-﻿using Darlek.Core.Schemy;
-using Darlek.Core.UI;
+﻿using Darlek.Core;
+using Darlek.Core.Schemy;
 
 namespace Darlek.Commands;
 

@@ -1,30 +1,25 @@
-﻿using System;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Parser;
+using LiteDB;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using AngleSharp.Dom;
-using AngleSharp.Html.Parser;
-using LiteDB;
 
 namespace Darlek.Core.Crawler;
 
 public class ChefkochCrawler : ICrawler
 {
-    public async Task<BsonDocument> Crawl(string id)
-    {
-#if DEBUG
-        return await Crawl(new Uri($"{Environment.CurrentDirectory}\\debug.html"));
-#else
-
-			return await Crawl(new Uri($"https://www.chefkoch.de/rezepte/drucken/{id}.html"));
-#endif
-    }
-
     public async Task<BsonDocument> Crawl(Uri url)
     {
         var parser = new HtmlParser();
 
         var wc = new WebClient();
+
+        if (!url.LocalPath.Contains("drucken"))
+        {
+            url = new Url($"https://www.chefkoch.de/rezepte/drucken/{url.Segments[^2]}{url.Segments[^1]}");
+        }
 
         var content = await wc.DownloadStringTaskAsync(url.ToString());
         var document = parser.ParseDocument(content);

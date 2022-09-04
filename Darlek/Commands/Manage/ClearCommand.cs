@@ -1,12 +1,13 @@
 ﻿using Darlek.Core;
-using Darlek.Core.UI;
 
-namespace Darlek.Commands;
+namespace Darlek.Commands.Manage;
 
 public class ClearCommand : IMenuCommand
 {
     public void Invoke(Menu parentMenu)
     {
         Repository.Clear();
+
+        parentMenu.WaitAndShow();
     }
 }

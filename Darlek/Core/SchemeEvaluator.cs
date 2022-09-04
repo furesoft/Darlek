@@ -1,18 +1,18 @@
 ﻿using Darlek.Commands;
-using Darlek.Core.Crawler;
 using Darlek.Core.ImportProviders;
 using Darlek.Core.RuntimeLibrary;
 using Darlek.Core.SchemeLibrary;
 using Darlek.Core.Schemy;
-using Darlek.Core.UI;
 using Darlek.Library;
+using Spectre.Console;
+using System;
 using System.IO;
 
 namespace Darlek.Core;
 
 public class SchemeEvaluator
 {
-    public Interpreter Init()
+    public static Interpreter Init()
     {
         var interpreter = new Interpreter();
 
@@ -30,11 +30,16 @@ public class SchemeEvaluator
             var invoker = (Procedure)args[1];
 
             var cmd = new SchemeCommand(args[0].ToString(), invoker);
-            menu.Items.Add(cmd.Name, cmd);
+
+            if (args.Count == 2)
+                menu.Items.Add(cmd.Name, cmd);
+            else
+                ((Menu)args[2]).Items.Add(cmd.Name, cmd);
             return None.Instance;
         }));
 
-        ctx.DefineGlobal(Symbol.FromString("current-menu"), menu);
+        ctx.DefineGlobal(Symbol.FromString("main-menu"), menu);
+        ctx.DefineGlobal(Symbol.FromString("manage-menu"), ManageMenu.Menu);
 
         ctx.DefineGlobal(Symbol.FromString("register-importer"), new NativeProcedure((args) => {
             var invoker = (Procedure)args[1];
@@ -46,10 +51,10 @@ public class SchemeEvaluator
         }));
 
         var result = ctx.Evaluate(new StringReader(source));
-    }
-
-    public ICrawler GetCrawler(string source)
-    {
-        return new SchemeCrawler(source);
+        if (result.Error != null)
+        {
+            AnsiConsole.MarkupLine($"[red]{result.Error}[/]");
+            Console.ReadKey();
+        }
     }
 }

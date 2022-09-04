@@ -1,8 +1,6 @@
 ﻿using Darlek.Core;
-using Darlek.Core.UI;
 using LiteDB;
 using Spectre.Console;
-using System;
 
 namespace Darlek.Commands.Manage;
 
@@ -21,15 +19,14 @@ public class InfoCommand : IMenuCommand
 
         AnsiConsole.Write(metaPanel);
 
-        var statTable = new Table().AddColumn("Title").AddColumn("Author");
+        var statTable = new Table().AddColumns("ID", "Title", "Author", "Date");
 
         foreach (var item in Repository.GetAll<BsonDocument>())
         {
-            statTable.AddRow(item["Name"], item["Author"]);
+            statTable.AddRow(item["_id"].AsObjectId.ToString(), item["Name"], item["Author"], item["addedDate"].IsNull ? "-" : item["addedDate"].AsDateTime.ToString());
         }
         AnsiConsole.Write(statTable);
 
-        var key = Console.ReadKey();
-        parentMenu.Show();
+        parentMenu.WaitAndShow();
     }
 }

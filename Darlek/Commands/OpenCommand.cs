@@ -1,5 +1,4 @@
 ﻿using Darlek.Core;
-using Darlek.Core.UI;
 using Spectre.Console;
 using System.IO;
 using System.Linq;
@@ -25,7 +24,6 @@ public class OpenCommand : IMenuCommand
 
         Repository.CacheFile = Path.Combine(Repository.BaseDir, selected + ".darlek");
 
-        //ToDo: Show Management Menu
-        parentMenu.Show();
+        ManageMenu.Show();
     }
 }

@@ -1,6 +1,4 @@
-﻿using Darlek.Core.UI;
-
-namespace Darlek.Commands;
+﻿namespace Darlek.Core;
 
 public interface IMenuCommand
 {

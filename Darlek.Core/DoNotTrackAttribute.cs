@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Darlek.Core.CLI;
+namespace Darlek.Core;
 
 [AttributeUsage(AttributeTargets.Class)]
 public class DoNotTrackAttribute : Attribute

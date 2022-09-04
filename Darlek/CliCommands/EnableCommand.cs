@@ -1,8 +1,6 @@
-﻿using Darlek.Core;
-using Darlek.Core.CLI;
+﻿namespace Darlek.CliCommands;
 
-namespace Darlek.Commands;
-
+/*
 public class EnableCommand : ICliCommand
 {
     public string Name => "enable";
@@ -20,3 +18,4 @@ public class EnableCommand : ICliCommand
         return 0;
     }
 }
+*/

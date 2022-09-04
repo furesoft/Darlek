@@ -1,5 +1,4 @@
-﻿using Darlek.Core.CLI;
-using Darlek.Core.Schemy;
+﻿using Darlek.Core.Schemy;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +8,7 @@ namespace Darlek.Core;
 
 public static class ImportProvider
 {
-    private static Dictionary<Symbol, IImportProvider> _providers = new Dictionary<Symbol, IImportProvider>();
+    private static readonly Dictionary<Symbol, IImportProvider> _providers = new Dictionary<Symbol, IImportProvider>();
 
     public static void Register(IImportProvider provider)
     {

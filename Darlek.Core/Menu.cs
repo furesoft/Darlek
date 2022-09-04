@@ -1,9 +1,8 @@
-﻿using Darlek.Commands;
-using Spectre.Console;
+﻿using Spectre.Console;
 using System;
 using System.Collections.Generic;
 
-namespace Darlek.Core.UI;
+namespace Darlek.Core;
 
 public class Menu
 {
@@ -15,6 +14,12 @@ public class Menu
     }
 
     public Dictionary<string, IMenuCommand> Items { get; set; } = new();
+
+    public void WaitAndShow()
+    {
+        Console.ReadKey();
+        Show();
+    }
 
     public string Show()
     {

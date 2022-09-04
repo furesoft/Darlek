@@ -18,6 +18,5 @@ public static class TemplateSelector
     {
         Repository.AddContentFile(template, "template.html");
         Repository.SetSetting("template", "template.html");
-        Repository.SetSetting("template", "template.html");
     }
 }
