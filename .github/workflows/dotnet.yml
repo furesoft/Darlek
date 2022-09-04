@@ -44,6 +44,7 @@ jobs:
         tag=$(git describe --tags --abbrev=0)
         release_name="Darlek-${{ matrix.target }}"
         # Build everything
+        mkdir /Dist
         dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --no-self-contained -c Release -o "/Dist/$release_name"
 
     - name: Publish
