@@ -1,6 +1,8 @@
 ﻿using Darlek.Core;
 using LiteDB;
 using Spectre.Console;
+using System;
+using System.Collections.Generic;
 
 namespace Darlek.Commands.Manage;
 
@@ -8,14 +10,17 @@ public static class Utils
 {
     public static BsonDocument SelectRecipe(Menu parentMenu)
     {
-        var selection = new SelectionPrompt<BsonDocument>();
-        selection.Converter = (_) => _ is null ? ".." : _["Name"];
+        return Selection(parentMenu, Repository.GetAll<BsonDocument>(), _ => _["Name"]);
+    }
 
-        selection.AddChoice(null);
-        foreach (var item in Repository.GetAll<BsonDocument>())
-        {
-            selection.AddChoice(item);
-        }
+    public static T Selection<T>(Menu parentMenu, IEnumerable<T> list, Func<T, string> converter = null)
+    {
+        var selection = new SelectionPrompt<T>();
+
+        selection.Converter = (_) => _ is null ? ".." : converter != null ? converter(_) : _.ToString();
+
+        selection.AddChoice(default);
+        selection.AddChoices(list);
         var selected = AnsiConsole.Prompt(selection);
 
         if (selected == null)
