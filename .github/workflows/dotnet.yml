@@ -45,15 +45,6 @@ jobs:
         release_name="Darlek-${{ matrix.target }}"
         # Build everything
         mkdir ./Dist
-        # Pack files
-          if [ "${{ matrix.target }}" == "win-x64" ]; then
-            7z a -tzip "${release_name}.zip" "./${release_name}/*"
-          else
-            tar czvf "${release_name}.tar.gz" "$release_name"
-          fi
-
-          # Delete output directory
-          rm -r "$release_name"
         dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --no-self-contained -c Release -o "Dist/$release_name"
 
     - name: Publish
