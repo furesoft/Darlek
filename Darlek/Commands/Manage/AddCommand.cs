@@ -15,6 +15,7 @@ public class AddCommand : IMenuCommand
 
         var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
         r.Add("addedDate", DateTime.Now);
+        r.Add("url", url);
 
         Repository.Add(r);
 
