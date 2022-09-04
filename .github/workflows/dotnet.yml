@@ -46,11 +46,12 @@ jobs:
         # Build everything
         mkdir ./Dist
         dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --no-self-contained -c Release -o "Dist/$release_name"
+    - name: LS
+      run: ls Dist/$release_name/
 
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: "Dist/${{release_name}}/Darlek*"
+        files: "Dist/$release_name/Darlek*"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        release_name: "Darlek-${{ matrix.target }}"
