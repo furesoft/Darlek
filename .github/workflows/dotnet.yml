@@ -50,7 +50,7 @@ jobs:
     - name: Publish
       uses: softprops/action-gh-release@v1
       with:
-        files: "Dist/$release_name/Darlek*"
+        files: "Dist/${{release_name}}/Darlek*"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         release_name: "Darlek-${{ matrix.target }}"
