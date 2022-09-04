@@ -13,10 +13,10 @@ public static class ManageMenu
 
         Menu.Items.Add("Set Cover", new CoverCommand());
         Menu.Items.Add("Add", new AddCommand());
-        Menu.Items.Add("Remove", new RemoveCommand());
         Menu.Items.Add("Publish", new PublishCommand());
         Menu.Items.Add("Clear", new ClearCommand());
         Menu.Items.Add("Info", new InfoCommand());
+        Menu.Items.Add("Manage Recipe", new ManageRecipeCommand());
     }
 
     public static void Show()
