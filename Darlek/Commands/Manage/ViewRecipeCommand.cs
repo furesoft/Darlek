@@ -21,9 +21,25 @@ public class ViewRecipeCommand : IMenuCommand
         grid.AddColumn(new GridColumn() { Alignment = Justify.Right, Padding = new(10, 0, 10, 0) });
 
         grid.AddRow(new Text(selectedRecipe["name"]).Centered(), new Text("Author: " + selectedRecipe["author"].AsString).RightAligned(), new Text("Date: " + (selectedRecipe["addedDate"].IsNull ? "-" : selectedRecipe["addedDate"].AsDateTime.ToString())));
-        grid.AddEmptyRow();
 
         AnsiConsole.Write(grid);
+
+        var table = new Table();
+        table.AddColumns("Measure", "Ingredient");
+
+        foreach (var row in selectedRecipe["ingredients"].AsArray)
+        {
+            if (!row["measure"].IsNull)
+            {
+                table.AddRow(row["measure"], row["item"]);
+            }
+            else
+            {
+                table.AddRow("", row["item"]);
+            }
+        }
+
+        AnsiConsole.Write(table.MinimalBorder());
         AnsiConsole.Write(new Text(selectedRecipe["content"]));
 
         parentMenu.WaitAndShow();
