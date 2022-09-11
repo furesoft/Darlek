@@ -257,4 +257,17 @@ public static class Repository
 
         return collection.FindOne(Query.EQ("_id", id));
     }
+
+    public static void Crawl(string url)
+    {
+        var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+        var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
+        r.Add("addedDate", DateTime.Now);
+        r.Add("url", url);
+
+        if (r.ContainsKey("imageUri"))
+        {
+            AddFile(r["imageUri"], r["_id"].RawValue.ToString(), r["_id"].RawValue + Path.GetExtension(r["imageUri"]));
+        }
+    }
 }
