@@ -21,10 +21,10 @@
 
 [ ] Implement scheme functions to manage recipes
   [ ] import
-  [ ] add
-  [ ] remove
+  [X] add
+  [X] remove
   [ ] update
   [ ] get
 	[X] all
 	[ ] byname
-	[ ] byid
+	[X] byid

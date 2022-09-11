@@ -3,7 +3,7 @@ using LiteDB;
 
 namespace Darlek.Core.SchemeLibrary;
 
-[RuntimeType()]
+[RuntimeType]
 public static class RepositoryMethods
 {
     [RuntimeMethod("repository-get-metadata")]
@@ -18,9 +18,31 @@ public static class RepositoryMethods
         return Repository.Get(id);
     }
 
-    [RuntimeMethod("get-all-recipes")]
+    [RuntimeMethod("get-recipes")]
     public static object GetRecipes()
     {
         return Repository.GetAll<BsonDocument>();
+    }
+
+    [RuntimeMethod("get-recipe-by-id")]
+    public static object GetRecipeById(string id)
+    {
+        return Repository.Get(id);
+    }
+
+    [RuntimeMethod("add-recipe")]
+    public static object AddRecipe(string url)
+    {
+        Repository.Crawl(url);
+
+        return null;
+    }
+
+    [RuntimeMethod("remove-recipe")]
+    public static object RemoveRecipe(BsonDocument recipe)
+    {
+        Repository.Remove(recipe);
+
+        return null;
     }
 }
