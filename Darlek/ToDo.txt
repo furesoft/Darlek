@@ -20,9 +20,11 @@
 	- ChefkochCrawler
 
 [ ] Implement scheme functions to manage recipes
+  [ ] import
   [ ] add
   [ ] remove
   [ ] update
   [ ] get
+	[X] all
 	[ ] byname
 	[ ] byid

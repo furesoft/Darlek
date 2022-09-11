@@ -248,4 +248,13 @@ public static class Repository
         var collection = db.GetCollection("entries");
         collection.Update(document);
     }
+
+    public static object Get(string id)
+    {
+        using var db = new LiteDatabase(CacheFile);
+
+        var collection = db.GetCollection("entries");
+
+        return collection.FindOne(Query.EQ("_id", id));
+    }
 }
