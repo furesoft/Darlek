@@ -20,10 +20,9 @@ public static class Repository
 
     public static void Clear()
     {
-        var collectionName = GetCollectionName();
         using var db = new LiteDatabase(CacheFile);
 
-        var collection = db.GetCollection(collectionName);
+        var collection = db.GetCollection("entries");
         collection.DeleteAll();
     }
 
@@ -36,7 +35,13 @@ public static class Repository
         return storage.Metadata;
     }
 
-    //ToDo: Implement Init In Repository
+    public static void Init(string title, string author)
+    {
+        Repository.CacheFile = Path.Combine(Repository.BaseDir, title + ".darlek");
+        Repository.SetMetadata("title", title);
+        Repository.SetMetadata("author", author);
+        Repository.SetMetadata("filename", "exported");
+    }
 
     public static void CollectCustomCommands(Menu menu)
     {
@@ -68,10 +73,9 @@ public static class Repository
 
     public static void Add(BsonDocument model)
     {
-        var collectionName = GetCollectionName();
         using var db = new LiteDatabase(CacheFile);
 
-        var collection = db.GetCollection(collectionName);
+        var collection = db.GetCollection("entries");
         collection.Insert(model);
     }
 
@@ -221,46 +225,27 @@ public static class Repository
         return null;
     }
 
-    public static void Remove(string id)
+    public static void Remove(BsonDocument doc)
     {
-        var collectionName = GetCollectionName();
         using var db = new LiteDatabase(CacheFile);
 
-        var collection = db.GetCollection(collectionName);
-        collection.Delete(id);
+        var collection = db.GetCollection("entries");
+        collection.Delete(doc["_id"]);
     }
 
     public static IEnumerable<T> GetAll<T>()
     {
-        var collectionName = GetCollectionName();
-
         using var db = new LiteDatabase(CacheFile);
-        var collection = db.GetCollection<T>(collectionName);
+        var collection = db.GetCollection<T>("entries");
 
         return collection.FindAll().ToArray();
     }
 
-    public static void RemoveByName(string name)
-    {
-        var collectionName = GetCollectionName();
-        using var db = new LiteDatabase(CacheFile);
-
-        var collection = db.GetCollection(collectionName);
-        var id = collection.FindOne(Query.EQ("name", name)).AsObjectId;
-        collection.Delete(id);
-    }
-
     public static void Update(BsonDocument document)
     {
-        var collectionName = GetCollectionName();
         using var db = new LiteDatabase(CacheFile);
 
-        var collection = db.GetCollection(collectionName);
+        var collection = db.GetCollection("entries");
         collection.Update(document);
-    }
-
-    private static string GetCollectionName()
-    {
-        return "entries";
     }
 }

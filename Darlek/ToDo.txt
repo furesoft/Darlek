@@ -19,4 +19,10 @@
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
 
-[ ] implement Ui  with Specre.Console
+[ ] Implement scheme functions to manage recipes
+  [ ] add
+  [ ] remove
+  [ ] update
+  [ ] get
+	[ ] byname
+	[ ] byid
