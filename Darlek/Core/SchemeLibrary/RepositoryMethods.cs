@@ -1,4 +1,5 @@
 ﻿using Darlek.Core.RuntimeLibrary;
+using Darlek.Core.Schemy;
 using LiteDB;
 
 namespace Darlek.Core.SchemeLibrary;
@@ -35,7 +36,7 @@ public static class RepositoryMethods
     {
         Repository.Crawl(url);
 
-        return null;
+        return None.Instance;
     }
 
     [RuntimeMethod("remove-recipe")]
@@ -43,6 +44,6 @@ public static class RepositoryMethods
     {
         Repository.Remove(recipe);
 
-        return null;
+        return None.Instance;
     }
 }

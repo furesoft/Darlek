@@ -15,12 +15,20 @@ public static class RequestMethods
         return new XmlHttpRequest();
     }
 
-    [RuntimeMethod("get-raw-from-url")]
-    public static byte[] GetRawFromUri(string url)
+    [RuntimeMethod("get-raw-bytes-from-url")]
+    public static byte[] GetRawBytesFromUri(string url)
     {
         var wc = new WebClient();
 
         return wc.DownloadData(url);
+    }
+
+    [RuntimeMethod("get-raw-string-from-url")]
+    public static string GetRawStringFromUri(string url)
+    {
+        var wc = new WebClient();
+
+        return wc.DownloadString(url);
     }
 
     [RuntimeMethod("request-open")]
