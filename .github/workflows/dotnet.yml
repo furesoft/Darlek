@@ -47,7 +47,7 @@ jobs:
         mkdir ./Dist
         dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --no-self-contained -c Release -o "Dist/${{ matrix.target }}"
     - name: Zip
-      run: zip Dist/${{ matrix.target }}
+      run: zip -r ${{ matrix.target }}.zip Dist/${{ matrix.target }}
 
     - name: Publish
       uses: softprops/action-gh-release@v1
