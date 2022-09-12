@@ -18,13 +18,3 @@
 
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
-
-[-] Implement scheme functions to manage recipes
-  [ ] import
-  [X] add
-  [X] remove
-  [X] update
-  [X] get
-	[X] all
-	[X] byname
-	[X] byid
