@@ -6,11 +6,11 @@ namespace Darlek.Core;
 
 public class Menu
 {
-    private Menu parentMenu;
+    public Menu Parent;
 
     public Menu(Menu parentMenu)
     {
-        this.parentMenu = parentMenu;
+        Parent = parentMenu;
     }
 
     public Dictionary<string, IMenuCommand> Items { get; set; } = new();
@@ -32,7 +32,7 @@ public class Menu
 
         var prompt = new SelectionPrompt<string>();
 
-        if (parentMenu != null)
+        if (Parent != null)
         {
             prompt.AddChoice("..");
         }
@@ -46,7 +46,7 @@ public class Menu
 
         if (selectedItem == "..")
         {
-            parentMenu.Show();
+            Parent.Show();
             return string.Empty;
         }
 

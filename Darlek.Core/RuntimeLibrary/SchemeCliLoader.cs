@@ -137,6 +137,22 @@ public static class SchemeCliLoader
 
             return None.Instance;
         }));
+        interpreter.DefineGlobal(Symbol.FromString("define-module"), new NativeProcedure((args) => {
+            var name = (Symbol)args[0];
+            var env = new Dictionary<Symbol, object>();
+
+            foreach (var arg in args.OfType<ExportModule>())
+            {
+                env.Add(arg.Symbol, arg.Value);
+            }
+
+            Modules.Add(name, new Schemy.Environment(env, interpreter.Environment));
+
+            return None.Instance;
+        }));
+        interpreter.DefineGlobal(Symbol.FromString("export"), new NativeProcedure((args) => {
+            return new ExportModule((Symbol)args[0], args.Skip(1).First());
+        }));
 
         interpreter.DefineGlobal(Symbol.FromString("display"), new NativeProcedure(_ => {
             Console.WriteLine(_.First().ToString());

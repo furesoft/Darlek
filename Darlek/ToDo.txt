@@ -9,8 +9,8 @@
 
 [ ] write|find scheme macros
 
-[ ] make available in scheme to make custom modules
-(module 'core (
+[-] make available in scheme to make custom modules
+(define-module 'core (
 	(define kl 12)
 
 	(export 'kl)
@@ -18,5 +18,3 @@
 
 [ ] Encapsulate Crawling for different sites
 	- ChefkochCrawler
-
-[ ] implement Ui  with Specre.Console

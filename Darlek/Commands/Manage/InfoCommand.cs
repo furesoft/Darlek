@@ -19,11 +19,11 @@ public class InfoCommand : IMenuCommand
 
         AnsiConsole.Write(metaPanel);
 
-        var statTable = new Table().AddColumns("ID", "Title", "Author", "Date");
+        var statTable = new Table().AddColumns("Title", "Author", "Date");
 
         foreach (var item in Repository.GetAll<BsonDocument>())
         {
-            statTable.AddRow(item["_id"].AsObjectId.ToString(), item["Name"], item["Author"], item["addedDate"].IsNull ? "-" : item["addedDate"].AsDateTime.ToString());
+            statTable.AddRow(item["Name"], item["Author"], item["addedDate"].IsNull ? "-" : item["addedDate"].AsDateTime.ToString());
         }
         AnsiConsole.Write(statTable);
 
