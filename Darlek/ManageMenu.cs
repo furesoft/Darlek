@@ -1,6 +1,7 @@
 ﻿using Darlek.Commands;
 using Darlek.Commands.Manage;
 using Darlek.Core;
+using Darlek.Core.Crawler;
 
 namespace Darlek;
 
@@ -16,6 +17,13 @@ public static class ManageMenu
             var m = new Menu(_);
             m.Items.Add("Add Recipe", new AddRecipeCommand());
             m.Items.Add("Manage Recipe", new ManageRecipeCommand());
+
+            var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+
+            if (crawler is ChefkochCrawler cc)
+            {
+                m.Items.Add("What should I cook?", new WhatShouldICookCommand(cc));
+            }
 
             m.Show();
         }));
