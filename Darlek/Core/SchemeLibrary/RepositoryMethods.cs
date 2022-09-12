@@ -31,10 +31,24 @@ public static class RepositoryMethods
         return Repository.Get(id);
     }
 
+    [RuntimeMethod("get-recipe-by-name")]
+    public static object GetRecipeByName(string name)
+    {
+        return Repository.GetByName(name);
+    }
+
     [RuntimeMethod("add-recipe")]
     public static object AddRecipe(string url)
     {
         Repository.Crawl(url);
+
+        return None.Instance;
+    }
+
+    [RuntimeMethod("update-recipe")]
+    public static object UpdateRecipe(BsonDocument recipe)
+    {
+        Repository.Update(recipe);
 
         return None.Instance;
     }

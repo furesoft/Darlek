@@ -258,6 +258,15 @@ public static class Repository
         return collection.FindOne(Query.EQ("_id", id));
     }
 
+    public static object GetByName(string name)
+    {
+        using var db = new LiteDatabase(CacheFile);
+
+        var collection = db.GetCollection("entries");
+
+        return collection.FindOne(Query.EQ("name", name));
+    }
+
     public static void Crawl(string url)
     {
         var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");

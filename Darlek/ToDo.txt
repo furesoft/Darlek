@@ -23,8 +23,8 @@
   [ ] import
   [X] add
   [X] remove
-  [ ] update
-  [ ] get
+  [X] update
+  [X] get
 	[X] all
-	[ ] byname
+	[X] byname
 	[X] byid
