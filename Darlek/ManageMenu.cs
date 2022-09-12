@@ -23,6 +23,7 @@ public static class ManageMenu
             if (crawler is ChefkochCrawler cc)
             {
                 m.Items.Add("What should I cook?", new WhatShouldICookCommand(cc));
+                m.Items.Add("What should I bake?", new WhatShouldIBakeCommand(cc));
             }
 
             m.Show();
