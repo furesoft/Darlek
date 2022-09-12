@@ -2,6 +2,7 @@
 using Darlek.Core;
 using Darlek.Core.Crawler;
 using Spectre.Console;
+using System;
 using System.Linq;
 using System.Net;
 
@@ -37,7 +38,18 @@ public class WhatShouldIBakeCommand : IMenuCommand
 
         if (selected.Item2 != null)
         {
-            Repository.Crawl(selected.Item2);
+            var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+            var r = crawler.Crawl(new Uri(selected.Item2, UriKind.RelativeOrAbsolute)).Result;
+
+            var menu = new Menu(parentMenu);
+            menu.Items.Add("View", new ViewRecipeCommand(r));
+            menu.Items.Add("Add", new DelegateCommand(_ => {
+                Repository.Crawl(selected.Item2);
+
+                parentMenu.Show();
+            }));
+
+            menu.Show();
         }
 
         parentMenu.Show();

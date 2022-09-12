@@ -15,6 +15,13 @@ public class ViewRecipeCommand : IMenuCommand
 
     public void Invoke(Menu parentMenu)
     {
+        DisplayRecipe();
+
+        parentMenu.WaitAndShow();
+    }
+
+    public void DisplayRecipe()
+    {
         var grid = new Grid();
         grid.AddColumn(new GridColumn() { Alignment = Justify.Left });
         grid.AddColumn(new GridColumn() { Alignment = Justify.Right, Padding = new(10, 0, 10, 0) });
@@ -41,7 +48,5 @@ public class ViewRecipeCommand : IMenuCommand
 
         AnsiConsole.Write(table.MinimalBorder());
         AnsiConsole.Write(new Text(selectedRecipe["content"]));
-
-        parentMenu.WaitAndShow();
     }
 }
