@@ -24,11 +24,13 @@ public class WhatShouldICommand : IMenuCommand
     {
         var wc = new WebClient();
 
-        var content = wc.DownloadStringTaskAsync(url.ToString()).Result;
-        var parser = new HtmlParser();
-        var document = parser.ParseDocument(content);
+        var n = AnsiConsole.Status().Start("Loading", _ => {
+            var content = wc.DownloadStringTaskAsync(url.ToString()).Result;
+            var parser = new HtmlParser();
+            var document = parser.ParseDocument(content);
 
-        var n = document.QuerySelectorAll("a[class='ds-teaser-link ds-recipe-card__link']");
+            return document.QuerySelectorAll("a[class='ds-teaser-link ds-recipe-card__link']");
+        });
 
         var selection = new SelectionPrompt<(string, string)>();
         selection.Converter = _ => _.Item1;
@@ -40,11 +42,13 @@ public class WhatShouldICommand : IMenuCommand
 
         if (selected.Item2 != null)
         {
-            var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
-            var r = crawler.Crawl(new Uri(selected.Item2, UriKind.RelativeOrAbsolute)).Result;
+            var recipe = AnsiConsole.Status().Start("Loading", _ => {
+                var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+                return crawler.Crawl(new Uri(selected.Item2, UriKind.RelativeOrAbsolute)).Result;
+            });
 
             var menu = new Menu(parentMenu);
-            menu.Items.Add("View", new ViewRecipeCommand(r));
+            menu.Items.Add("View", new ViewRecipeCommand(recipe));
             menu.Items.Add("Add", new DelegateCommand(_ => {
                 Repository.Crawl(selected.Item2);
 

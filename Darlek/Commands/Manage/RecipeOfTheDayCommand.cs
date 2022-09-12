@@ -1,6 +1,8 @@
 ﻿using AngleSharp.Html.Parser;
 using Darlek.Core;
 using Darlek.Core.Crawler;
+using LiteDB;
+using Spectre.Console;
 using System;
 using System.Linq;
 using System.Net;
@@ -30,12 +32,17 @@ public class RecipeOfTheDayCommand : IMenuCommand
         var url = "https://www.chefkoch.de" + link + title.Replace(" ", "_") + ".html";
 
         var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
-        var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
+
+        var recipe = AnsiConsole.Status().AutoRefresh(true).Start("Loading " + title, _ => {
+            return crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
+        });
 
         var menu = new Menu(parentMenu);
-        menu.Items.Add("View", new ViewRecipeCommand(r));
+        menu.Items.Add("View", new ViewRecipeCommand(recipe));
         menu.Items.Add("Add", new DelegateCommand(_ => {
-            Repository.Crawl(url);
+            AnsiConsole.Status().AutoRefresh(true).Start("Crawling " + title, _ => {
+                Repository.Crawl(url);
+            });
 
             parentMenu.Show();
         }));
