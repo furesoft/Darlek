@@ -274,6 +274,8 @@ public static class Repository
         r.Add("addedDate", DateTime.Now);
         r.Add("url", url);
 
+        Add(r);
+
         if (r.ContainsKey("imageUri"))
         {
             AddFile(r["imageUri"], r["_id"].RawValue.ToString(), r["_id"].RawValue + Path.GetExtension(r["imageUri"]));
