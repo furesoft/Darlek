@@ -24,6 +24,7 @@ public static class ManageMenu
             {
                 m.Items.Add("What should I cook?", new WhatShouldICookCommand(cc));
                 m.Items.Add("What should I bake?", new WhatShouldIBakeCommand(cc));
+                m.Items.Add("Recipe of the day", new RecipeOfTheDayCommand(cc));
             }
 
             m.Show();
