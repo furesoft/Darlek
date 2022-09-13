@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Net;
 
-namespace Darlek.Commands.Manage;
+namespace Darlek.Commands.Manage.Chefkoch;
 
 public class WhatShouldICommand : IMenuCommand
 {

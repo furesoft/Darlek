@@ -1,5 +1,6 @@
 ﻿using Darlek.Commands;
 using Darlek.Commands.Manage;
+using Darlek.Commands.Manage.Chefkoch;
 using Darlek.Core;
 using Darlek.Core.Crawler;
 
