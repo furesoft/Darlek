@@ -19,7 +19,7 @@ public static class ManageMenu
             m.Items.Add("Add Recipe", new AddRecipeCommand());
             m.Items.Add("Manage Recipe", new ManageRecipeCommand());
 
-            var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+            var crawler = CrawlerFactory.GetCrawlerByHost("http://www.chefkoch.de/");
 
             if (crawler is ChefkochCrawler cc)
             {
@@ -34,6 +34,7 @@ public static class ManageMenu
         Menu.Items.Add("Set Cover", new CoverCommand());
         Menu.Items.Add("Publish", new PublishCommand());
         Menu.Items.Add("Select Crawler", new SelectCrawlerCommand());
+        Menu.Items.Add("Recrawl Recipes", new RenewAllCommand());
         Menu.Items.Add("Info", new InfoCommand());
     }
 

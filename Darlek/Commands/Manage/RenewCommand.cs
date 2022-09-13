@@ -16,8 +16,8 @@ public class RenewCommand : IMenuCommand
 
     public void Invoke(Menu parentMenu)
     {
-        var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
         var url = SelectedRecipe["url"];
+        var crawler = CrawlerFactory.GetCrawlerByHost(url);
 
         var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
         r["_id"] = SelectedRecipe["_id"];

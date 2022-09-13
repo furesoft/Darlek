@@ -10,7 +10,7 @@ namespace Darlek.Core.Schemy;
 /// <summary>
 /// Represents a procedure value in Scheme
 /// </summary>
-interface ICallable
+public interface ICallable
 {
     /// <summary>
     /// Invokes this procedure
@@ -55,10 +55,10 @@ public class Procedure : ICallable
     /// <remarks>
     /// Implementation note: under normal function invocation scenarios, this method is not used. Instead,
     /// a tail call optimization is used in the interpreter evaluation phase that runs Scheme functions.
-    /// 
+    ///
     /// This method is useful however, in macro expansions, and any other occasions where the tail call optimization
     /// is not (yet) implemented.
-    /// 
+    ///
     /// <see cref="Interpreter.EvaluateExpression(object, Environment)"/>
     /// </remarks>
     public object Call(List<object> args)
@@ -92,11 +92,6 @@ public class NativeProcedure : ICallable
     {
         this.func = func;
         this.name = name;
-    }
-
-    public object Call(List<object> args)
-    {
-        return func(args);
     }
 
     /// <summary>
@@ -195,6 +190,11 @@ public class NativeProcedure : ICallable
         }, name);
     }
 
+    public object Call(List<object> args)
+    {
+        return func(args);
+    }
+
     /// <summary>
     /// ToString implementation
     /// </summary>
@@ -204,4 +204,3 @@ public class NativeProcedure : ICallable
         return string.Format("#<NativeProcedure:{0}>", string.IsNullOrEmpty(name) ? "noname" : name);
     }
 }
-

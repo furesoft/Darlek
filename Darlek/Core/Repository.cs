@@ -269,7 +269,7 @@ public static class Repository
 
     public static void Crawl(string url)
     {
-        var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+        var crawler = CrawlerFactory.GetCrawlerByHost(url);
         var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
         r.Add("addedDate", DateTime.Now);
         r.Add("url", url);

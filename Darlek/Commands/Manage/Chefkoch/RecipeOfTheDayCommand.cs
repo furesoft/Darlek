@@ -29,7 +29,7 @@ public class RecipeOfTheDayCommand : IMenuCommand
 
         var url = "https://www.chefkoch.de" + link + title.Replace(" ", "_") + ".html";
 
-        var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
+        var crawler = CrawlerFactory.GetCrawlerByHost(url);
 
         var recipe = AnsiConsole.Status().AutoRefresh(true).Start("Loading " + title, _ => {
             return crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
