@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Net;
 
-namespace Darlek.Commands.Manage;
+namespace Darlek.Commands.Manage.Chefkoch;
 
 public class WhatShouldICommand : IMenuCommand
 {
@@ -43,8 +43,10 @@ public class WhatShouldICommand : IMenuCommand
         if (selected.Item2 != null)
         {
             var recipe = AnsiConsole.Status().Start("Loading", _ => {
-                var crawler = CrawlerFactory.GetCrawler(Repository.GetMetadata("crawler") ?? "chefkoch");
-                return crawler.Crawl(new Uri(selected.Item2, UriKind.RelativeOrAbsolute)).Result;
+                var uri = new Uri(selected.Item2, UriKind.RelativeOrAbsolute);
+                var crawler = CrawlerFactory.GetCrawlerByHost(uri);
+
+                return crawler.Crawl(uri).Result;
             });
 
             var menu = new Menu(parentMenu);

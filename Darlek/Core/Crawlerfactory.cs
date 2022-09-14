@@ -1,26 +1,30 @@
 ﻿using Darlek.Core.Crawler;
 using System;
-using System.IO;
+using System.Collections.Generic;
 
 namespace Darlek.Core;
 
 public static class CrawlerFactory
 {
-    public static ICrawler GetCrawler(string name)
+    public static Dictionary<string, ICrawler> Crawlers = new()
     {
-        if (string.Equals(name, "chefkoch", StringComparison.CurrentCultureIgnoreCase))
-        {
-            return new ChefkochCrawler();
-        }
-        var extension = Path.GetExtension(name);
-        var content = Repository.GetFile($"{name}");
-        if (extension == ".ss") new SchemeCrawler(content);
-        // need use crawler command
-        return new SchemeCrawler(content);
+        ["www.chefkoch.de"] = new ChefkochCrawler()
+    };
+
+    public static ICrawler GetCrawlerByHost(string url)
+    {
+        var uri = new Uri(url);
+
+        return GetCrawlerByHost(uri);
     }
 
-    public static bool IsDefault(string name)
+    public static ICrawler GetCrawlerByHost(Uri uri)
     {
-        return name == "chefkoch";
+        if (Crawlers.ContainsKey(uri.Host))
+        {
+            return Crawlers[uri.Host];
+        }
+
+        return new ChefkochCrawler();
     }
 }

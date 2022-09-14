@@ -1,6 +1,6 @@
 ﻿using Darlek.Core.Crawler;
 
-namespace Darlek.Commands.Manage;
+namespace Darlek.Commands.Manage.Chefkoch;
 
 public class WhatShouldIBakeCommand : WhatShouldICommand
 {

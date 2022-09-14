@@ -2,7 +2,7 @@
 
 namespace Darlek.Library;
 
-[RuntimeType("bits")]
+[RuntimeType]
 public static class LogicMethods
 {
     [RuntimeMethod("^")]

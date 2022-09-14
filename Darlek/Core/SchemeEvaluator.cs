@@ -1,4 +1,5 @@
 ﻿using Darlek.Commands;
+using Darlek.Core.Crawler;
 using Darlek.Core.ImportProviders;
 using Darlek.Core.RuntimeLibrary;
 using Darlek.Core.SchemeLibrary;
@@ -48,6 +49,13 @@ public class SchemeEvaluator
             ImportProvider.Register(importer);
 
             return None.Instance;
+        }));
+
+        ctx.DefineGlobal(Symbol.FromString("register-crawler"), NativeProcedure.Create<string, Procedure, object>((host, callback) => {
+            var crawler = new SchemeCrawler(callback);
+            CrawlerFactory.Crawlers.Add(host, crawler);
+
+            return callback;
         }));
 
         var result = ctx.Evaluate(new StringReader(source));
