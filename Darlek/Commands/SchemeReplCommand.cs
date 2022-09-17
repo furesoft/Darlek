@@ -15,6 +15,7 @@ internal class SchemeReplCommand : IMenuCommand
     {
         var interpreter = new Interpreter();
 
+        SchemeCliLoader.InitGlobals(interpreter);
         SchemeCliLoader.Apply(typeof(StringMethods).Assembly, interpreter);
         SchemeCliLoader.Apply(typeof(RepositoryMethods).Assembly, interpreter);
 

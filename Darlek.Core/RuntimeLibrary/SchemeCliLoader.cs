@@ -79,8 +79,17 @@ public static class SchemeCliLoader
         }
     }
 
-    private static void InitGlobals(Interpreter interpreter)
+    public static void InitGlobals(Interpreter interpreter)
     {
+        interpreter.DefineGlobal(Symbol.FromString("define-enum"), NativeProcedure.Create<Symbol, List<object>, object>((name, _) => {
+            for (int i = 0; i < _.Count; i++)
+            {
+                interpreter.DefineGlobal(Symbol.FromString(name.AsString + "/" + ((Symbol)_[i]).AsString), i);
+            }
+
+            return None.Instance;
+        }));
+
         //(make-struct 'name '('prop1 'prop2))
         interpreter.DefineGlobal(Symbol.FromString("make-struct"), new NativeProcedure(_ => {
             var s = new RuntimeStruct { Typename = (Symbol)_.First() };
