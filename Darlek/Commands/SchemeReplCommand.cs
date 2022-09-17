@@ -3,6 +3,7 @@ using Darlek.Core.RuntimeLibrary;
 using Darlek.Core.SchemeLibrary;
 using Darlek.Core.Schemy;
 using Darlek.Library;
+using Spectre.Console;
 using System;
 using System.IO;
 
@@ -23,9 +24,11 @@ internal class SchemeReplCommand : IMenuCommand
             var res = interpreter.Evaluate(new StringReader(input));
 
             if (res.Error != null)
-                Console.WriteLine(res.Error);
+            {
+                AnsiConsole.WriteLine(res.Error.ToString());
+            }
 
-            Console.WriteLine(res.Result);
+            AnsiConsole.WriteLine(res.Result.ToString());
         }
     }
 }

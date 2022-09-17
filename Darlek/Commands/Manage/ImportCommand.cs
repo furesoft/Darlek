@@ -1,6 +1,5 @@
 ﻿using Darlek.Core;
 using Spectre.Console;
-using System;
 using System.IO;
 
 namespace Darlek.Commands.Manage;
@@ -9,7 +8,7 @@ public class ImportCommand : IMenuCommand
 {
     public void Invoke(Menu parentMenu)
     {
-        string filename = AnsiConsole.Prompt(new TextPrompt<string>("Filename:"));
+        var filename = AnsiConsole.Prompt(new TextPrompt<string>("Filename:"));
 
         var provider = ImportProvider.GetProvider(filename);
 
@@ -18,7 +17,7 @@ public class ImportCommand : IMenuCommand
 
         Repository.Add(document);
 
-        Console.WriteLine("Successfully imported");
+        AnsiConsole.WriteLine("Successfully imported");
 
         parentMenu.WaitAndShow();
     }

@@ -1,6 +1,5 @@
 ﻿using Darlek.Core;
 using Spectre.Console;
-using System;
 using System.Threading;
 
 namespace Darlek.Commands.Manage;
@@ -15,7 +14,7 @@ public class AddRecipeCommand : IMenuCommand
             Repository.Crawl(url);
         });
 
-        Console.WriteLine("Success");
+        AnsiConsole.WriteLine("Success");
         Thread.Sleep(1000);
 
         parentMenu.Show();

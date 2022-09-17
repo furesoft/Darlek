@@ -6,9 +6,14 @@ namespace Darlek.Library.Types;
 
 public class XmlHttpRequest
 {
-    public enum Readystate { Opened, Recieved, Sended, Finished }
-
     public Action OnReadyStateChange;
+
+    private HttpWebRequest _webrequest;
+
+    private Readystate _readyState;
+
+    public enum Readystate
+    { Opened, Recieved, Sended, Finished }
 
     public Readystate ReadyState {
         get { return _readyState; }
@@ -20,9 +25,6 @@ public class XmlHttpRequest
 
     public string MimeType { get { return _webrequest.MediaType; } set { _webrequest.MediaType = value; } }
     public string ResponseText { get; set; }
-
-    private HttpWebRequest _webrequest;
-    private Readystate _readyState;
 
     public void Open(string method, string url)
     {
@@ -36,21 +38,19 @@ public class XmlHttpRequest
         if (data == null)
         {
             var resp = (HttpWebResponse)_webrequest.GetResponse();
-            using (var s = resp.GetResponseStream())
-            {
-                ResponseText = new StreamReader(s).ReadToEnd();
-                ReadyState = Readystate.Recieved;
-            }
+
+            using var s = resp.GetResponseStream();
+            ResponseText = new StreamReader(s).ReadToEnd();
+            ReadyState = Readystate.Recieved;
         }
         else
         {
-            using (var s = _webrequest.GetRequestStream())
-            {
-                var sw = new StreamWriter(s);
-                sw.Write(data);
-                sw.Flush();
-                ReadyState = Readystate.Sended;
-            }
+            using var s = _webrequest.GetRequestStream();
+
+            var sw = new StreamWriter(s);
+            sw.Write(data);
+            sw.Flush();
+            ReadyState = Readystate.Sended;
         }
     }
 }

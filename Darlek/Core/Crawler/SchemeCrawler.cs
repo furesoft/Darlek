@@ -7,15 +7,15 @@ namespace Darlek.Core.Crawler;
 
 public class SchemeCrawler : ICrawler
 {
-    private ICallable callback;
+    private readonly ICallable _callback;
 
     public SchemeCrawler(ICallable callback)
     {
-        this.callback = callback;
+        _callback = callback;
     }
 
-    public async Task<BsonDocument> Crawl(Uri url)
+    public Task<BsonDocument> Crawl(Uri url)
     {
-        return (BsonDocument)callback.Call(new System.Collections.Generic.List<object> { url.ToString() });
+        return Task.FromResult((BsonDocument)_callback.Call(new System.Collections.Generic.List<object> { url.ToString() }));
     }
 }
