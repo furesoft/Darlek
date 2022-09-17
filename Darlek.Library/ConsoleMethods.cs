@@ -2,15 +2,17 @@
 using Darlek.Core.Schemy;
 using Spectre.Console;
 using System;
+using System.Collections.Generic;
 
 namespace Darlek.Library;
 
+[RuntimeType]
 public static class ConsoleMethods
 {
     [RuntimeMethod("display")]
     public static object Display(string msg)
     {
-        Console.WriteLine(msg);
+        AnsiConsole.MarkupLine(msg);
 
         return None.Instance;
     }
@@ -29,9 +31,24 @@ public static class ConsoleMethods
         return None.Instance;
     }
 
-    [RuntimeMethod("ask")]
-    public static object Ask(string msg)
+    [RuntimeMethod("prompt")]
+    public static object Prompt(string msg)
     {
         return AnsiConsole.Ask<string>(msg);
+    }
+
+    [RuntimeMethod("confirm")]
+    public static object Confirm(string msg)
+    {
+        return AnsiConsole.Confirm(msg);
+    }
+
+    [RuntimeMethod("display-selection")]
+    public static object Selection(List<object> arg)
+    {
+        var s = new SelectionPrompt<object>();
+        s.AddChoices(arg);
+
+        return AnsiConsole.Prompt(s);
     }
 }
