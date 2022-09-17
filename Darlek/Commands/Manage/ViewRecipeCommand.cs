@@ -32,16 +32,21 @@ public class ViewRecipeCommand : IMenuCommand
 
         AnsiConsole.Write(grid);
 
-        AnsiConsole.WriteLine(selectedRecipe["portions"].AsString);
+        var content = new Grid();
+        content.AddColumns(new GridColumn().LeftAligned(), new GridColumn().RightAligned());
+
+        var ingredientsPanel = new Grid().AddColumn();
+
+        ingredientsPanel.AddRow(new Markup("[bold]" + selectedRecipe["portions"].AsString + "[/]"));
 
         foreach (var t in selectedRecipe["ingredientsTables"].AsArray)
         {
             var table = new Table();
-            table.AddColumns("Measure", "Ingredient");
+            table.AddColumns("", "");
 
             if (t.AsDocument.ContainsKey("name"))
             {
-                AnsiConsole.Write(t["name"].AsString);
+                ingredientsPanel.AddRow(t["name"].AsString);
             }
 
             foreach (var row in t["elements"].AsArray)
@@ -56,9 +61,13 @@ public class ViewRecipeCommand : IMenuCommand
                 }
             }
 
-            AnsiConsole.Write(table.MinimalBorder());
+            table.AddEmptyRow();
+
+            ingredientsPanel.AddRow(table.NoBorder());
         }
 
-        AnsiConsole.Write(new Text(selectedRecipe["content"]));
+        content.AddRow(new Text(selectedRecipe["content"]), ingredientsPanel);
+
+        AnsiConsole.Write(content);
     }
 }
