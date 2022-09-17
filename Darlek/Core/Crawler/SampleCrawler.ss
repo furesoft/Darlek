@@ -7,4 +7,4 @@
 	result
 ))
 
-(register-crawler mycrawler)
+(register-crawler "www.sample.com" mycrawler)

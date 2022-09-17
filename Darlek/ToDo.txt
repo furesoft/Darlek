@@ -9,6 +9,9 @@
 
 [ ] write|find scheme macros
 
+[ ] Add site scheme to crawler for automatic crawler selection for each recipe
+	[ ] add host property to ICrawler
+
 [-] make available in scheme to make custom modules
 (define-module 'core (
 	(define kl 12)
