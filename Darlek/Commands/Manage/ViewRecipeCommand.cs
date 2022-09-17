@@ -32,23 +32,33 @@ public class ViewRecipeCommand : IMenuCommand
 
         AnsiConsole.Write(grid);
 
-        AnsiConsole.Write(selectedRecipe["portions"].AsString);
-        var table = new Table();
-        table.AddColumns("Measure", "Ingredient");
+        AnsiConsole.WriteLine(selectedRecipe["portions"].AsString);
 
-        foreach (var row in selectedRecipe["ingredients"].AsArray)
+        foreach (var t in selectedRecipe["ingredientsTables"].AsArray)
         {
-            if (!row["measure"].IsNull)
+            var table = new Table();
+            table.AddColumns("Measure", "Ingredient");
+
+            if (t.AsDocument.ContainsKey("name"))
             {
-                table.AddRow(row["measure"], row["item"]);
+                AnsiConsole.Write(t["name"].AsString);
             }
-            else
+
+            foreach (var row in t["elements"].AsArray)
             {
-                table.AddRow("", row["item"]);
+                if (!row["measure"].IsNull)
+                {
+                    table.AddRow(row["measure"], row["item"]);
+                }
+                else
+                {
+                    table.AddRow("", row["item"]);
+                }
             }
+
+            AnsiConsole.Write(table.MinimalBorder());
         }
 
-        AnsiConsole.Write(table.MinimalBorder());
         AnsiConsole.Write(new Text(selectedRecipe["content"]));
     }
 }

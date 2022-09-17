@@ -2,6 +2,7 @@
 using AngleSharp.Html.Parser;
 using LiteDB;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -32,14 +33,21 @@ public class ChefkochCrawler : ICrawler
         recipe.Add("portions", document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("h3").TextContent);
         recipe.Add("time", document.QuerySelector("table[id='recipe-info']").OuterHtml.Trim());
 
-        recipe.Add("ingredients", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")));
+        recipe.Add("ingredientsTables", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")));
 
         return recipe;
     }
 
     private BsonArray ParseIngredients(IElement element)
     {
-        var res = new BsonArray();
+        //arr[(name, elements)]
+
+        //doc
+        //name
+        //elements
+        var elements = new BsonArray();
+        var res = new List<BsonDocument>();
+        var tabledoc = new BsonDocument();
 
         foreach (var row in element.QuerySelectorAll("tr"))
         {
@@ -56,19 +64,41 @@ public class ChefkochCrawler : ICrawler
             if (measureEntry != null && itemEntry != null)
             {
                 var entryDocument = new BsonDocument();
+
                 if (!string.IsNullOrEmpty(measureEntry.TextContent.Trim()))
                 {
-                    entryDocument.Add("measure", measureEntry.QuerySelector("strong").TextContent);
+                    if (measureEntry.QuerySelector("strong") != null)
+                    {
+                        entryDocument.Add("measure", measureEntry.QuerySelector("strong").TextContent);
+                    }
+                    else if (measureEntry.QuerySelector("span") != null)
+                    {
+                        tabledoc.Add("elements", elements);
+                        tabledoc = new();
+                        elements = new();
+
+                        res.Add(tabledoc);
+
+                        tabledoc.Add("name", measureEntry.QuerySelector("span").TextContent);
+                        continue;
+                    }
                 }
                 if (!string.IsNullOrEmpty(itemEntry.TextContent.Trim()))
                 {
                     entryDocument.Add("item", itemEntry.QuerySelector("span").TextContent);
                 }
 
-                res.Add(entryDocument);
+                elements.Add(entryDocument);
             }
         }
 
-        return res;
+        tabledoc.Add("elements", elements);
+
+        if (res.Count == 0)
+        {
+            res.Add(tabledoc);
+        }
+
+        return new BsonArray(res);
     }
 }
