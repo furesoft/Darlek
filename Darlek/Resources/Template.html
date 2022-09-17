@@ -62,9 +62,12 @@
 
         <p>{{portions}}</p>
 
+        {{ for ingredients in ingredients_tables }}
+
+        <strong>{{ ingredients.name }}</strong>
         <table>
             <tbody>
-                {{ for entry in ingredients }}
+                {{ for entry in ingredients.elements }}
                 <tr>
                     <td><strong>{{ entry.measure }}</strong></td>
 
@@ -73,6 +76,7 @@
                 {{ end }}
             </tbody>
         </table>
+        {{ end }}
 
         <div class="author-widget">
             Author: <i>{{author}}</i>

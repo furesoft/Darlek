@@ -40,7 +40,7 @@ public static class Renderer
                     items.Add(BuildScriptObject(arrItem));
                 }
 
-                sobj.Add(renamedKey, items);
+                sobj.Add(renamedKey, items.ToArray());
             }
             else
             {

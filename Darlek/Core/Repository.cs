@@ -40,7 +40,7 @@ public static class Repository
         Repository.CacheFile = Path.Combine(Repository.BaseDir, title + ".darlek");
         Repository.SetMetadata("title", title);
         Repository.SetMetadata("author", author);
-        Repository.SetMetadata("filename", "exported");
+        Repository.SetMetadata("filename", "exported.epub");
     }
 
     public static void CollectCustomCommands(Menu menu)
