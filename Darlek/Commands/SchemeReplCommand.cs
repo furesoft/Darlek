@@ -18,7 +18,10 @@ internal class SchemeReplCommand : IMenuCommand
         SchemeCliLoader.Apply(typeof(StringMethods).Assembly, interpreter);
         SchemeCliLoader.Apply(typeof(RepositoryMethods).Assembly, interpreter);
 
-        while (true)
+        bool shouldLeave = false;
+        interpreter.DefineGlobal(Symbol.FromString("exit-repl"), NativeProcedure.Create<object>(() => { shouldLeave = true; return None.Instance; }));
+
+        while (!shouldLeave)
         {
             var input = Console.ReadLine();
             var res = interpreter.Evaluate(new StringReader(input));
@@ -27,8 +30,12 @@ internal class SchemeReplCommand : IMenuCommand
             {
                 AnsiConsole.WriteLine(res.Error.ToString());
             }
-
-            AnsiConsole.WriteLine(res.Result.ToString());
+            else
+            {
+                AnsiConsole.WriteLine(res.Result.ToString());
+            }
         }
+
+        parentMenu.Show();
     }
 }
