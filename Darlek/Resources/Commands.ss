@@ -1,24 +1,10 @@
-﻿(open 'ObjectModel 'conversion)
+﻿(open 'ObjectModel)
 
-(define myCommand (lambda (menu)
-	(display "Hello From Scheme :)")
-	(wait-menu menu)
-))
+(define mycrawler (lambda (args) (
+	(define result (make-object))
+	(set-property result 'title "hello scheme")
 
-(register-command 
-	"my-command"
-	myCommand
-	manage-menu
-)
+	result
+)))
 
-(define myImport 
-	(lambda args
-		(define obj (make-object))
-		(set-property obj 'name "scheme test")
-		(set-property obj 'content (binary->string (car args)))
-
-		obj
-	)
-)
-
-(register-importer '.t myImport)
+(register-crawler "www.sample.com" mycrawler)
