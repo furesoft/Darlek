@@ -1,8 +1,8 @@
 ﻿using Darlek.Core;
 using Darlek.Core.RuntimeLibrary;
 using Darlek.Core.SchemeLibrary;
-using Darlek.Core.Schemy;
 using Darlek.Library;
+using Darlek.Scheme;
 using Spectre.Console;
 using System;
 using System.IO;

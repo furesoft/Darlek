@@ -1,4 +1,4 @@
-﻿using Darlek.Core.Schemy;
+﻿using Darlek.Scheme;
 using LiteDB;
 
 namespace Darlek.Core.ImportProviders;

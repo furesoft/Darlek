@@ -1,4 +1,4 @@
-﻿using Darlek.Core.Schemy;
+﻿using Darlek.Scheme;
 
 namespace Darlek.Core.RuntimeLibrary;
 

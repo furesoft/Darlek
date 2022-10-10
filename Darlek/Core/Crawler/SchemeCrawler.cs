@@ -1,4 +1,4 @@
-﻿using Darlek.Core.Schemy;
+﻿using Darlek.Scheme;
 using LiteDB;
 using System;
 using System.Threading.Tasks;

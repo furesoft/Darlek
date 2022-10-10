@@ -1,15 +1,11 @@
-﻿using Darlek.Core.Schemy;
-using LiteDB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Darlek.Scheme;
 using System.Reflection;
 
 namespace Darlek.Core.RuntimeLibrary;
 
 public static class SchemeCliLoader
 {
-    public static Dictionary<Symbol, Schemy.Environment> Modules = new Dictionary<Symbol, Schemy.Environment>();
+    public static Dictionary<Symbol, Scheme.Environment> Modules = new Dictionary<Symbol, Scheme.Environment>();
 
     public static void Apply(Assembly ass, Interpreter interpreter)
     {
@@ -32,7 +28,7 @@ public static class SchemeCliLoader
                     {
                         if (!Modules.ContainsKey(att.Module))
                         {
-                            Modules.Add(att.Module, new Schemy.Environment(new Dictionary<Symbol, object>(), null));
+                            Modules.Add(att.Module, new Scheme.Environment(new Dictionary<Symbol, object>(), null));
                         }
 
                         environment = Modules[att.Module];
@@ -62,7 +58,7 @@ public static class SchemeCliLoader
                         {
                             if (!Modules.ContainsKey(att.Module))
                             {
-                                var env = new Schemy.Environment(new Dictionary<Symbol, object>(), interpreter.Environment);
+                                var env = new Scheme.Environment(new Dictionary<Symbol, object>(), interpreter.Environment);
 
                                 Modules.Add(att.Module, env);
                             }
@@ -155,22 +151,16 @@ public static class SchemeCliLoader
                 env.Add(arg.Symbol, arg.Value);
             }
 
-            Modules.Add(name, new Schemy.Environment(env, interpreter.Environment));
+            Modules.Add(name, new Scheme.Environment(env, interpreter.Environment));
 
             return None.Instance;
         }));
         interpreter.DefineGlobal(Symbol.FromString("export"), new NativeProcedure((args) => {
             return new ExportModule((Symbol)args[0], args.Skip(1).First());
         }));
-
-        interpreter.DefineGlobal(Symbol.FromString("display"), new NativeProcedure(_ => {
-            Console.WriteLine(_.First().ToString());
-
-            return None.Instance;
-        }));
     }
 
-    private static void OpenModule(Symbol ns, Schemy.Environment env)
+    private static void OpenModule(Symbol ns, Scheme.Environment env)
     {
         foreach (var obj in Modules[ns].store)
         {

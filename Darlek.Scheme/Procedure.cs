@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Darlek.Core.Schemy;
+namespace Darlek.Scheme;
 
 /// <summary>
 /// Represents a procedure value in Scheme

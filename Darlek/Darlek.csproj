@@ -34,6 +34,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Darlek.Core\Darlek.Core.csproj" />
-	  <ProjectReference Include="..\Darlek.Library\Darlek.Library.csproj" />
+	  <ProjectReference Include="..\Darlek.Scheme\Darlek.Scheme.csproj" />
 	</ItemGroup>
 </Project>

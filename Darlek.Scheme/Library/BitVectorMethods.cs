@@ -1,6 +1,6 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.Schemy;
 using Darlek.Library.Types;
+using Darlek.Scheme;
 
 namespace Darlek.Library;
 

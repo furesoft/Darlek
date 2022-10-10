@@ -1,5 +1,5 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.Schemy;
+using Darlek.Scheme;
 using LiteDB;
 
 namespace Darlek.Library;

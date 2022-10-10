@@ -3,7 +3,7 @@ using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using Darlek.Core.RuntimeLibrary;
 
-namespace Darlek.Library;
+namespace Darlek.Core.SchemeLibrary;
 
 [RuntimeType("html")]
 public static class HtmlMethods
