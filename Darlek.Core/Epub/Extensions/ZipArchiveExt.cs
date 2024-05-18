@@ -52,13 +52,14 @@ public static class ZipArchiveExt
 
         if (entry == null)
         {
-            var namesToTry = new List<string>();
+            var namesToTry = new List<string>
+            {
+                "/" + entryName,
+                "\\" + entryName,
 
-            namesToTry.Add("/" + entryName);
-            namesToTry.Add("\\" + entryName);
-
-            // I've seen epubs, where manifest href's are url encoded, but files in archive not.
-            namesToTry.Add(Uri.UnescapeDataString(entryName));
+                // I've seen epubs, where manifest href's are url encoded, but files in archive not.
+                Uri.UnescapeDataString(entryName)
+            };
 
             // Such epubs aren't common, but zip archives created on windows uses backslashes.
             // That could happen if an epub is re-archived manually.

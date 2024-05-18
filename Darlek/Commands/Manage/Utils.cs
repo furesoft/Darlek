@@ -15,12 +15,14 @@ public static class Utils
 
     public static T Selection<T>(Menu parentMenu, IEnumerable<T> list, Func<T, string> converter = null)
     {
-        var selection = new SelectionPrompt<T>();
-
-        selection.Converter = (_) => _ is null ? ".." : converter != null ? converter(_) : _.ToString();
+        var selection = new SelectionPrompt<T>
+        {
+            Converter = (_) => _ is null ? ".." : converter != null ? converter(_) : _.ToString()
+        };
 
         selection.AddChoice(default);
         selection.AddChoices(list);
+        
         var selected = AnsiConsole.Prompt(selection);
 
         if (selected == null)

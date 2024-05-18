@@ -8,17 +8,11 @@ using System.Net;
 
 namespace Darlek.Commands.Manage.Chefkoch;
 
-public class WhatShouldICommand : IMenuCommand
+public class WhatShouldICommand(ChefkochCrawler crawler, string url) : IMenuCommand
 {
-    private ChefkochCrawler crawler;
+    private ChefkochCrawler crawler = crawler;
 
-    private string url;
-
-    public WhatShouldICommand(ChefkochCrawler crawler, string url)
-    {
-        this.crawler = crawler;
-        this.url = url;
-    }
+    private string url = url;
 
     public void Invoke(Menu parentMenu)
     {

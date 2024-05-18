@@ -2,14 +2,9 @@
 
 namespace Darlek.Core.RuntimeLibrary;
 
-public class ExportModule
+public class ExportModule(Symbol symbol, object value)
 {
-    public ExportModule(Symbol symbol, object value)
-    {
-        Symbol = symbol;
-        Value = value;
-    }
 
-    public Symbol Symbol { get; }
-    public object Value { get; }
+    public Symbol Symbol { get; } = symbol;
+    public object Value { get; } = value;
 }

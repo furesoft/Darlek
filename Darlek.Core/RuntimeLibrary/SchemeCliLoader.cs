@@ -9,7 +9,7 @@ namespace Darlek.Core.RuntimeLibrary;
 
 public static class SchemeCliLoader
 {
-    public static Dictionary<Symbol, Schemy.Environment> Modules = new Dictionary<Symbol, Schemy.Environment>();
+    public static Dictionary<Symbol, Schemy.Environment> Modules = [];
 
     public static void Apply(Assembly ass, Interpreter interpreter)
     {

@@ -8,14 +8,9 @@ namespace Darlek.Library.Types;
 /// </summary>
 [RuntimeCtorMethod("bitvector")]
 [RuntimeType("bitvector")]
-public struct BitSet
+public struct BitSet(int value)
 {
-    private int flags;
-
-    public BitSet(int value)
-    {
-        flags = value;
-    }
+    private int flags = value;
 
     public bool this[int index] {
         get {

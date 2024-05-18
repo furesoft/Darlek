@@ -2,23 +2,14 @@
 
 namespace Darlek.Core.Epub;
 
-public class EpubException : Exception
+public class EpubException(string message) : Exception(message)
 {
-    public EpubException(string message) : base(message)
-    {
-    }
 }
 
-public class EpubParseException : EpubException
+public class EpubParseException(string message) : EpubException($"EPUB parsing error: {message}")
 {
-    public EpubParseException(string message) : base($"EPUB parsing error: {message}")
-    {
-    }
 }
 
-public class EpubWriteException : EpubException
+public class EpubWriteException(string message) : EpubException($"EPUB write error: {message}")
 {
-    public EpubWriteException(string message) : base($"EPUB write error: {message}")
-    {
-    }
 }

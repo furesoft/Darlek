@@ -10,18 +10,12 @@ public class None
     public static readonly None Instance = new None();
 }
 
-class AssertionFailedError : Exception
+class AssertionFailedError(string msg) : Exception(msg)
 {
-    public AssertionFailedError(string msg) : base(msg)
-    {
-    }
 }
 
-class SyntaxError : Exception
+class SyntaxError(string msg) : Exception(msg)
 {
-    public SyntaxError(string msg) : base(msg)
-    {
-    }
 }
 
 /// <summary>

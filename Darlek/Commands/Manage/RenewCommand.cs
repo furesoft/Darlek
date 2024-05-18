@@ -5,14 +5,9 @@ using System.IO;
 
 namespace Darlek.Commands.Manage;
 
-public class RenewCommand : IMenuCommand
+public class RenewCommand(BsonDocument selectedRecipe) : IMenuCommand
 {
-    public RenewCommand(BsonDocument selectedRecipe)
-    {
-        SelectedRecipe = selectedRecipe;
-    }
-
-    public BsonDocument SelectedRecipe { get; set; }
+    public BsonDocument SelectedRecipe { get; set; } = selectedRecipe;
 
     public void Invoke(Menu parentMenu)
     {

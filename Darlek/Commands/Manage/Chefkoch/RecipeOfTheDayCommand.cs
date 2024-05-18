@@ -7,15 +7,8 @@ using System.Net;
 
 namespace Darlek.Commands.Manage.Chefkoch;
 
-public class RecipeOfTheDayCommand : IMenuCommand
+public class RecipeOfTheDayCommand(ChefkochCrawler chefkochCrawler) : IMenuCommand
 {
-    private ChefkochCrawler cc;
-
-    public RecipeOfTheDayCommand(ChefkochCrawler cc)
-    {
-        this.cc = cc;
-    }
-
     public void Invoke(Menu parentMenu)
     {
         var wc = new WebClient();

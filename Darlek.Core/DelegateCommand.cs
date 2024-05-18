@@ -2,14 +2,9 @@
 
 namespace Darlek.Core;
 
-public class DelegateCommand : IMenuCommand
+public class DelegateCommand(Action<Menu> action) : IMenuCommand
 {
-    private Action<Menu> Action;
-
-    public DelegateCommand(Action<Menu> action)
-    {
-        Action = action;
-    }
+    private Action<Menu> Action = action;
 
     public void Invoke(Menu parentMenu)
     {

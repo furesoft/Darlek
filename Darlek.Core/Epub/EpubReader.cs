@@ -106,7 +106,7 @@ public static class EpubReader
             return LoadChaptersFromNcx(book.Format.Paths.NcxAbsolutePath, book.Format.Ncx.NavMap.NavPoints);
         }
 
-        return new List<EpubChapter>();
+        return [];
     }
 
     private static List<EpubChapter> LoadChaptersFromNav(string navAbsolutePath, XElement element, EpubChapter parentChapter = null)

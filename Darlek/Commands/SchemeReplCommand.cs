@@ -7,7 +7,6 @@ using System;
 using System.IO;
 using Spectre.Console;
 
-
 namespace Darlek.Commands;
 
 internal class SchemeReplCommand : IMenuCommand

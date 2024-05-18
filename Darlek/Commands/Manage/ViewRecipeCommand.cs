@@ -4,14 +4,9 @@ using Spectre.Console;
 
 namespace Darlek.Commands.Manage;
 
-public class ViewRecipeCommand : IMenuCommand
+public class ViewRecipeCommand(BsonDocument selectedRecipe) : IMenuCommand
 {
-    private BsonDocument selectedRecipe;
-
-    public ViewRecipeCommand(BsonDocument selectedRecipe)
-    {
-        this.selectedRecipe = selectedRecipe;
-    }
+    private BsonDocument selectedRecipe = selectedRecipe;
 
     public void Invoke(Menu parentMenu)
     {

@@ -4,16 +4,11 @@ using System.Collections.Generic;
 
 namespace Darlek.Core;
 
-public class Menu
+public class Menu(Menu parentMenu)
 {
-    public Menu Parent;
+    public Menu Parent = parentMenu;
 
-    public Menu(Menu parentMenu)
-    {
-        Parent = parentMenu;
-    }
-
-    public Dictionary<string, IMenuCommand> Items { get; set; } = new();
+    public Dictionary<string, IMenuCommand> Items { get; set; } = [];
 
     public void WaitAndShow()
     {

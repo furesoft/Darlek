@@ -8,7 +8,7 @@ namespace Darlek.Core;
 
 public static class ImportProvider
 {
-    private static readonly Dictionary<Symbol, IImportProvider> _providers = new Dictionary<Symbol, IImportProvider>();
+    private static readonly Dictionary<Symbol, IImportProvider> _providers = [];
 
     public static void Register(IImportProvider provider)
     {

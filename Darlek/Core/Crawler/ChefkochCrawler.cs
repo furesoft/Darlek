@@ -25,15 +25,16 @@ public class ChefkochCrawler : ICrawler
         var content = await wc.DownloadStringTaskAsync(url.ToString());
         var document = parser.ParseDocument(content);
 
-        var recipe = new BsonDocument();
-        recipe.Add("name", document.QuerySelectorAll("a[class='ds-copy-link bi-recipe-title']")[0].TextContent.Trim());
-        recipe.Add("content", document.QuerySelectorAll("div[class='ds-box']")[4].TextContent.Trim());
-        recipe.Add("author", document.QuerySelectorAll("a[class='ds-copy-link bi-profile']")[1].TextContent.Trim());
-        recipe.Add("imageUri", document.QuerySelectorAll("img")[0].Attributes.GetNamedItem("src").Value);
-        recipe.Add("portions", document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("h3").TextContent);
-        recipe.Add("time", document.QuerySelector("table[id='recipe-info']").OuterHtml.Trim());
-
-        recipe.Add("ingredientsTables", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")));
+        var recipe = new BsonDocument
+        {
+            { "name", document.QuerySelectorAll("a[class='ds-copy-link bi-recipe-title']")[0].TextContent.Trim() },
+            { "content", document.QuerySelectorAll("div[class='ds-box']")[4].TextContent.Trim() },
+            { "author", document.QuerySelectorAll("a[class='ds-copy-link bi-profile']")[1].TextContent.Trim() },
+            { "imageUri", document.QuerySelectorAll("img")[0].Attributes.GetNamedItem("src").Value },
+            { "portions", document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("h3").TextContent },
+            { "time", document.QuerySelector("table[id='recipe-info']").OuterHtml.Trim() },
+            { "ingredientsTables", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")) }
+        };
 
         return recipe;
     }
@@ -74,8 +75,8 @@ public class ChefkochCrawler : ICrawler
                     else if (measureEntry.QuerySelector("span") != null)
                     {
                         tabledoc.Add("elements", elements);
-                        tabledoc = new();
-                        elements = new();
+                        tabledoc = [];
+                        elements = [];
 
                         res.Add(tabledoc);
 

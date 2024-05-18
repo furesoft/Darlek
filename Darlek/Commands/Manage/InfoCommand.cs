@@ -9,6 +9,7 @@ public class InfoCommand : IMenuCommand
     public void Invoke(Menu parentMenu)
     {
         var metaTable = new Grid().AddColumn().AddColumn().Centered();
+
         foreach (var md in Repository.GetAllMetadata())
         {
             metaTable.AddRow(md.Key, md.Value);
@@ -19,12 +20,17 @@ public class InfoCommand : IMenuCommand
 
         AnsiConsole.Write(metaPanel);
 
-        var statTable = new Table().AddColumns("Title", "Author", "Date");
+        var statTable = new Table().AddColumns("Title", "Author", "Crawl Date");
 
         foreach (var item in Repository.GetAll<BsonDocument>())
         {
-            statTable.AddRow(item["Name"], item["Author"], item["addedDate"].IsNull ? "-" : item["addedDate"].AsDateTime.ToString());
+            statTable.AddRow(
+                item["Name"], 
+                item["Author"], 
+                item["addedDate"].IsNull ? "-" : item["addedDate"].AsDateTime.ToString()
+            );
         }
+
         AnsiConsole.Write(statTable);
 
         parentMenu.WaitAndShow();

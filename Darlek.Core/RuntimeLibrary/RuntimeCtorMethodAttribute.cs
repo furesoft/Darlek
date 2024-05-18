@@ -3,12 +3,8 @@
 namespace Darlek.Core.RuntimeLibrary;
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-public class RuntimeCtorMethodAttribute : Attribute
+public class RuntimeCtorMethodAttribute(string name) : Attribute
 {
-    public RuntimeCtorMethodAttribute(string name)
-    {
-        Name = name;
-    }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
 }

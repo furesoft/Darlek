@@ -20,11 +20,13 @@ public class PublishCommand : IMenuCommand
         epub.AddAuthor(Repository.GetMetadata("author"));
 
         var recipes = Repository.GetAll<BsonDocument>().ToArray();
-        var bookInfo = new ScriptObject();
-        bookInfo.Add("pages", recipes.Length);
-        bookInfo.Add("title", Repository.GetMetadata("title"));
-        bookInfo.Add("author", Repository.GetMetadata("author"));
-        bookInfo.Add("date", DateTime.Now.ToString());
+        var bookInfo = new ScriptObject
+        {
+            { "pages", recipes.Length },
+            { "title", Repository.GetMetadata("title") },
+            { "author", Repository.GetMetadata("author") },
+            { "date", DateTime.Now.ToString() }
+        };
 
         for (var i = 0; i < recipes.Length; i++)
         {

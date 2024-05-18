@@ -10,7 +10,7 @@ public static class ObjectModelMethods
     [RuntimeMethod("make-object")]
     public static BsonDocument MakeObject()
     {
-        return new BsonDocument();
+        return [];
     }
 
     [RuntimeMethod("get-property")]

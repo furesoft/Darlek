@@ -1,6 +1,5 @@
 ﻿using Darlek.Core;
 using Spectre.Console;
-using System;
 using System.IO;
 
 namespace Darlek.Commands.Manage;

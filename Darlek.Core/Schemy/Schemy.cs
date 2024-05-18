@@ -31,7 +31,7 @@ public class Interpreter
 
         // populate an empty environment for the initializer to potentially work with
         environment = Environment.CreateEmpty();
-        macroTable = new Dictionary<Symbol, Procedure>();
+        macroTable = [];
 
         environmentInitializers ??= new List<CreateSymbolTableDelegate>();
         environmentInitializers = new CreateSymbolTableDelegate[] { Builtins.CreateBuiltins }.Concat(environmentInitializers);
@@ -514,18 +514,13 @@ public class Interpreter
         public object Result { get { return result; } }
     }
 
-    public class InPort
+    public class InPort(TextReader file)
     {
         private const string tokenizer = @"^\s*(,@|[('`,)]|""(?:[\\].|[^\\""])*""|;.*|[^\s('""`,;)]*)(.*)";
 
-        private readonly TextReader file;
-        private string line;
+        private readonly TextReader file = file;
+        private string line = string.Empty;
 
-        public InPort(TextReader file)
-        {
-            this.file = file;
-            line = string.Empty;
-        }
 
         /// <summary>
         /// Parses and returns the next token. Returns <see cref="Symbol.EOF"/> if there's no more content to read.

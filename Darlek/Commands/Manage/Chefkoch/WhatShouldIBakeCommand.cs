@@ -2,10 +2,6 @@
 
 namespace Darlek.Commands.Manage.Chefkoch;
 
-public class WhatShouldIBakeCommand : WhatShouldICommand
+public class WhatShouldIBakeCommand(ChefkochCrawler crawler) : WhatShouldICommand(crawler, "https://www.chefkoch.de/rezepte/was-backe-ich-heute/")
 {
-    public WhatShouldIBakeCommand(ChefkochCrawler crawler) :
-        base(crawler, "https://www.chefkoch.de/rezepte/was-backe-ich-heute/")
-    {
-    }
 }

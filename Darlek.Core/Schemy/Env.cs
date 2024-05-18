@@ -8,9 +8,9 @@ using System.Collections.Generic;
 /// <summary>
 /// Tracks the state of an interpreter or a procedure. It supports lexical scoping.
 /// </summary>
-public class Environment
+public class Environment(IDictionary<Symbol, object> env, Environment outer)
 {
-    public readonly IDictionary<Symbol, object> store;
+    public readonly IDictionary<Symbol, object> store = env;
 
     public void Define(Symbol sym, object val)
     {
@@ -20,13 +20,7 @@ public class Environment
     /// <summary>
     /// The enclosing environment. For top level env, this is null.
     /// </summary>
-    private readonly Environment outer;
-
-    public Environment(IDictionary<Symbol, object> env, Environment outer)
-    {
-        store = env;
-        this.outer = outer;
-    }
+    private readonly Environment outer = outer;
 
     public static Environment CreateEmpty()
     {

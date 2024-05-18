@@ -5,17 +5,12 @@ using System.Threading.Tasks;
 
 namespace Darlek.Core.Crawler;
 
-public class SchemeCrawler : ICrawler
+public class SchemeCrawler(ICallable callback) : ICrawler
 {
-    private ICallable callback;
-
-    public SchemeCrawler(ICallable callback)
-    {
-        this.callback = callback;
-    }
+    private ICallable callback = callback;
 
     public async Task<BsonDocument> Crawl(Uri url)
     {
-        return (BsonDocument)callback.Call(new System.Collections.Generic.List<object> { url.ToString() });
+        return (BsonDocument)callback.Call([url.ToString()]);
     }
 }

@@ -4,14 +4,9 @@ using Spectre.Console;
 
 namespace Darlek.Commands.Manage;
 
-public class DeleteRecipeCommand : IMenuCommand
+public class DeleteRecipeCommand(BsonDocument selectedRecipe) : IMenuCommand
 {
-    private BsonDocument selectedRecipe;
-
-    public DeleteRecipeCommand(BsonDocument selectedRecipe)
-    {
-        this.selectedRecipe = selectedRecipe;
-    }
+    private BsonDocument selectedRecipe = selectedRecipe;
 
     public void Invoke(Menu parentMenu)
     {

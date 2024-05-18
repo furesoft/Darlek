@@ -24,18 +24,11 @@ public interface ICallable
 /// A procedure implemented in Scheme
 /// </summary>
 /// <seealso cref="ICallable" />
-public class Procedure : ICallable
+public class Procedure(Union<Symbol, List<Symbol>> parameters, object body, Environment env) : ICallable
 {
-    private readonly Union<Symbol, List<Symbol>> parameters;
-    private readonly object body;
-    private readonly Environment env;
-
-    public Procedure(Union<Symbol, List<Symbol>> parameters, object body, Environment env)
-    {
-        this.parameters = parameters;
-        this.body = body;
-        this.env = env;
-    }
+    private readonly Union<Symbol, List<Symbol>> parameters = parameters;
+    private readonly object body = body;
+    private readonly Environment env = env;
 
     public object Body {
         get { return body; }
@@ -83,16 +76,10 @@ public class Procedure : ICallable
 /// A procedure implemented in .NET
 /// </summary>
 /// <seealso cref="ICallable" />
-public class NativeProcedure : ICallable
+public class NativeProcedure(Func<List<object>, object> func, string name = null) : ICallable
 {
-    private readonly Func<List<object>, object> func;
-    private readonly string name;
-
-    public NativeProcedure(Func<List<object>, object> func, string name = null)
-    {
-        this.func = func;
-        this.name = name;
-    }
+    private readonly Func<List<object>, object> func = func;
+    private readonly string name = name;
 
     /// <summary>
     /// Convenient function method to create a native procedure and doing arity and type check for inputs. It makes the input function
