@@ -1,7 +1,5 @@
-﻿using Darlek.Core;
-using Darlek.Core.Schemy;
+﻿using Darlek.Core.Schemy;
 using LiteDB;
-using System;
 using System.IO;
 using System.Text;
 

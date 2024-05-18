@@ -1,7 +1,6 @@
 ﻿using Darlek.Core.RuntimeLibrary;
 using Darlek.Core.Schemy;
 using Darlek.Library.Types;
-using System.Collections.Generic;
 using System.Net;
 
 namespace Darlek.Library;
@@ -10,7 +9,7 @@ namespace Darlek.Library;
 public static class RequestMethods
 {
     [RuntimeMethod("make-request")]
-    public static object Make()
+    public static XmlHttpRequest Make()
     {
         return new XmlHttpRequest();
     }
@@ -32,33 +31,23 @@ public static class RequestMethods
     }
 
     [RuntimeMethod("request-open")]
-    public static object Open(XmlHttpRequest req, string method, string url)
+    public static void Open(XmlHttpRequest req, string method, string url)
     {
         req.Open(method, url);
-
-        return None.Instance;
     }
 
     [RuntimeMethod("request-send")]
-    public static object Send(XmlHttpRequest req, object data)
-    {
-        req.Send(data);
-
-        return None.Instance;
-    }
-
-    [RuntimeMethod("request-subscribe-readystatechanged")]
-    public static object OnChange(XmlHttpRequest req, Procedure callback)
+    public static void Send(XmlHttpRequest req, object data, Procedure callback)
     {
         req.OnReadyStateChange += () => {
-            callback.Call(new List<object> { req.ReadyState });
+            callback.Call([req.ReadyState, req.ResponseText]);
         };
 
-        return None.Instance;
+        req.Send(data);
     }
 
-    [RuntimeMethod("request-get-response")]
-    public static object GetResponse(XmlHttpRequest req)
+    [RuntimeMethod("request-get-response-text")]
+    public static string GetResponse(XmlHttpRequest req)
     {
         return req.ResponseText;
     }

@@ -8,19 +8,19 @@ namespace Darlek.Library;
 public static class ObjectModelMethods
 {
     [RuntimeMethod("make-object")]
-    public static object MakeObject()
+    public static BsonDocument MakeObject()
     {
         return new BsonDocument();
     }
 
     [RuntimeMethod("get-property")]
-    public static object GetProperty(BsonDocument doc, Symbol name)
+    public static BsonValue GetProperty(BsonDocument doc, Symbol name)
     {
         return doc[name.AsString];
     }
 
     [RuntimeMethod("set-property")]
-    public static object SetProperty(BsonDocument doc, Symbol name, object value)
+    public static void SetProperty(BsonDocument doc, Symbol name, object value)
     {
         if (doc.ContainsKey(name.AsString))
         {
@@ -30,7 +30,5 @@ public static class ObjectModelMethods
         {
             doc.Add(name.AsString, BsonMapper.Global.Serialize(value));
         }
-
-        return None.Instance;
     }
 }

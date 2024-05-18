@@ -1,5 +1,4 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.Schemy;
 using Darlek.Library.Types;
 
 namespace Darlek.Library;
@@ -8,19 +7,15 @@ namespace Darlek.Library;
 public static class BitVectorMethods
 {
     [RuntimeMethod("bitvector-set")]
-    public static object Set(BitSet set, int index)
+    public static void Set(BitSet set, int index)
     {
         set.Set(index);
-
-        return None.Instance;
     }
 
     [RuntimeMethod("bitvector-unset")]
-    public static object Unset(BitSet set, int index)
+    public static void Unset(BitSet set, int index)
     {
         set.Unset(index);
-
-        return None.Instance;
     }
 
     [RuntimeMethod("bitvector-set?")]

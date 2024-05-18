@@ -19,7 +19,7 @@ public static class ConverterMethods
     [RuntimeMethod("struct->value-list")]
     public static List<object> ToValueList(RuntimeStruct stru)
     {
-        return stru.Values.ToList();
+        return [.. stru.Values];
     }
 
     [RuntimeMethod("string->num")]
@@ -53,7 +53,7 @@ public static class ConverterMethods
     }
 
     [RuntimeMethod("bitvector->num")]
-    public static BitSet ToNum(BitSet bv)
+    public static int ToNum(BitSet bv)
     {
         return (int)bv;
     }

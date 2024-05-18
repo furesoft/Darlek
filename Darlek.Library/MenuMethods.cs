@@ -1,6 +1,5 @@
 ﻿using Darlek.Core;
 using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.Schemy;
 using System;
 
 namespace Darlek.Library;
@@ -9,19 +8,15 @@ namespace Darlek.Library;
 public static class MenuMethods
 {
     [RuntimeMethod("show-menu")]
-    public static object ShowMenu(Menu menu)
+    public static void ShowMenu(Menu menu)
     {
         menu.Show();
-
-        return None.Instance;
     }
 
     [RuntimeMethod("wait-menu")]
-    public static object WaitMenu(Menu menu)
+    public static void WaitMenu(Menu menu)
     {
         Console.ReadKey();
         menu.Show();
-
-        return None.Instance;
     }
 }

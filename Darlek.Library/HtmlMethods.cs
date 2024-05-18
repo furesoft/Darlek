@@ -12,6 +12,7 @@ public static class HtmlMethods
     public static IHtmlDocument Parse(string content)
     {
         var parser = new HtmlParser();
+        
         return parser.ParseDocument(content);
     }
 

@@ -1,5 +1,4 @@
 ﻿using Darlek.Core.Epub.Extensions;
-using Darlek.Core.Epub.Format;
 using System;
 using System.Xml.Linq;
 

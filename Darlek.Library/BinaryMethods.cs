@@ -7,31 +7,36 @@ namespace Darlek.Library;
 public class BinaryMethods
 {
     [RuntimeMethod("make-reader")]
-    public static object MakeReader(byte[] raw)
+    public static BinaryReader MakeReader(byte[] raw)
     {
         return new BinaryReader(new MemoryStream(raw));
     }
 
     [RuntimeMethod("read-string")]
-    public object ReadString(BinaryReader reader)
+    public string ReadString(BinaryReader reader)
     {
         return reader.ReadString();
     }
 
     [RuntimeMethod("read32")]
-    public object Read32(BinaryReader reader)
+    public int Read32(BinaryReader reader)
     {
         return reader.ReadInt32();
     }
 
+    [RuntimeMethod("read64")]
+    public static long Read64(BinaryReader reader) {
+        return reader.ReadInt64();
+    }
+
     [RuntimeMethod("read16")]
-    public object Read16(BinaryReader reader)
+    public short Read16(BinaryReader reader)
     {
         return reader.ReadInt16();
     }
 
     [RuntimeMethod("read8")]
-    public object Read8(BinaryReader reader)
+    public byte Read8(BinaryReader reader)
     {
         return reader.ReadByte();
     }

@@ -10,7 +10,7 @@ public static class StringMethods
     {
         if (length == 0)
         {
-            return src.Substring(start);
+            return src[start..];
         }
 
         return src.Substring(start, length);

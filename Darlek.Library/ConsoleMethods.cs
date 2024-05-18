@@ -1,5 +1,4 @@
 ﻿using Darlek.Core.RuntimeLibrary;
-using Darlek.Core.Schemy;
 using Spectre.Console;
 using System;
 
@@ -8,29 +7,25 @@ namespace Darlek.Library;
 public static class ConsoleMethods
 {
     [RuntimeMethod("display")]
-    public static object Display(string msg)
+    public static void Display(string msg)
     {
         Console.WriteLine(msg);
-
-        return None.Instance;
     }
 
     [RuntimeMethod("read-key")]
-    public static object ReadKey()
+    public static ConsoleKeyInfo ReadKey()
     {
         return Console.ReadKey();
     }
 
     [RuntimeMethod("clear-console")]
-    public static object Clear()
+    public static void Clear()
     {
         AnsiConsole.Clear();
-
-        return None.Instance;
     }
 
     [RuntimeMethod("ask")]
-    public static object Ask(string msg)
+    public static string Ask(string msg)
     {
         return AnsiConsole.Ask<string>(msg);
     }

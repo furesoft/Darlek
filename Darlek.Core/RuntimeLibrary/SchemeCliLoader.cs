@@ -21,6 +21,7 @@ public static class SchemeCliLoader
             if (att != null)
             {
                 var mctoratt = t.GetCustomAttribute<RuntimeCtorMethodAttribute>();
+                
                 if (mctoratt != null)
                 {
                     var name = "make-" + mctoratt.Name;
@@ -54,6 +55,7 @@ public static class SchemeCliLoader
                 foreach (var mi in t.GetMethods())
                 {
                     var matt = mi.GetCustomAttribute<RuntimeMethodAttribute>();
+
                     if (matt != null)
                     {
                         var procedure = new NativeProcedure(_ => CallMethodInfo(_, mi));
@@ -122,6 +124,7 @@ public static class SchemeCliLoader
 
             return s;
         }));
+
         interpreter.DefineGlobal(Symbol.FromString("open"), new NativeProcedure((args) => {
             foreach (var ns in args.Cast<Symbol>())
             {
@@ -150,14 +153,9 @@ public static class SchemeCliLoader
 
             return None.Instance;
         }));
+
         interpreter.DefineGlobal(Symbol.FromString("export"), new NativeProcedure((args) => {
             return new ExportModule((Symbol)args[0], args.Skip(1).First());
-        }));
-
-        interpreter.DefineGlobal(Symbol.FromString("display"), new NativeProcedure(_ => {
-            Console.WriteLine(_.First().ToString());
-
-            return None.Instance;
         }));
     }
 

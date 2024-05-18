@@ -4,7 +4,6 @@
 namespace Darlek.Core.Schemy;
 
 using System;
-using System.Collections.Generic;
 
 public class None
 {

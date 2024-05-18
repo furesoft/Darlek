@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Darlek.Core.Epub.Extensions;
-using Darlek.Core.Epub.Format;
 
 namespace Darlek.Core.Epub.Format.Readers;
 
