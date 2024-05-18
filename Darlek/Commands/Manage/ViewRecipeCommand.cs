@@ -27,7 +27,10 @@ public class ViewRecipeCommand : IMenuCommand
         grid.AddColumn(new GridColumn() { Alignment = Justify.Right, Padding = new(10, 0, 10, 0) });
         grid.AddColumn(new GridColumn() { Alignment = Justify.Right, Padding = new(10, 0, 10, 0) });
 
-        grid.AddRow(new Text(selectedRecipe["name"]).Centered(), new Text("Author: " + selectedRecipe["author"].AsString).RightAligned(), new Text("Date: " + (selectedRecipe["addedDate"].IsNull ? "-" : selectedRecipe["addedDate"].AsDateTime.ToString())));
+        grid.AddRow(
+            new Text(selectedRecipe["name"]).Centered(), 
+            new Text("Author: " + selectedRecipe["author"].AsString).RightJustified(), 
+            new Text("Date: " + (selectedRecipe["addedDate"].IsNull ? "-" : selectedRecipe["addedDate"].AsDateTime.ToString())));
         grid.AddEmptyRow();
 
         AnsiConsole.Write(grid);

@@ -5,6 +5,8 @@ using Darlek.Core.Schemy;
 using Darlek.Library;
 using System;
 using System.IO;
+using Spectre.Console;
+
 
 namespace Darlek.Commands;
 
@@ -20,12 +22,19 @@ internal class SchemeReplCommand : IMenuCommand
         while (true)
         {
             var input = Console.ReadLine();
+
+            if (input == ":q") {
+                parentMenu.Show();
+
+                return;
+            }
+
             var res = interpreter.Evaluate(new StringReader(input));
 
             if (res.Error != null)
-                Console.WriteLine(res.Error);
-
-            Console.WriteLine(res.Result);
+                AnsiConsole.WriteLine(res.Error.Message);
+            else
+                AnsiConsole.WriteLine(res.Result.ToString());
         }
     }
 }

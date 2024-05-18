@@ -58,7 +58,7 @@ public class PublishCommand : IMenuCommand
             epub.Write(filename);
         });
 
-        Console.WriteLine("Success");
+        AnsiConsole.WriteLine("Success");
         Thread.Sleep(1000);
 
         parentMenu.Show();

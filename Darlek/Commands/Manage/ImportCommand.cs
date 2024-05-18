@@ -18,7 +18,7 @@ public class ImportCommand : IMenuCommand
 
         Repository.Add(document);
 
-        Console.WriteLine("Successfully imported");
+        AnsiConsole.WriteLine("Successfully imported");
 
         parentMenu.WaitAndShow();
     }
