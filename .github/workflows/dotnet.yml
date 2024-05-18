@@ -48,7 +48,7 @@ jobs:
         release_name="Darlek-${{ matrix.target }}"
         # Build everything
         mkdir ./Dist
-        dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --no-self-contained -c Release -o "Dist/${{ matrix.target }}"
+        dotnet publish Darlek/Darlek.csproj --runtime "${{ matrix.target }}" -p:PublishSingleFile=true --self-contained -c Release -o "Dist/${{ matrix.target }}"
     - name: Zip
       run: zip -r Dist/${{ matrix.target }}.zip Dist/${{ matrix.target }}
 
