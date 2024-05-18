@@ -16,6 +16,9 @@ jobs:
           - kind: linux
             os: ubuntu-latest
             target: linux-x64
+          - kind: linux
+            os: ubuntu-latest
+            target: linux-arm64
           - kind: windows
             os: ubuntu-latest
             target: win-x64
@@ -31,7 +34,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Install .NET Core
+    - name: Install .NET
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 8.0.x
