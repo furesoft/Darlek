@@ -12,7 +12,7 @@ public class ManageRecipeCommand : IMenuCommand
 
         menu.Items.Add("View", new ViewRecipeCommand(selectedRecipe));
         menu.Items.Add("Delete", new DeleteRecipeCommand(selectedRecipe));
-        menu.Items.Add("Edit", null);
+        menu.Items.Add("Edit", new EditCommand(selectedRecipe));
         menu.Items.Add("Renew", new RenewCommand(selectedRecipe));
 
         menu.Show();
