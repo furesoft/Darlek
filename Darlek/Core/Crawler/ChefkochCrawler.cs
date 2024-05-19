@@ -33,7 +33,8 @@ public class ChefkochCrawler : ICrawler
             { "imageUri", document.QuerySelectorAll("img")[0].Attributes.GetNamedItem("src").Value },
             { "portions", document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("h3").TextContent },
             { "time", document.QuerySelector("table[id='recipe-info']").OuterHtml.Trim() },
-            { "ingredientsTables", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")) }
+            { "ingredientsTables", ParseIngredients(document.QuerySelectorAll("div[class='ds-box']")[1].QuerySelector("table")) },
+            { "tags", new BsonArray()}
         };
 
         return recipe;

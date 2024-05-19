@@ -18,6 +18,7 @@ public static class ManageMenu
             var m = new Menu(_);
             m.Items.Add("Add Recipe", new AddRecipeCommand());
             m.Items.Add("Manage Recipe", new ManageRecipeCommand());
+            m.Items.Add("Search", new SearchCommand());
 
             var crawler = CrawlerFactory.GetCrawlerByHost("http://www.chefkoch.de/");
 

@@ -249,7 +249,7 @@ public static class Repository
         collection.Update(document);
     }
 
-    public static object Get(string id)
+    public static BsonDocument Get(string id)
     {
         using var db = new LiteDatabase(CacheFile);
 
@@ -258,7 +258,7 @@ public static class Repository
         return collection.FindOne(Query.EQ("_id", id));
     }
 
-    public static object GetByName(string name)
+    public static BsonDocument GetByName(string name)
     {
         using var db = new LiteDatabase(CacheFile);
 
@@ -267,10 +267,19 @@ public static class Repository
         return collection.FindOne(Query.EQ("name", name));
     }
 
+    public static IEnumerable<BsonDocument> GetByTag(string tag) {
+        using var db = new LiteDatabase(CacheFile);
+
+        var collection = db.GetCollection("entries");
+
+        return collection.Find(Query.Contains("tags", tag));
+    }
+
     public static void Crawl(string url)
     {
         var crawler = CrawlerFactory.GetCrawlerByHost(url);
         var r = crawler.Crawl(new Uri(url, UriKind.RelativeOrAbsolute)).Result;
+        
         r.Add("addedDate", DateTime.Now);
         r.Add("url", url);
 
