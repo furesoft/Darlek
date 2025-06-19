@@ -9,4 +9,7 @@ public class Measure
     public string Source { get; set; }
 
     public QuantityUnit QuantityUnit { get; set; }
+
+    public override string ToString() =>
+        $"{Quantity} {QuantityUnit?.Name ?? "Unknown"} ({Source})";
 }
