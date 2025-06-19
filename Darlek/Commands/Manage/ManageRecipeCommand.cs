@@ -14,6 +14,7 @@ public class ManageRecipeCommand : IMenuCommand
         menu.Items.Add("Delete", new DeleteRecipeCommand(selectedRecipe));
         menu.Items.Add("Edit", new EditCommand(selectedRecipe));
         menu.Items.Add("Renew", new RenewCommand(selectedRecipe));
+        menu.Items.Add("Sync", new SyncCommand(selectedRecipe));
 
         menu.Show();
 
