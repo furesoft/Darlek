@@ -14,11 +14,13 @@ A simple and useful recipe crawler and ebook generator
 
 # Syncrhonize Recipes with Grocy
 1. Configure URL and ApiKey initialially. (The url has to point to the api endpoint)
-   ```
-  darlek config GROCY_URL https://mygrocyinstance.de/public/index.php/api/
-  darlek config GROCY_APIKEY 123456789
-   ```
-2. You can synchronize already saved recipes by selecting the menu item in `Managing Recipes` or using this command:
+   
+  `darlek config GROCY_URL https://mygrocyinstance.de/public/index.php/api/`
+
+  `darlek config GROCY_APIKEY 123456789`
+  
+3. You can synchronize already saved recipes by selecting the menu item in `Managing Recipes` or using this command:
+   
 `darlek grocy-sync --url https://www.chefkoch.de/rezepte/599651159698445/Quiche-mit-Lauch-und-Schinken.html`
 
 ## Screenshots
