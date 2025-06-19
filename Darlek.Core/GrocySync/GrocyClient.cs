@@ -1,9 +1,12 @@
-﻿using Darlek.Core.GrocySync.Models;
+﻿using Darlek.Core.GrocySync.Dto;
+using Darlek.Core.GrocySync.Models;
 using LiteDB;
 using RestSharp;
 using Spectre.Console;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -26,21 +29,21 @@ public class GrocyClient
         client = new RestClient(httpClient);
     }
 
-    public void AddRecipe(BsonDocument recipe)
+    public void AddRecipe(Recipe recipe)
     {
         var id = CreateRecipe(recipe);
         //SetSourceUrl(id, recipe["url"].AsString); // doesn't work
     }
 
-    private int CreateRecipe(BsonDocument recipe)
+    private int CreateRecipe(Recipe recipe)
     {
-        var pictureFileName = UploadRecipeImage(recipe);
+        UploadRecipeImage(recipe);
 
         var body = new CreateRecipe
         {
-            name = recipe["name"].AsString,
-            description = recipe["content"].AsString,
-            picture_file_name = pictureFileName
+            name = recipe.Name,
+            description = recipe.Description,
+            picture_file_name = recipe.PictureFileName
         };
 
         var request = new RestRequest("/objects/recipes");
@@ -49,25 +52,21 @@ public class GrocyClient
 
         var id = client.Post<CreatedResponse>(request).created_object_id;
 
+
         Console.WriteLine("Recipe synced");
 
         return id;
     }
 
-    private string UploadRecipeImage(BsonDocument recipe)
+    private void UploadRecipeImage(Recipe recipe)
     {
-        var imgurl = recipe["imageuri"].AsString;
-        var uri = new Uri(imgurl);
-        var pictureFileName = uri.Segments[^1];
-
-        var img = new WebClient().DownloadData(imgurl);
+        var img = new WebClient().DownloadData(recipe.PictureUrl);
 
         AnsiConsole.Status()
             .Spinner(Spinner.Known.Arrow)
             .Start("Uploading Recipe Image...", ctx => {
-                UploadRecipeImage(pictureFileName, img);
+                UploadRecipeImage(recipe.PictureFileName, img);
             });
-        return pictureFileName;
     }
 
     private void SetSourceUrl(int id, string url)
@@ -93,5 +92,19 @@ public class GrocyClient
         body.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
 
         _ = httpClient.PutAsync($"files/recipepictures/{filename}", body).Result;
+    }
+
+    public List<Product> GetAllProducts()
+    {
+        var request = new RestRequest("/objects/products");
+        var response = client.Get<List<Product>>(request);
+        return response;
+    }
+
+    public List<QuantityUnit> GetAllQuantityUnits()
+    {
+        var request = new RestRequest("/objects/quantity_units");
+        var response = client.Get<List<QuantityUnit>>(request);
+        return response;
     }
 }

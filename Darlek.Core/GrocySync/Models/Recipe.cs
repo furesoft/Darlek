@@ -1,9 +1,14 @@
-﻿namespace Darlek.Core.GrocySync.Models;
+﻿using System.Collections.Generic;
 
-public class CreateRecipe
+namespace Darlek.Core.GrocySync.Models;
+
+public class Recipe
 {
-    public string name { get; set; }
-    public string description { get; set; }
-    public string type { get; set; } = "normal";
-    public string picture_file_name { get; set; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public string? Source { get; set; }
+    public string PictureFileName { get; set; }
+    public string PictureUrl { get; set; }
+
+    public List<Ingredient> Ingredients { get; set; } = [];
 }

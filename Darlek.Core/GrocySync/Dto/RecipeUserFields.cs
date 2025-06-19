@@ -1,4 +1,4 @@
-﻿namespace Darlek.Core.GrocySync.Models;
+﻿namespace Darlek.Core.GrocySync.Dto;
 
 public class RecipeUserFields
 {
