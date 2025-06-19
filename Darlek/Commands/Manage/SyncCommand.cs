@@ -56,7 +56,7 @@ public class SyncCommand(BsonDocument selectedrecipe) : IMenuCommand
                 }
                 catch
                 {
-                    AnsiConsole.WriteLine($"[red]Cannot find {measure}[/red]");
+                    AnsiConsole.WriteLine($"Cannot find {measure} in {productName}. Please check the measure.");
                 }
 
                 recipe.Ingredients.Add(ingr);
