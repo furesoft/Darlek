@@ -36,4 +36,10 @@
 	  <ProjectReference Include="..\Darlek.Core\Darlek.Core.csproj" />
 	  <ProjectReference Include="..\Darlek.Library\Darlek.Library.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="darlek.conf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
 </Project>

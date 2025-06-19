@@ -1,4 +1,5 @@
-﻿using Darlek.Commands;
+﻿using Darlek.CliCommands;
+using Darlek.Commands;
 using Darlek.Core;
 using Darlek.Properties;
 
@@ -6,9 +7,20 @@ namespace Darlek;
 
 public static class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
+        if (args.Length > 1)
+        {
+            if (args[1] == "config")
+            {
+                ConfigCommand.SetConfig(args);
+            }
+
+            return;
+        }
+
         ImportProvider.Collect(typeof(IImportProvider).Assembly);
+        Config.Load();
 
         var mainMenu = new Menu(null);
         mainMenu.Items.Add("New", new NewCommand());

@@ -22,8 +22,8 @@ public class GrocyClient
     public GrocyClient()
     {
         httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.Add("GROCY-API-KEY", "5hRZXgi2XXYlNRi7WLijE7ilE8sxXWpoGEiNq6QzyJyfKTVnxm");
-        httpClient.BaseAddress = new Uri("https://erp.furesoft.de/public/index.php/api/");
+        httpClient.DefaultRequestHeaders.Add("GROCY-API-KEY", Config.Get("GROCY_APIKEY"));
+        httpClient.BaseAddress = new Uri(Config.Get("GROCY_URL"));
         httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
 
         client = new RestClient(httpClient);
