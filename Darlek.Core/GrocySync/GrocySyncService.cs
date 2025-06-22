@@ -6,6 +6,7 @@ using Spectre.Console;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Darlek.Core.GrocySync;
 
@@ -74,7 +75,7 @@ public class GrocySyncService
         return selected;
     }
 
-    public static void Sync(BsonDocument selectedrecipe)
+    public static async Task Sync(BsonDocument selectedrecipe)
     {
         var imgurl = selectedrecipe["imageuri"].AsString;
         var uri = new Uri(imgurl);
@@ -91,7 +92,7 @@ public class GrocySyncService
 
         SetIngredients(selectedrecipe, recipe);
 
-        //_client.AddRecipe(recipe);
+        await _client.AddRecipe(recipe);
     }
 
     private static void SetIngredients(BsonDocument selectedrecipe, Recipe recipe)

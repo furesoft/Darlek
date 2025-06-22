@@ -2,13 +2,17 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net10.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>darlek</AssemblyName>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>1.0.7</Version>
-		<PackageProjectUrl>https://github.com/furesoft/Darlek</PackageProjectUrl>
+		<Version>1.0.12</Version>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>darlek</ToolCommandName>
+		<LangVersion>default</LangVersion>
+		<Authors>furesoft</Authors>
+		<RepositoryUrl>https://github.com/furesoft/Darlek</RepositoryUrl>
+		<PackageTags>recipe</PackageTags>
+		<Title>Darlek</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -47,5 +51,9 @@
 	  <None Update="darlek.conf">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="DotnetToolSettings.xml" Pack="true" PackagePath="." />
 	</ItemGroup>
 </Project>

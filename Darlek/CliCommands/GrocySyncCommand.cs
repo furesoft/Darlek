@@ -3,10 +3,11 @@ using Darlek.Core.GrocySync;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System;
+using System.Threading.Tasks;
 
 namespace Darlek.CliCommands;
 
-public class GrocySyncCommand : Command<GrocySyncCommand.Settings>
+public class GrocySyncCommand : AsyncCommand<GrocySyncCommand.Settings>
 {
     public class Settings : CommandSettings
     {
@@ -14,7 +15,7 @@ public class GrocySyncCommand : Command<GrocySyncCommand.Settings>
         public string Url { get; set; }
     }
 
-    public override int Execute(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
     {
         var crawler = CrawlerFactory.GetCrawlerByHost(settings.Url);
 
@@ -25,7 +26,7 @@ public class GrocySyncCommand : Command<GrocySyncCommand.Settings>
         }
 
         var recipe = crawler.Crawl(new Uri(settings.Url)).Result;
-        GrocySyncService.Sync(recipe);
+        await GrocySyncService.Sync(recipe);
 
         return 0;
     }

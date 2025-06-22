@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Darlek.Core.GrocySync;
 
@@ -29,15 +30,15 @@ internal class GrocyClient
         client = new RestClient(httpClient);
     }
 
-    public void AddRecipe(Recipe recipe)
+    public async Task AddRecipe(Recipe recipe)
     {
-        var id = CreateRecipe(recipe);
+        var id = await CreateRecipe(recipe);
         //SetSourceUrl(id, recipe["url"].AsString); // doesn't work
     }
 
-    private int CreateRecipe(Recipe recipe)
+    private async Task<int> CreateRecipe(Recipe recipe)
     {
-        UploadRecipeImage(recipe);
+        await UploadRecipeImage(recipe);
 
         var body = new CreateRecipe
         {
@@ -52,13 +53,12 @@ internal class GrocyClient
 
         var id = client.Post<CreatedResponse>(request).created_object_id;
 
-
         AnsiConsole.WriteLine("Recipe synced");
 
         return id;
     }
 
-    private async void UploadRecipeImage(Recipe recipe)
+    private async Task UploadRecipeImage(Recipe recipe)
     {
         var img = await new HttpClient().GetByteArrayAsync(recipe.PictureUrl);
 
