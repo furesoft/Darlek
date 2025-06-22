@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{FC08A2EE-F59D-41AA-9E94-2DD47134353D}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Darlek.Library", "Darlek.Library\Darlek.Library.csproj", "{CEF0ABB3-7646-4105-9649-159688B28631}"
