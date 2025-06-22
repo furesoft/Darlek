@@ -14,7 +14,7 @@ using System.Text;
 
 namespace Darlek.Core.GrocySync;
 
-public class GrocyClient
+internal class GrocyClient
 {
     private RestClient client;
     private readonly HttpClient httpClient;
