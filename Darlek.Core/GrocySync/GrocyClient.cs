@@ -51,9 +51,25 @@ internal class GrocyClient
         request.AddHeader("Content-Type", "application/json");
         request.AddJsonBody(body);
 
-        var id = client.Post<CreatedResponse>(request).created_object_id;
+        var id = (await client.PostAsync<CreatedResponse>(request)).created_object_id;
 
-        AnsiConsole.WriteLine("Recipe synced");
+        AnsiConsole.WriteLine("Recipe created with ID: " + id);
+
+        if (recipe.Ingredients.Any())
+        {
+            await AnsiConsole.Progress()
+                .StartAsync(async ctx => {
+                    var task = ctx.AddTask($"Adding Ingredients");
+                    task.MaxValue(recipe.Ingredients.Count);
+
+                    for (var index = 0; index < recipe.Ingredients.Count; index++)
+                    {
+                        var ingr = recipe.Ingredients[index];
+                        await AddIngredientToRecipe(id, ingr);
+                        task.Increment(1);
+                    }
+                });
+        }
 
         return id;
     }
@@ -106,5 +122,24 @@ internal class GrocyClient
         var request = new RestRequest("/objects/quantity_units");
         var response = client.Get<List<QuantityUnit>>(request);
         return response;
+    }
+
+    private async Task AddIngredientToRecipe(int recipeId, Ingredient ingredient)
+    {
+        var ingrBody = new CreateRecipePos
+        {
+            RecipeId = recipeId,
+            ProductId = ingredient.Product?.Id,
+            Amount = ingredient.Measure.Quantity,
+            QuantityUnitId = ingredient.Measure.QuantityUnit?.Id,
+            IngredientGroup = ingredient.Group,
+            VariableAmount = ingredient.Measure.VariableAmount,
+        };
+
+        var ingrRequest = new RestRequest("/objects/recipes_pos");
+        ingrRequest.AddHeader("Content-Type", "application/json");
+        ingrRequest.AddJsonBody(ingrBody);
+
+        await client.PostAsync(ingrRequest);
     }
 }

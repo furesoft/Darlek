@@ -8,6 +8,7 @@ internal class Ingredient
     public Measure Measure { get; set; } = new();
     public bool IsResolved => Product is not null && Measure.IsResolved;
     public string ProductName { get; set; }
+    public string? Group { get; set; }
     public override string ToString() =>
         $"({Measure.Quantity} {Measure.QuantityUnit?.Name ?? "Unknown"}) {ProductName}";
 }

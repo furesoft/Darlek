@@ -10,6 +10,8 @@ internal class Measure
 
     public QuantityUnit QuantityUnit { get; set; }
 
+    public string VariableAmount { get; set; }
+
     public override string ToString() =>
         $"{Quantity} {QuantityUnit?.Name ?? "Unknown"} ({Source})";
 }

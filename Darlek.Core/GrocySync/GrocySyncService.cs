@@ -19,13 +19,13 @@ public class GrocySyncService
 
     static GrocySyncService()
     {
-        products = _client.GetAllProducts().OrderBy(p => p.name).ToList();
+        products = _client.GetAllProducts().OrderBy(p => p.Name).ToList();
         quantityUnits = _client.GetAllQuantityUnits().OrderBy(qu => qu.Name).ToList();
     }
 
     private static Ingredient ResolveIngredient(string productName, string measure)
     {
-        var product = products.Find(p => p.name.Equals(productName, StringComparison.OrdinalIgnoreCase));
+        var product = products.Find(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
         var ingr = new Ingredient();
         ingr.Product = product;
         ingr.ProductName = productName;
@@ -33,7 +33,7 @@ public class GrocySyncService
 
         if (ingr.Product == null)
         {
-            ingr.Product = ManualResolveSelector("product", productName, products, p => p.name);
+            ingr.Product = ManualResolveSelector("product", productName, products, p => p.Name);
         }
 
         double quantity = 0;
@@ -47,6 +47,11 @@ public class GrocySyncService
                                                                  qu.Userfields["symbol"] == unit ||
                                                                  qu.NamePlural == unit
             );
+
+            if (!ingr.Measure.IsResolved)
+            {
+                ingr.Measure.VariableAmount = ingr.Measure.Source;
+            }
         }
         catch
         {
