@@ -1,14 +1,22 @@
 ﻿using Darlek.Core;
+using Spectre.Console.Cli;
 
 namespace Darlek.CliCommands;
 
-public class ConfigCommand
+public class ConfigCommand : Command<ConfigCommand.Settings>
 {
-    public static void SetConfig(string[] args)
+    public class Settings : CommandSettings
     {
-        var key = args[1];
-        var value = args[2];
+        [CommandArgument(0, "key")]
+        public string Key { get; set; }
 
-        Config.Set(key, value);
+        [CommandArgument(1, "value")]
+        public string Value { get; set; }
+    }
+
+    public override int Execute(CommandContext context, Settings settings)
+    {
+        Config.Set(settings.Key, settings.Value);
+        return 0;
     }
 }

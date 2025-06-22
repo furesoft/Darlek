@@ -2,21 +2,18 @@
 using Darlek.Commands;
 using Darlek.Core;
 using Darlek.Properties;
+using Spectre.Console.Cli;
 
 namespace Darlek;
 
 public static class Program
 {
-    public static void Main(string[] args)
+    public static int Main(string[] args)
     {
         if (args.Length > 1)
         {
-            if (args[1] == "config")
-            {
-                ConfigCommand.SetConfig(args);
-            }
-
-            return;
+            var app = new CommandApp<ConfigCommand>();
+            return app.Run(args);
         }
 
         ImportProvider.Collect(typeof(IImportProvider).Assembly);
@@ -40,5 +37,6 @@ public static class Program
         mainMenu.Items.Add("Exit", new ExitCommand());
 
         mainMenu.Show();
+        return 0;
     }
 }

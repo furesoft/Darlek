@@ -1,12 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>Darlek.Library</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Darlek.Core\Darlek.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.50.1-preview.0.20" />
   </ItemGroup>
 
 </Project>
