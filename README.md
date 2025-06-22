@@ -21,7 +21,7 @@ A simple and useful recipe crawler and ebook generator
   
 3. You can synchronize already saved recipes by selecting the menu item in `Managing Recipes` or using this command:
    
-`darlek grocy-sync --url https://www.chefkoch.de/rezepte/599651159698445/Quiche-mit-Lauch-und-Schinken.html`
+`darlek grocy-sync https://www.chefkoch.de/rezepte/599651159698445/Quiche-mit-Lauch-und-Schinken.html`
 
 ## Screenshots
 
