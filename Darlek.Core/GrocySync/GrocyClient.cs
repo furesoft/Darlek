@@ -53,14 +53,14 @@ public class GrocyClient
         var id = client.Post<CreatedResponse>(request).created_object_id;
 
 
-        Console.WriteLine("Recipe synced");
+        AnsiConsole.WriteLine("Recipe synced");
 
         return id;
     }
 
-    private void UploadRecipeImage(Recipe recipe)
+    private async void UploadRecipeImage(Recipe recipe)
     {
-        var img = new WebClient().DownloadData(recipe.PictureUrl);
+        var img = await new HttpClient().GetByteArrayAsync(recipe.PictureUrl);
 
         AnsiConsole.Status()
             .Spinner(Spinner.Known.Arrow)
