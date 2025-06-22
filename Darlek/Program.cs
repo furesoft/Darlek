@@ -12,7 +12,17 @@ public static class Program
     {
         if (args.Length > 1)
         {
-            var app = new CommandApp<ConfigCommand>();
+            var app = new CommandApp();
+            app.Configure(c => {
+                c.AddCommand<ConfigCommand>("config")
+                    .WithDescription("Manage configuration settings for Darlek")
+                    .WithExample("darlek config set grocy-url https://grocy.example.com");
+
+                c.AddCommand<GrocySyncCommand>("grocy-sync")
+                    .WithDescription("Sync a recipe to Grocy")
+                    .WithExample("darlek grocy-sync https://www.chefkoch.de/rezepte/599651159698445/Quiche-mit-Lauch-und-Schinken.html");
+            });
+
             return app.Run(args);
         }
 

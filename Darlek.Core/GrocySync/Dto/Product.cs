@@ -1,6 +1,6 @@
 namespace Darlek.Core.GrocySync.Dto;
 
-public class Product
+internal class Product
 {
     public int? id { get; set; }
     public string name { get; set; }

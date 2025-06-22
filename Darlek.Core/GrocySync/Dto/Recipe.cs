@@ -1,6 +1,6 @@
 ﻿namespace Darlek.Core.GrocySync.Dto;
 
-public class CreateRecipe
+internal class CreateRecipe
 {
     public string name { get; set; }
     public string description { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace Darlek.Core.GrocySync.Dto;
 
-public class CreatedResponse
+internal class CreatedResponse
 {
     public int created_object_id { get; set; }
 }

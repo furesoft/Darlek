@@ -2,7 +2,7 @@
 
 namespace Darlek.Core.GrocySync.Models;
 
-public class Measure
+internal class Measure
 {
     public double Quantity { get; set; }
     public bool IsResolved => Quantity > 0 && QuantityUnit != null;

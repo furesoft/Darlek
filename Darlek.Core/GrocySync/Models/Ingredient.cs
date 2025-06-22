@@ -2,7 +2,7 @@
 
 namespace Darlek.Core.GrocySync.Models;
 
-public class Ingredient
+internal class Ingredient
 {
     public Product Product { get; set; }
     public Measure Measure { get; set; } = new();

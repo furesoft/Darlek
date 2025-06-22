@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Darlek.Core.GrocySync.Dto;
 
-public class QuantityUnit
+internal class QuantityUnit
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

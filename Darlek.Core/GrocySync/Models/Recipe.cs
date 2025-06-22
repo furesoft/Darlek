@@ -2,7 +2,7 @@
 
 namespace Darlek.Core.GrocySync.Models;
 
-public class Recipe
+internal class Recipe
 {
     public string Name { get; set; }
     public string Description { get; set; }

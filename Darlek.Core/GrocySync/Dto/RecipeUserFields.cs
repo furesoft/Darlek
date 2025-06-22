@@ -1,6 +1,6 @@
 ﻿namespace Darlek.Core.GrocySync.Dto;
 
-public class RecipeUserFields
+internal class RecipeUserFields
 {
     public string source { get; set; }
 }
