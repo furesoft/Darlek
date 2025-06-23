@@ -1,24 +1,22 @@
 ﻿using Darlek.Core.GrocySync.Dto;
 using Darlek.Core.GrocySync.Models;
-using LiteDB;
 using RestSharp;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Darlek.Core.GrocySync;
 
 internal class GrocyClient
 {
-    private RestClient client;
     private readonly HttpClient httpClient;
+    private readonly RestClient client;
 
     public GrocyClient()
     {
@@ -38,28 +36,33 @@ internal class GrocyClient
 
     private async Task<int> CreateRecipe(Recipe recipe)
     {
-        await UploadRecipeImage(recipe);
+        return await AnsiConsole.Progress()
+            .StartAsync(async ctx => {
+                var uploadTask = ctx.AddTask("Uploading Recipe Image").IsIndeterminate();
+                uploadTask.StartTask();
+                var img = await new HttpClient().GetByteArrayAsync(recipe.PictureUrl);
 
-        var body = new CreateRecipe
-        {
-            name = recipe.Name,
-            description = recipe.Description,
-            picture_file_name = recipe.PictureFileName
-        };
+                UploadRecipeImage(recipe.PictureFileName, img);
+                uploadTask.StopTask();
 
-        var request = new RestRequest("/objects/recipes");
-        request.AddHeader("Content-Type", "application/json");
-        request.AddJsonBody(body);
+                var createTask = ctx.AddTask("Creating Recipe").IsIndeterminate();
+                createTask.StartTask();
+                var body = new CreateRecipe
+                {
+                    name = recipe.Name, description = recipe.Description, picture_file_name = recipe.PictureFileName
+                };
 
-        var id = (await client.PostAsync<CreatedResponse>(request)).created_object_id;
+                var request = new RestRequest("/objects/recipes");
+                request.AddHeader("Content-Type", "application/json");
+                request.AddJsonBody(body);
 
-        AnsiConsole.WriteLine("Recipe created with ID: " + id);
+                var id = (await client.PostAsync<CreatedResponse>(request)).created_object_id;
 
-        if (recipe.Ingredients.Any())
-        {
-            await AnsiConsole.Progress()
-                .StartAsync(async ctx => {
-                    var task = ctx.AddTask($"Adding Ingredients");
+                createTask.StopTask();
+
+                if (recipe.Ingredients.Any())
+                {
+                    var task = ctx.AddTask("Adding Ingredients");
                     task.MaxValue(recipe.Ingredients.Count);
 
                     for (var index = 0; index < recipe.Ingredients.Count; index++)
@@ -68,33 +71,19 @@ internal class GrocyClient
                         await AddIngredientToRecipe(id, ingr);
                         task.Increment(1);
                     }
-                });
-        }
+                }
 
-        return id;
-    }
-
-    private async Task UploadRecipeImage(Recipe recipe)
-    {
-        var img = await new HttpClient().GetByteArrayAsync(recipe.PictureUrl);
-
-        AnsiConsole.Status()
-            .Spinner(Spinner.Known.Arrow)
-            .Start("Uploading Recipe Image...", ctx => {
-                UploadRecipeImage(recipe.PictureFileName, img);
+                return id;
             });
     }
 
     private void SetSourceUrl(int id, string url)
     {
-        var body = new RecipeUserFields
-        {
-            source = url
-        };
+        var body = new RecipeUserFields { source = url };
 
         var request = new RestRequest($"/userfields/recipes/{id}");
         request.AddHeader("Content-Type", "application/json");
-        var json = System.Text.Json.JsonSerializer.Serialize(body);
+        var json = JsonSerializer.Serialize(body);
         request.AddStringBody(json, DataFormat.Json);
 
         var result = client.Post(request);
@@ -133,7 +122,7 @@ internal class GrocyClient
             Amount = ingredient.Measure.Quantity,
             QuantityUnitId = ingredient.Measure.QuantityUnit?.Id,
             IngredientGroup = ingredient.Group,
-            VariableAmount = ingredient.Measure.VariableAmount,
+            VariableAmount = ingredient.Measure.VariableAmount
         };
 
         var ingrRequest = new RestRequest("/objects/recipes_pos");
