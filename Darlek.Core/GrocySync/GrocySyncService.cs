@@ -38,13 +38,16 @@ public static class GrocySyncService
             ingr.Product = ManualResolveSelector("product", productName, _products, p => p.Name);
         }
 
-        double quantity = 0;
+        string? srcQuantity = null;
         string unit = null;
 
         try
         {
-            InterpolatedParser.Parse(measure, $"{quantity} {unit}");
-            ingr.Measure.Quantity = quantity;
+            InterpolatedParser.Parse(measure, $"{srcQuantity} {unit}");
+
+            srcQuantity = NormalizeFraction(srcQuantity?.Trim());
+
+            ingr.Measure.Quantity = double.Parse(srcQuantity);
             ingr.Measure.QuantityUnit = _quantityUnits.Find(qu => qu.Name == unit ||
                                                                  qu.Userfields["symbol"] == unit || qu.NamePlural == unit
             );
@@ -57,9 +60,43 @@ public static class GrocySyncService
         catch
         {
             ingr.Measure.QuantityUnit ??= ManualResolveSelector("quantity unit", measure, _quantityUnits, qu => qu.Name);
+            if (!ingr.Measure.IsResolved)
+            {
+                ingr.Measure.VariableAmount = ingr.Measure.Source;
+            }
         }
 
         return ingr;
+    }
+
+    private static readonly Dictionary<string, string> _fractions = new()
+    {
+        { "¼", "0.25" },
+        { "½", "0.5" },
+        { "¾", "0.75" },
+        { "⅐", "0.142857" },
+        { "⅑", "0.111111" },
+        { "⅒", "0.1" },
+        { "⅓", "0.333333" },
+        { "⅔", "0.666667" },
+        { "⅕", "0.2" },
+        { "⅖", "0.4" },
+        { "⅗", "0.6" },
+        { "⅘", "0.8" },
+        { "⅙", "0.166667" },
+        { "⅚", "0.833333" },
+        { "⅛", "0.125" },
+        { "⅜", "0.375" },
+        { "⅝", "0.625" },
+        { "⅞", "0.875" }
+    };
+    public static string NormalizeFraction(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return string.Empty;
+
+        return _fractions
+            .Aggregate(input, (current, kv) => current.Replace(kv.Key, kv.Value));
     }
 
     private static int StringSimilarity(string a, string b)
@@ -104,7 +141,7 @@ public static class GrocySyncService
 
         var selection = new SelectionPrompt<T>
         {
-            Converter = (_) => converter != null ? converter(_) : _.ToString()
+            Converter = _ => converter != null ? converter(_) : _.ToString()
         };
 
         selection.AddChoices(sortedList);
