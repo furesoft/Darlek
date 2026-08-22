@@ -15,9 +15,10 @@ public class ConfigCommand : Command<ConfigCommand.Settings>
         public string Value { get; set; }
     }
 
-    public override int Execute(CommandContext context, Settings settings, CancellationToken cancellationToken)
+    protected override int Execute(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         Config.Set(settings.Key, settings.Value);
         return 0;
     }
+
 }

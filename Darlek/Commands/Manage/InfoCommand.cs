@@ -8,7 +8,7 @@ public class InfoCommand : IMenuCommand
 {
     public void Invoke(Menu parentMenu)
     {
-        var metaTable = new Grid().AddColumn().AddColumn().Centered();
+        var metaTable = new Grid().AddColumn().AddColumn();
 
         foreach (var md in Repository.GetAllMetadata())
         {

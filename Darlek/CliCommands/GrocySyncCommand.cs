@@ -16,7 +16,7 @@ public class GrocySyncCommand : AsyncCommand<GrocySyncCommand.Settings>
         public string Url { get; set; }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         var crawler = CrawlerFactory.GetCrawlerByHost(settings.Url);
 
@@ -26,7 +26,7 @@ public class GrocySyncCommand : AsyncCommand<GrocySyncCommand.Settings>
             return 1;
         }
 
-        var recipe = crawler.Crawl(new Uri(settings.Url)).Result;
+        var recipe = await crawler.Crawl(new Uri(settings.Url));
         await GrocySyncService.Sync(recipe);
 
         return 0;
